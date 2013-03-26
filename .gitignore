@@ -12,3 +12,4 @@ tmp
 .cucumber-chef/vagrant
 .vagrant*
 public
+vendor/checkouts
