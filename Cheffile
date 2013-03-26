@@ -3,7 +3,7 @@
 ################################################################################
 def cookbook_dev(cookbook_name, *args)
   verbose = (ENV['VERBOSE'] == "1")
-  cbdev = (ENV["CBDEV"] == "1")
+  cbdev = (ENV['CBDEV'] == "1")
 
   if (File.exists?(path = File.join("vendor", "checkouts", cookbook_name)) && (cbdev == true))
     if (arg = args.first{ |arg| arg.is_a?(Hash) })

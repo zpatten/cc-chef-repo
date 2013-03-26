@@ -3,7 +3,7 @@
 ################################################################################
 def gem_dev(gem_name, *args)
   verbose = (ENV['VERBOSE'] == "1")
-  gemdev = (ENV["GEMDEV"] == "1")
+  gemdev = (ENV['GEMDEV'] == "1")
 
   if (File.exists?(path = File.join("vendor", "checkouts", gem_name)) && gemdev)
     if (arg = args.first{ |arg| arg.is_a?(Hash) })
