@@ -3,8 +3,9 @@
 ################################################################################
 def cookbook_dev(cookbook_name, *args)
   verbose = (ENV['VERBOSE'] == "1")
+  cbdev = (ENV["CBDEV"] == "1")
 
-  if (File.exists?(path = File.join("vendor", "checkouts", cookbook_name)) && (ENV["CBDEV"] == "1"))
+  if (File.exists?(path = File.join("vendor", "checkouts", cookbook_name)) && (cbdev == true))
     if (arg = args.first{ |arg| arg.is_a?(Hash) })
       arg.reject!{ |k,v| [:git,:ref].include?(k) }
       arg.merge!(:path => path)
@@ -16,7 +17,7 @@ def cookbook_dev(cookbook_name, *args)
   if verbose
     cookbook_details = args.collect{ |arg| arg.inspect }.join(", ")
     !cookbook_details.empty? and (cookbook_details = ", #{cookbook_details}")
-    puts("   CBDEV: %32s%s" % [cookbook_name, cookbook_details])
+    puts("%2sCBDEV: %32s%s" % [((cbdev == true) ? "  " : "NO"), cookbook_name, cookbook_details])
   end
 
   cookbook(cookbook_name, *args)
