@@ -1,2 +1,14 @@
-.rake_test_cache
-
+.bundle
+.rvmrc
+.DS_Store
+bin
+*tar.gz
+cookbooks
+tmp
+*pem
+*log
+.cucumber-chef/*.log
+.cucumber-chef/aws
+.cucumber-chef/vagrant
+.vagrant*
+public
