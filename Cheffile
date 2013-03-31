@@ -17,7 +17,7 @@ def cookbook_dev(cookbook_name, *args)
   if verbose
     cookbook_details = args.collect{ |arg| arg.inspect }.join(", ")
     !cookbook_details.empty? and (cookbook_details = ", #{cookbook_details}")
-    puts("%2sCBDEV: %32s%s" % [((cbdev == true) ? "  " : "NO"), cookbook_name, cookbook_details])
+    puts(" %2sCBDEV: %32s%s" % [((cbdev == true) ? "  " : "NO"), cookbook_name, cookbook_details])
   end
 
   cookbook(cookbook_name, *args)
