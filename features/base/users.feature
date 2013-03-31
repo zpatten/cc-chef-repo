@@ -30,7 +30,6 @@ Feature: Base Role User Management
       Then I should see "KeepAlive yes" in the output
       And I should see "ServerAliveInterval 60" in the output
 
-  @ignore
   Scenario: The deployer user can ssh to the devop-test-1
     * I ssh to "devop-test-1" with the following credentials:
       | username | keyfile |
