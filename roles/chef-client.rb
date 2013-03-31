@@ -8,6 +8,7 @@ run_list(
 
 override_attributes(
   :chef_client => {
+    :server_url => "http://192.168.255.254:4000",
     :interval => 900,
     :splay => 900,
     :init_style => "bluepill",
