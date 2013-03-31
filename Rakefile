@@ -63,3 +63,6 @@ task :bundle_cookbook, :cookbook do |t, args|
 
   FileUtils.rm_rf temp_dir
 end
+
+require 'cucumber-chef'
+require 'cucumber-chef/rake/task'
