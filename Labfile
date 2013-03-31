@@ -10,7 +10,7 @@ ecosystem "mockup-app-1" do
     persist false
     ip "192.168.0.1"
     mac "00:00:5e:35:ea:d5"
-    chef-client  ({ :environment => "test",
+    chef_client  ({ :environment => "test",
                     :run_list => [
                       "role[base]",
                       "role[chef-client]"
@@ -24,7 +24,7 @@ ecosystem "mockup-app-1" do
     persist true
     ip "192.168.0.2"
     mac "00:00:5e:d1:fa:08"
-    chef-client  ({ :environment => "test",
+    chef_client  ({ :environment => "test",
                     :run_list => [
                       "role[base]",
                       "role[chef-client]"
@@ -38,7 +38,7 @@ ecosystem "mockup-app-1" do
     persist true
     ip "192.168.0.3"
     mac "00:00:5e:eb:8d:a3"
-    chef-client  ({ :environment => "test",
+    chef_client  ({ :environment => "test",
                     :run_list => [
                       "role[base]",
                       "role[chef-client]"
