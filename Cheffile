@@ -34,8 +34,8 @@ cookbook "yum"
 cookbook "bluepill"
 
 # User Management Cookbooks
-cookbook "users"
-cookbook "sudo"
+cookbook_dev "users", :git => "git@github.com:zpatten/chef-cookbook-users.git"
+cookbook_dev "sudo", :git => "git@github.com:zpatten/chef-cookbook-sudo.git"
 
 # Compilation Tool Cookbooks
 cookbook "build-essential"
