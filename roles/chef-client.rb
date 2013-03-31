@@ -1,4 +1,4 @@
-name "chef_client"
+name "chef-client"
 description "sample chef-client role"
 run_list(
   "recipe[chef-client::delete_validation]",
