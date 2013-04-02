@@ -7,7 +7,11 @@ artifacts       ({ "chef-client-log" => "/var/log/chef/client.log",
 
 vagrant.merge!( :identity_file => "#{ENV['HOME']}/.vagrant.d/insecure_private_key",
                 :lab_user => "vagrant",
-                :lxc_user => "root" )
+                :lxc_user => "root",
+                :ssh => {
+                    :lab_port => 22222,
+                    :lxc_port => 22
+                } )
 
 aws.merge!(     :identity_file => ENV['AWS_IDENTITY'],
                 :lab_user => "ubuntu",
