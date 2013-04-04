@@ -9,7 +9,7 @@ vagrant.merge!( :identity_file => "#{ENV['HOME']}/.vagrant.d/insecure_private_ke
                 :lab_user => "vagrant",
                 :lxc_user => "root",
                 :ssh => {
-                    :lab_port => 22222,
+                    :lab_port => 22,
                     :lxc_port => 22
                 } )
 
@@ -24,4 +24,5 @@ aws.merge!(     :identity_file => ENV['AWS_IDENTITY'],
                 :aws_instance_arch => "i386",
                 :aws_instance_type => "c1.medium" )
 
-chef.merge!(    :version => "10.18.2")
+chef.merge!(    :client_version => "11.4.0",
+                :server_version => "11.0.6")
