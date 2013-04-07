@@ -28,7 +28,8 @@ source "https://rubygems.org"
 
 # RUBYGEMS
 ###########
-gem "chef", "11.4.0"
+gem "chef", "10.18.2"
+# gem "chef", "11.4.0"
 gem "librarian-chef"
 
 # DEVELOPMENT GEMS
