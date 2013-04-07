@@ -30,7 +30,7 @@ site 'http://community.opscode.com/api/v1'
 cookbook "apt"
 
 # Process Management Cookbooks
-cookbook "bluepill"
+# cookbook "bluepill"
 
 # User Management Cookbooks
 cookbook_dev "users", :git => "git@github.com:zpatten/chef-cookbook-users.git"

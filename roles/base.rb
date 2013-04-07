@@ -1,7 +1,6 @@
 name "base"
 description "sample base role"
 run_list(
-  "recipe[bluepill]",
   "recipe[motd-tail]",
   "recipe[timezone]",
   "recipe[users]",

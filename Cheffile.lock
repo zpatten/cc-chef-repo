@@ -86,7 +86,6 @@ GIT
 
 DEPENDENCIES
   apt (>= 0)
-  bluepill (>= 0)
   build-essential (>= 0)
   chef-client (>= 0)
   chef-server (>= 0)
