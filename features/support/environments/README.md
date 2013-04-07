@@ -1,1 +1,1 @@
-Create supporting environments here.
+Create supporting environment definitions here.
