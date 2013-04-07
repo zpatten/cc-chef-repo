@@ -28,7 +28,6 @@ site 'http://community.opscode.com/api/v1'
 
 # Package Management Cookbooks
 cookbook "apt"
-cookbook "yum"
 
 # Process Management Cookbooks
 cookbook "bluepill"
