@@ -26,6 +26,7 @@ artifacts       ({ "chef-client-log" => "/var/log/chef/client.log",
                    "chef-client-stacktrace" => "/var/chef/cache/chef-stacktrace.out" })
 
 chef.merge!(    :version => "10.24.0",
+                :container_version => "10.24.0",
                 :cookbook_paths => %w(cookbooks site-cookbooks))
 
 # chef.merge!(    :version => "10.24.0")
