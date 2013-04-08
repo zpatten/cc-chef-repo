@@ -11,4 +11,5 @@ Feature: Base Role TZ Management
 
   Scenario: System timezone is set and defaults to UTC.
     And I run "cat /etc/timezone"
-    Then I should see "UTC" in the output
+    Then the exit code should be "0"
+    And I should see "UTC" in the output

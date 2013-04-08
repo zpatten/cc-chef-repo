@@ -11,23 +11,27 @@ Feature: Base Role User Management
 
   Scenario: The deployer user exists
     When I run "cat /etc/passwd | grep [d]eployer"
-      Then I should see "deployer" in the output
+      Then the exit code should be "0"
+      And I should see "deployer" in the output
       And I should see "/home/deployer" in the output
       And I should see "/bin/bash" in the output
 
   Scenario: The deployer users groups exist
     When I run "cat /etc/group | grep [d]eployer"
-      Then I should see "devop" in the output
-      Then I should see "deployer" in the output
+      Then the exit code should be "0"
+      And I should see "devop" in the output
+      And I should see "deployer" in the output
 
   Scenario: The deployer users authorized_keys has been rendered
     When I run "cat /home/deployer/.ssh/authorized_keys"
-      Then I should see "ssh-rsa" in the output
+      Then the exit code should be "0"
+      And I should see "ssh-rsa" in the output
       And I should see "deployer" in the output
 
   Scenario: The deployer users ssh config has been rendered
     When I run "cat /home/deployer/.ssh/config"
-      Then I should see "KeepAlive yes" in the output
+      Then the exit code should be "0"
+      And I should see "KeepAlive yes" in the output
       And I should see "ServerAliveInterval 60" in the output
 
   Scenario: The deployer user can ssh to the devop-test-1
@@ -35,5 +39,6 @@ Feature: Base Role User Management
       | username | keyfile |
       | deployer | features/support/keys/deployer |
     When I run "whoami"
-    Then I should see "deployer" in the output
+    Then the exit code should be "0"
+    And I should see "deployer" in the output
 
