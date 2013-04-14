@@ -4,7 +4,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
 
 # USING
 
-### 1) I define these bash aliases for use with my ruby-related development:
+#### 1) I define these bash aliases for use with my ruby-related development:
 
     alias be='bundle exec'
     alias bi='bundle install'
@@ -18,18 +18,18 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
     alias noverbose='export VERBOSE=0'   # turn verbose off
     alias rgs='rvm --force gemset empty' # reset-gemset
 
-### 2) Clone this repo:
+#### 2) Clone this repo:
 
     [~] $ mkdir -p ~/code/
     [~] $ cd ~/code/
     [~/code] $ git clone git@github.com:zpatten/cc-chef-repo.git
 
-### 3) Change to the repo directory and make sure the ruby and gemset specified in `.ruby-version` and `.ruby-gemset` are active.  Optionally set VERBOSE=1.
+#### 3) Change to the repo directory and make sure the ruby and gemset specified in `.ruby-version` and `.ruby-gemset` are active.  Optionally set `VERBOSE=1`.
 
     [~/code] $ cd cc-chef-repo
     [~/code/cc-chef-repo] $ export VERBOSE=1
 
-### 4) Clear your gemset, bundle update, bundle install binstubs:
+#### 4) Clear your gemset, bundle update, bundle install binstubs:
 
     [~/code/cc-chef-repo] $ rgs && bu && bibs
     NOGEMDEV:                              ztk
@@ -146,7 +146,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
     Use `bundle show [gemname]` to see where a bundled gem is installed.
     [~/code/cc-chef-repo] $
 
-### 5) Update the librarian-chef bundle:
+#### 5) Update the librarian-chef bundle:
 
     [~/code/cc-chef-repo] $ bin/librarian-chef update
     NOGEMDEV:                              ztk
@@ -189,7 +189,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
     Installing users (1.3.0)
     [~/code/cc-chef-repo] $
 
-### 6) Install the librarian-chef bundle:
+#### 6) Install the librarian-chef bundle:
 
     [~/code/cc-chef-repo] $ bin/librarian-chef install
     NOGEMDEV:                              ztk
@@ -232,7 +232,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
     Installing users (1.3.0)
     [~/code/cc-chef-repo] $
 
-### 7) Ensure any existing test labs are destroyed:
+#### 7) Ensure any existing test labs are destroyed:
 
     [~/code/cc-chef-repo] $ echo "yes" | bin/cucumber-chef destroy
     NOGEMDEV:                              ztk
@@ -255,7 +255,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
 
     [~/code/cc-chef-repo] $
 
-### 8) Setup a new test lab:
+#### 8) Setup a new test lab:
 
     [~/code/cc-chef-repo] $ bin/cucumber-chef setup
     NOGEMDEV:                              ztk
@@ -285,7 +285,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
 
     [~/code/cc-chef-repo] $
 
-### 9) Run cucumber:
+#### 9) Run cucumber:
 
 
 
