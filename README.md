@@ -29,9 +29,21 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
     [~/code] $ cd cc-chef-repo
     [~/code/cc-chef-repo] $ export VERBOSE=1
 
-#### 4) Clear your gemset, bundle update, bundle install binstubs:
+#### TL;DR
 
-    [~/code/cc-chef-repo] $ rgs && bu && bibs
+At this point you have two options, keep going step by step or you can use this TL;DR version:
+
+    rgs && bu && bibs && echo "y" | bin/cucumber-chef destroy && bin/cucumber-chef setup && bin/cucumber
+
+If you are not using RVM, you will have to adapt this command for whatever you using:
+
+    rvm --force gemset empty && bundle update && bundle install --binstubs && echo "y" | bin/cucumber-chef destroy && bin/cucumber-chef setup && bin/cucumber
+
+#### 4) Reset your gemset, bundle update, bundle install binstubs:
+
+If you are not using RVM, you will have to adapt the following command for whatever you using.
+
+    [~/code/cc-chef-repo] $ rvm --force gemset empty && bundle update && bundle install --binstubs
     NOGEMDEV:                              ztk
     NOGEMDEV:                    cucumber-chef
     Fetching gem metadata from https://rubygems.org/.........
@@ -241,7 +253,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
     +-------------------------------------------------+
     |    PROVIDER: Cucumber::Chef::Provider::Vagrant  |
     |          ID: test-lab-zpatten                   |
-    |       STATE: unknown                            |
+    |       STATE: running                            |
     |    USERNAME: vagrant                            |
     |  IP_ADDRESS: 192.168.33.10                      |
     |    SSH_PORT: 22                                 |
@@ -251,7 +263,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
 
     5...4...3...2...1...BOOM!
 
-    Destroy VAGRANT instance 'test-lab-zpatten' completed in 1.2252 seconds.
+    Destroy VAGRANT instance 'test-lab-zpatten' completed in 4.8374 seconds.
 
     [~/code/cc-chef-repo] $
 
