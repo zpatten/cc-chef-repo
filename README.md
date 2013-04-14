@@ -301,7 +301,217 @@ If you are not using RVM, you will have to adapt the following command for whate
 
 #### 9) Run cucumber:
 
+The first time a container is created for a particular distro/release pair it will take a while.  Once this first time 'cache' is created container creation becomes a very rapid process.
 
+    [~/code/cc-chef-repo] $ bin/cucumber
+    NOGEMDEV:                              ztk
+    NOGEMDEV:                    cucumber-chef
+    Using the default profile...
+    Code:
+      * features/support/env.rb
+      * features/support/cc-hooks.rb
+    >>> cucumber-chef v3.0.8
+    >>> Pushing chef-repo environments to the test lab completed in 1.8293 seconds.
+    >>> Pushing chef-repo cookbooks to the test lab completed in 15.5206 seconds.
+    >>> Pushing chef-repo roles to the test lab completed in 1.0124 seconds.
+    >>> Pushing chef-repo data bag 'users' to the test lab completed in 1.4156 seconds.
+    >>> Creating container 'devop-test-1' completed in 511.7403 seconds.
+    >>> Provisioning container 'devop-test-1' completed in 37.2049 seconds.
+
+    Features:
+      * features/base/sudo.feature
+      * features/base/timezone.feature
+      * features/base/users.feature
+      * features/chef-client.feature
+    Parsing feature files took 0m0.038s
+
+    @base @sudo
+    Feature: Base Role Sudo Management
+      In order to automate user management with Opscode Chef
+      As a DevOp Engineer
+      I want to ensure that the deployer users sudo access is being managed properly
+
+      Background:                                                 # features/base/sudo.feature:7
+        * I ssh to "devop-test-1" with the following credentials: # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:28
+          | username | keyfile |
+          | $lxc$    | $lxc$   |
+
+      Scenario: Our suoders file exists                           # features/base/sudo.feature:12
+        When I run "[[ -e /etc/sudoers ]]"                        # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:62
+        Then the exit code should be "0"                          # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:84
+
+      Scenario: The deployer users groups should be in the sudoers file # features/base/sudo.feature:16
+        When I run "grep [d]eployer /etc/sudoers"                       # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:62
+        Then the exit code should be "0"                                # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:84
+        And I should see "ALL" in the output                            # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+        And I should see "NOPASSWD" in the output                       # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+        When I run "grep [d]evop /etc/sudoers"                          # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:62
+        Then the exit code should be "0"                                # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:84
+        And I should see "ALL" in the output                            # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+        And I should see "NOPASSWD" in the output                       # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+
+    @base @timezone
+    Feature: Base Role TZ Management
+      In order to automate TZ management with Opscode Chef
+      As a DevOp Engineer
+      I want to ensure that the hosts timezone is being managed properly
+
+      Background:                                                 # features/base/timezone.feature:7
+        * I ssh to "devop-test-1" with the following credentials: # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:28
+          | username | keyfile |
+          | $lxc$    | $lxc$   |
+
+      Scenario: System timezone is set and defaults to UTC.       # features/base/timezone.feature:12
+        And I run "cat /etc/timezone"                             # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:62
+        Then the exit code should be "0"                          # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:84
+        And I should see "UTC" in the output                      # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+
+    @base @users
+    Feature: Base Role User Management
+      In order to automate user management with Opscode Chef
+      As a DevOp Engineer
+      I want to ensure that my users are being managed properly
+
+      Background:                                                 # features/base/users.feature:7
+        * I ssh to "devop-test-1" with the following credentials: # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:28
+          | username | keyfile |
+          | $lxc$    | $lxc$   |
+
+      Scenario: The deployer user exists                          # features/base/users.feature:12
+        When I run "cat /etc/passwd | grep [d]eployer"            # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:62
+        Then the exit code should be "0"                          # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:84
+        And I should see "deployer" in the output                 # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+        And I should see "/home/deployer" in the output           # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+        And I should see "/bin/bash" in the output                # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+
+      Scenario: The deployer users groups exist                   # features/base/users.feature:19
+        When I run "cat /etc/group | grep [d]eployer"             # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:62
+        Then the exit code should be "0"                          # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:84
+        And I should see "devop" in the output                    # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+        And I should see "deployer" in the output                 # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+
+      Scenario: The deployer users authorized_keys has been rendered # features/base/users.feature:25
+        When I run "cat /home/deployer/.ssh/authorized_keys"         # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:62
+        Then the exit code should be "0"                             # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:84
+        And I should see "ssh-rsa" in the output                     # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+        And I should see "deployer" in the output                    # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+
+      Scenario: The deployer users ssh config has been rendered   # features/base/users.feature:31
+        When I run "cat /home/deployer/.ssh/config"               # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:62
+        Then the exit code should be "0"                          # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:84
+        And I should see "KeepAlive yes" in the output            # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+        And I should see "ServerAliveInterval 60" in the output   # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+
+      Scenario: The deployer user can ssh to the devop-test-1     # features/base/users.feature:37
+        * I ssh to "devop-test-1" with the following credentials: # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:28
+          | username | keyfile                        |
+          | deployer | features/support/keys/deployer |
+        When I run "whoami"                                       # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:62
+        Then the exit code should be "0"                          # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:84
+        And I should see "deployer" in the output                 # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+
+    @chef-client
+    Feature: Chef-Client Role
+      In order to automate server provisioning with Opscode Chef
+      As a DevOp Engineer
+      I want to ensure that chef-client is daemonized on my servers
+
+      Background:                                                 # features/chef-client.feature:7
+        * I ssh to "devop-test-1" with the following credentials: # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:28
+          | username | keyfile |
+          | $lxc$    | $lxc$   |
+
+      Scenario: Chef-Client is running as a daemon                # features/chef-client.feature:12
+        When I run "ps aux | grep [c]hef-client"                  # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:62
+        Then the exit code should be "0"                          # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:84
+        And I should see "chef-client" in the output              # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+        And I should see "-i 900" in the output                   # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+        And I should see "-s 900" in the output                   # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:68
+
+      Scenario: The Chef-Server validation key has been removed   # features/chef-client.feature:19
+        When I run "[[ ! -e /etc/chef/validation.pem ]]"          # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:62
+        Then the exit code should be "0"                          # cucumber-chef-3.0.8/lib/cucumber/chef/steps/ssh_steps.rb:84
+
+    10 scenarios (10 passed)
+    51 steps (51 passed)
+    0m3.630s
+    [~/code/cc-chef-repo] $
+
+#### 10) Container Status
+
+Lets see how the container is doing after the test:
+
+    [~/code/cc-chef-repo] $ bin/cucumber-chef status --containers
+    NOGEMDEV:                              ztk
+    NOGEMDEV:                    cucumber-chef
+    cucumber-chef v3.0.8
+    +--------------+-------+--------+-------------+-------------------+---------------+---------+
+    | NAME         | ALIVE | DISTRO | IP          | MAC               | CHEF VERSION  | PERSIST |
+    +--------------+-------+--------+-------------+-------------------+---------------+---------+
+    | devop-test-1 | true  | ubuntu | 192.168.0.1 | 00:00:5e:35:ea:d5 | Chef: 10.24.0 | true    |
+    +--------------+-------+--------+-------------+-------------------+---------------+---------+
+
+    [~/code/cc-chef-repo] $
+
+Looks good!
+
+#### 11) Container SSH
+
+Lets checkout the container itself:
+
+    [~/code/cc-chef-repo] $ bin/cucumber-chef ssh devop-test-1
+    NOGEMDEV:                              ztk
+    NOGEMDEV:                    cucumber-chef
+    cucumber-chef v3.0.8
+    Attempting proxy SSH connection to the container 'devop-test-1'...
+          _____                           _                _____ _           __
+         / ____|                         | |              / ____| |         / _|
+        | |    _   _  ___ _   _ _ __ ___ | |__   ___ _ __| |    | |__   ___| |_
+        | |   | | | |/ __| | | | '_ ` _ \| '_ \ / _ \ '__| |    | '_ \ / _ \  _|
+        | |___| |_| | (__| |_| | | | | | | |_) |  __/ |  | |____| | | |  __/ |
+         \_____\__,_|\___|\__,_|_| |_| |_|_.__/ \___|_|   \_____|_| |_|\___|_|
+
+
+        Welcome to the Cucumber Chef Test Lab v3.0.8
+
+        You are now logged in to the devop-test-1 container!
+
+    Last login: Sun Apr 14 22:12:24 2013 from cucumber-chef.test-lab
+    root@devop-test-1:~#
+
+Nice! We're in!
+
+##### 12) Process List
+
+Lets see what's running; we can pass our own `ps` options in too; I like using `aux`:
+
+    [~/code/cc-chef-repo] $ bin/cucumber-chef ps aux
+    NOGEMDEV:                              ztk
+    NOGEMDEV:                    cucumber-chef
+    cucumber-chef v3.0.8
+    --------------------------------------------------------------------------------
+    CONTAINER  USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+    devop-test-1 root     24034  0.0  0.0  23920  1892 ?        Ss   22:09   0:00 /sbin/init
+    devop-test-1 root     24170  0.0  0.0  16964   364 ?        S    22:09   0:00 upstart-udev-bridge --daemon
+    devop-test-1 syslog   24179  0.0  0.0 119872  1412 ?        Sl   22:09   0:00 rsyslogd -c4
+    devop-test-1 root     24184  0.0  0.0  16812   420 ?        S<s  22:09   0:00 udevd --daemon
+    devop-test-1 root     24196  0.0  0.0   6140   636 pts/5    Ss+  22:09   0:00 /sbin/getty -8 38400 tty4
+    devop-test-1 root     24199  0.0  0.0   6140   636 pts/3    Ss+  22:09   0:00 /sbin/getty -8 38400 tty2
+    devop-test-1 root     24200  0.0  0.0   6140   640 pts/4    Ss+  22:09   0:00 /sbin/getty -8 38400 tty3
+    devop-test-1 root     24207  0.0  0.0  21136   896 ?        Ss   22:09   0:00 cron
+    devop-test-1 root     24241  0.0  0.0   6140   636 pts/2    Ss+  22:09   0:00 /sbin/getty -8 38400 tty1
+    devop-test-1 root     24243  0.0  0.0   6140   636 pts/6    Ss+  22:09   0:00 /sbin/getty -8 38400 /dev/console
+    devop-test-1 root     24265  0.0  0.0   6616   288 ?        Ss   22:09   0:00 dhclient3 -e IF_METRIC=100 -pf /var/run/dhclient.eth0.pid -lf /var/lib/dhcp3/dhclient.eth0.leases eth0
+    devop-test-1 root     24281  0.0  0.0  49324  2544 ?        Ss   22:09   0:00 /usr/sbin/sshd -D
+    devop-test-1 root     24905  0.0  0.7 111136 30996 ?        Sl   22:10   0:00 /opt/chef/embedded/bin/ruby /usr/bin/chef-client -d -P /var/run/chef/client.pid -c /etc/chef/client.rb -i 900 -s 900 -L /var/log/chef/client.log
+    --------------------------------------------------------------------------------
+
+    [~/code/cc-chef-repo] $
+
+We can see our `chef-client` daemon up and running along with some other standard daemons and processes.
+
+
+I hope this helps further use and understanding of test-driven infrastructure and cucumber-chef!
 
 # RESOURCES
 
