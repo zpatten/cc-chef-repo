@@ -31,11 +31,11 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
 
 #### TL;DR
 
-At this point you have two options, keep going step by step or you can use this TL;DR version:
+At this point you have two options, keep going step by step or you can use this TL;DR version, you will need my bash aliases active for this version to work:
 
     rgs && bu && bibs && echo "y" | bin/cucumber-chef destroy && bin/cucumber-chef setup && bin/cucumber
 
-If you are not using RVM, you will have to adapt this command for whatever you using:
+Alternately you can use this command if you don't want to bother with the aliases.  If you are not using RVM, you will have to adapt this command for whatever you using:
 
     rvm --force gemset empty && bundle update && bundle install --binstubs && echo "y" | bin/cucumber-chef destroy && bin/cucumber-chef setup && bin/cucumber
 
