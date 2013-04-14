@@ -4,7 +4,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
 
 # USING
 
-**1)** I define these bash aliases for use with my ruby-related development:
+## 1) I define these bash aliases for use with my ruby-related development:
 
     alias be='bundle exec'
     alias bi='bundle install'
@@ -18,7 +18,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
     alias noverbose='export VERBOSE=0'   # turn verbose off
     alias rgs='rvm --force gemset empty' # reset-gemset
 
-**2)** Clone this repo:
+### 2) Clone this repo:
 
     [~] $ mkdir -p ~/code/
     [~] $ cd ~/code/
