@@ -273,13 +273,13 @@ If you are not using RVM, you will have to adapt the following command for whate
     NOGEMDEV:                              ztk
     NOGEMDEV:                    cucumber-chef
     cucumber-chef v3.0.8
-    Creating VAGRANT instance completed in 79.4110 seconds.
-    Uploading embedded chef-repo completed in 0.9761 seconds.
-    Bootstrapping VAGRANT instance completed in 361.4017 seconds.
+    Creating VAGRANT instance completed in 93.9351 seconds.
+    Uploading embedded chef-repo completed in 0.8683 seconds.
+    Bootstrapping VAGRANT instance completed in 512.1306 seconds.
     Waiting for the chef-server-api HTTPS responded after 0.1005 seconds.
-    Downloading chef credentials completed in 0.4057 seconds.
-    Downloading SSH credentials completed in 0.8045 seconds.
-    Rebooting the test lab completed in 45.1487 seconds.
+    Downloading chef credentials completed in 0.3048 seconds.
+    Downloading SSH credentials completed in 0.7068 seconds.
+    Rebooting the test lab completed in 28.2183 seconds.
     Waiting for the chef-server-api HTTPS responded after 0.1006 seconds.
 
     If you are using AWS, be sure to log into the chef-server webui and change the default admin password at least.
