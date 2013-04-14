@@ -257,7 +257,35 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
 
 8) Setup a new test lab:
 
+    [~/code/cc-chef-repo] $ bin/cucumber-chef setup
+    NOGEMDEV:                              ztk
+    NOGEMDEV:                    cucumber-chef
+    cucumber-chef v3.0.8
+    Creating VAGRANT instance completed in 79.4110 seconds.
+    Uploading embedded chef-repo completed in 0.9761 seconds.
+    Bootstrapping VAGRANT instance completed in 361.4017 seconds.
+    Waiting for the chef-server-api HTTPS responded after 0.1005 seconds.
+    Downloading chef credentials completed in 0.4057 seconds.
+    Downloading SSH credentials completed in 0.8045 seconds.
+    Rebooting the test lab completed in 45.1487 seconds.
+    Waiting for the chef-server-api HTTPS responded after 0.1006 seconds.
 
+    If you are using AWS, be sure to log into the chef-server webui and change the default admin password at least.
+
+    Your test lab has now been provisioned!  Enjoy!
+
+    +-------------------------------------------------+
+    |    PROVIDER: Cucumber::Chef::Provider::Vagrant  |
+    |          ID: test-lab-zpatten                   |
+    |       STATE: running                            |
+    |    USERNAME: vagrant                            |
+    |  IP_ADDRESS: 192.168.33.10                      |
+    |    SSH_PORT: 22                                 |
+    +-------------------------------------------------+
+
+    [~/code/cc-chef-repo] $
+
+9) Run cucumber:
 
 
 # Cucumber-Chef v3.0.6 Run
