@@ -6,6 +6,8 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
 
 #### 1) I define these bash aliases for use with my ruby-related development:
 
+You do not need to use these; but if you want to use some of the more advanced features of this repo like gem and cookbook development; i.e. working on cucumber-chef for example; then you will want to use these.
+
     alias be='bundle exec'
     alias bi='bundle install'
     alias bibs='bundle install --binstubs'
@@ -246,7 +248,7 @@ If you are not using RVM, you will have to adapt the following command for whate
 
 #### 7) Ensure any existing test labs are destroyed:
 
-    [~/code/cc-chef-repo] $ echo "yes" | bin/cucumber-chef destroy
+    [~/code/cc-chef-repo] $ echo "y" | bin/cucumber-chef destroy
     NOGEMDEV:                              ztk
     NOGEMDEV:                    cucumber-chef
     cucumber-chef v3.0.8
