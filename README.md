@@ -2,9 +2,9 @@
 
 This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  ENJOY!
 
-# Using
+# USING
 
-1) I define these bash aliases for use with my ruby-related development:
+**1)** I define these bash aliases for use with my ruby-related development:
 
     alias be='bundle exec'
     alias bi='bundle install'
@@ -18,18 +18,18 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
     alias noverbose='export VERBOSE=0'   # turn verbose off
     alias rgs='rvm --force gemset empty' # reset-gemset
 
-2) Clone this repo:
+**2)** Clone this repo:
 
     [~] $ mkdir -p ~/code/
     [~] $ cd ~/code/
     [~/code] $ git clone git@github.com:zpatten/cc-chef-repo.git
 
-3) Change to the repo directory and make sure the ruby and gemset specified in `.ruby-version` and `.ruby-gemset` are active.  Optionally set VERBOSE=1.
+**3)** Change to the repo directory and make sure the ruby and gemset specified in `.ruby-version` and `.ruby-gemset` are active.  Optionally set VERBOSE=1.
 
     [~/code] $ cd cc-chef-repo
     [~/code/cc-chef-repo] $ export VERBOSE=1
 
-4) Clear your gemset, bundle update, bundle install binstubs:
+**4)** Clear your gemset, bundle update, bundle install binstubs:
 
     [~/code/cc-chef-repo] $ rgs && bu && bibs
     NOGEMDEV:                              ztk
@@ -146,7 +146,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
     Use `bundle show [gemname]` to see where a bundled gem is installed.
     [~/code/cc-chef-repo] $
 
-5) Update the librarian-chef bundle:
+**5)** Update the librarian-chef bundle:
 
     [~/code/cc-chef-repo] $ bin/librarian-chef update
     NOGEMDEV:                              ztk
@@ -189,7 +189,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
     Installing users (1.3.0)
     [~/code/cc-chef-repo] $
 
-6) Install the librarian-chef bundle:
+**6)** Install the librarian-chef bundle:
 
     [~/code/cc-chef-repo] $ bin/librarian-chef install
     NOGEMDEV:                              ztk
@@ -232,7 +232,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
     Installing users (1.3.0)
     [~/code/cc-chef-repo] $
 
-7) Ensure any existing test labs are destroyed:
+**7)** Ensure any existing test labs are destroyed:
 
     [~/code/cc-chef-repo] $ echo "yes" | bin/cucumber-chef destroy
     NOGEMDEV:                              ztk
@@ -255,7 +255,7 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
 
     [~/code/cc-chef-repo] $
 
-8) Setup a new test lab:
+**8)** Setup a new test lab:
 
     [~/code/cc-chef-repo] $ bin/cucumber-chef setup
     NOGEMDEV:                              ztk
@@ -285,330 +285,8 @@ This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  
 
     [~/code/cc-chef-repo] $
 
-9) Run cucumber:
+**9)** Run cucumber:
 
-
-# Cucumber-Chef v3.0.6 Run
-
-    $ rvm --force gemset empty && bundle install --binstubs && echo "yes" | bin/cucumber-chef destroy && bin/cucumber-chef setup && time bin/cucumber
-    NOGEMDEV:                              ztk
-    NOGEMDEV:                    cucumber-chef
-    NOGEMDEV:                              ztk
-    NOGEMDEV:                    cucumber-chef
-    Fetching gem metadata from https://rubygems.org/.........
-    Fetching gem metadata from https://rubygems.org/..
-    Installing rake (10.0.4)
-    Installing i18n (0.6.1)
-    Installing multi_json (1.7.2)
-    Installing activesupport (3.2.13)
-    Installing archive-tar-minitar (0.5.2)
-    Installing builder (3.2.0)
-    Installing bunny (0.7.9)
-    Installing erubis (2.7.0)
-    Installing highline (1.6.16)
-    Installing json (1.7.7) with native extensions
-    Installing mixlib-log (1.6.0)
-    Installing mixlib-authentication (1.3.0)
-    Installing mixlib-cli (1.3.0)
-    Installing mixlib-config (1.1.2)
-    Installing mixlib-shellout (1.1.0)
-    Installing moneta (0.6.0)
-    Installing net-ssh (2.6.7)
-    Installing net-ssh-gateway (1.2.0)
-    Installing net-ssh-multi (1.1)
-    Installing ipaddress (0.8.0)
-    Installing systemu (2.5.2)
-    Installing yajl-ruby (1.1.0) with native extensions
-    Installing ohai (6.16.0)
-    Installing mime-types (1.22)
-    Installing rest-client (1.6.7)
-    Installing polyglot (0.3.3)
-    Installing treetop (1.4.12)
-    Installing uuidtools (2.1.3)
-    Installing chef (10.24.0)
-    Installing diff-lcs (1.2.3)
-    Installing gherkin (2.11.8) with native extensions
-    Installing cucumber (1.2.5)
-    Installing excon (0.20.1)
-    Installing formatador (0.2.4)
-    Installing net-scp (1.1.0)
-    Installing nokogiri (1.5.9) with native extensions
-    Installing ruby-hmac (0.4.0)
-    Installing fog (1.10.1)
-    Installing rspec-core (2.13.1)
-    Installing rspec-expectations (2.13.0)
-    Installing rspec-mocks (2.13.1)
-    Installing rspec (2.13.0)
-    Installing thor (0.18.1)
-    Installing ubuntu_ami (0.4.1)
-    Installing net-sftp (2.1.1)
-    Installing ztk (1.0.10)
-    Installing cucumber-chef (3.0.6)
-    Installing librarian (0.1.0)
-    Installing librarian-chef (0.0.1)
-    Using bundler (1.2.3)
-    Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.
-    Post-install message from bunny:
-    [Version 0.7.8] test suite cleanup (eliminated some race conditions related to queue.message_count)
-
-    NOGEMDEV:                              ztk
-    NOGEMDEV:                    cucumber-chef
-    cucumber-chef v3.0.6
-    +-------------------------------------------------+
-    |    PROVIDER: Cucumber::Chef::Provider::Vagrant  |
-    |          ID: test-lab-zpatten                   |
-    |       STATE: unknown                            |
-    |    USERNAME: vagrant                            |
-    |  IP_ADDRESS: 192.168.33.10                      |
-    |    SSH_PORT: 22                                 |
-    +-------------------------------------------------+
-    Are you sure you want to destroy the test lab?
-    You have 5 seconds to abort!
-
-    5...4...3...2...1...BOOM!
-
-    Destroy VAGRANT instance 'test-lab-zpatten' completed in 2.2374 seconds.
-
-    NOGEMDEV:                              ztk
-    NOGEMDEV:                    cucumber-chef
-    cucumber-chef v3.0.6
-    Creating VAGRANT instance completed in 112.3682 seconds.
-    Uploading embedded chef-repo completed in 0.9657 seconds.
-    Bootstrapping VAGRANT instance completed in 237.7720 seconds.
-    Waiting for the chef-server-api HTTPS responded after 0.1005 seconds.
-    Downloading chef credentials completed in 0.3062 seconds.
-    Downloading SSH credentials completed in 0.9147 seconds.
-    Rebooting the test lab completed in 89.1921 seconds.
-    Waiting for the chef-server-api HTTPS responded after 0.1005 seconds.
-
-    If you are using AWS, be sure to log into the chef-server webui and change the default admin password at least.
-
-    Your test lab has now been provisioned!  Enjoy!
-
-    +-------------------------------------------------+
-    |    PROVIDER: Cucumber::Chef::Provider::Vagrant  |
-    |          ID: test-lab-zpatten                   |
-    |       STATE: running                            |
-    |    USERNAME: vagrant                            |
-    |  IP_ADDRESS: 192.168.33.10                      |
-    |    SSH_PORT: 22                                 |
-    +-------------------------------------------------+
-
-    NOGEMDEV:                              ztk
-    NOGEMDEV:                    cucumber-chef
-    Using the default profile...
-    Code:
-      * features/support/env.rb
-      * features/support/cc-hooks.rb
-    >>> cucumber-chef v3.0.6
-    >>> Pushing chef-repo environments to the test lab completed in 1.7292 seconds.
-    >>> Pushing chef-repo cookbooks to the test lab completed in 29.5274 seconds.
-    >>> Pushing chef-repo roles to the test lab completed in 1.0046 seconds.
-    >>> Pushing chef-repo data bag 'users' to the test lab completed in 1.7133 seconds.
-    >>> Creating container 'devop-test-1' completed in 528.2874 seconds.
-    >>> Provisioning container 'devop-test-1' completed in 42.1745 seconds.
-
-    Features:
-      * features/base/sudo.feature
-      * features/base/timezone.feature
-      * features/base/users.feature
-      * features/chef-client.feature
-    Parsing feature files took 0m0.032s
-
-    @base @sudo
-    Feature: Base Role Sudo Management
-      In order to automate user management with Opscode Chef
-      As a DevOp Engineer
-      I want to ensure that the deployer users sudo access is being managed properly
-
-      Background:                                                 # features/base/sudo.feature:7
-        * I ssh to "devop-test-1" with the following credentials: # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:28
-          | username | keyfile |
-          | $lxc$    | $lxc$   |
-
-      Scenario: Our suoders file exists                           # features/base/sudo.feature:12
-        When I run "[[ -e /etc/sudoers ]]"                        # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:62
-        Then the exit code should be "0"                          # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:84
-
-      Scenario: The deployer users groups should be in the sudoers file # features/base/sudo.feature:16
-        When I run "grep [d]eployer /etc/sudoers"                       # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:62
-        Then the exit code should be "0"                                # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:84
-        And I should see "ALL" in the output                            # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-        And I should see "NOPASSWD" in the output                       # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-        When I run "grep [d]evop /etc/sudoers"                          # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:62
-        Then the exit code should be "0"                                # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:84
-        And I should see "ALL" in the output                            # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-        And I should see "NOPASSWD" in the output                       # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-
-    @base @timezone
-    Feature: Base Role TZ Management
-      In order to automate TZ management with Opscode Chef
-      As a DevOp Engineer
-      I want to ensure that the hosts timezone is being managed properly
-
-      Background:                                                 # features/base/timezone.feature:7
-        * I ssh to "devop-test-1" with the following credentials: # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:28
-          | username | keyfile |
-          | $lxc$    | $lxc$   |
-
-      Scenario: System timezone is set and defaults to UTC.       # features/base/timezone.feature:12
-        And I run "cat /etc/timezone"                             # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:62
-        Then the exit code should be "0"                          # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:84
-        And I should see "UTC" in the output                      # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-
-    @base @users
-    Feature: Base Role User Management
-      In order to automate user management with Opscode Chef
-      As a DevOp Engineer
-      I want to ensure that my users are being managed properly
-
-      Background:                                                 # features/base/users.feature:7
-        * I ssh to "devop-test-1" with the following credentials: # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:28
-          | username | keyfile |
-          | $lxc$    | $lxc$   |
-
-      Scenario: The deployer user exists                          # features/base/users.feature:12
-        When I run "cat /etc/passwd | grep [d]eployer"            # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:62
-        Then the exit code should be "0"                          # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:84
-        And I should see "deployer" in the output                 # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-        And I should see "/home/deployer" in the output           # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-        And I should see "/bin/bash" in the output                # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-
-      Scenario: The deployer users groups exist                   # features/base/users.feature:19
-        When I run "cat /etc/group | grep [d]eployer"             # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:62
-        Then the exit code should be "0"                          # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:84
-        And I should see "devop" in the output                    # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-        And I should see "deployer" in the output                 # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-
-      Scenario: The deployer users authorized_keys has been rendered # features/base/users.feature:25
-        When I run "cat /home/deployer/.ssh/authorized_keys"         # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:62
-        Then the exit code should be "0"                             # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:84
-        And I should see "ssh-rsa" in the output                     # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-        And I should see "deployer" in the output                    # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-
-      Scenario: The deployer users ssh config has been rendered   # features/base/users.feature:31
-        When I run "cat /home/deployer/.ssh/config"               # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:62
-        Then the exit code should be "0"                          # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:84
-        And I should see "KeepAlive yes" in the output            # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-        And I should see "ServerAliveInterval 60" in the output   # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-
-      Scenario: The deployer user can ssh to the devop-test-1     # features/base/users.feature:37
-        * I ssh to "devop-test-1" with the following credentials: # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:28
-          | username | keyfile                        |
-          | deployer | features/support/keys/deployer |
-        When I run "whoami"                                       # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:62
-        Then the exit code should be "0"                          # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:84
-        And I should see "deployer" in the output                 # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-
-    @chef-client
-    Feature: Chef-Client Role
-      In order to automate server provisioning with Opscode Chef
-      As a DevOp Engineer
-      I want to ensure that chef-client is daemonized on my servers
-
-      Background:                                                 # features/chef-client.feature:7
-        * I ssh to "devop-test-1" with the following credentials: # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:28
-          | username | keyfile |
-          | $lxc$    | $lxc$   |
-
-      Scenario: Chef-Client is running as a daemon                # features/chef-client.feature:12
-        When I run "ps aux | grep [c]hef-client"                  # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:62
-        Then the exit code should be "0"                          # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:84
-        And I should see "chef-client" in the output              # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-        And I should see "-i 900" in the output                   # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-        And I should see "-s 900" in the output                   # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:68
-
-      Scenario: The Chef-Server validation key has been removed   # features/chef-client.feature:19
-        When I run "[[ ! -e /etc/chef/validation.pem ]]"          # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:62
-        Then the exit code should be "0"                          # cucumber-chef-3.0.6/lib/cucumber/chef/steps/ssh_steps.rb:84
-
-    10 scenarios (10 passed)
-    51 steps (51 passed)
-    0m4.001s
-
-    real    10m11.078s
-    user    0m14.547s
-    sys 0m1.508s
-
-
-    $ bin/cucumber-chef displayconfig
-    NOGEMDEV:                              ztk
-    NOGEMDEV:                    cucumber-chef
-    cucumber-chef v3.0.6
-    --------------------------------------------------------------------------------
-    ---
-    :mode: :user
-    :prerelease: false
-    :user: zpatten
-    :artifacts:
-      chef-client-log: /var/log/chef/client.log
-      chef-client-stacktrace: /var/chef/cache/chef-stacktrace.out
-    :chef:
-      :version: latest
-      :container_version: 10.24.0
-      :default_password: p@ssw0rd1
-      :render_client_rb: true
-      :cookbook_paths:
-      - cookbooks
-      - site-cookbooks
-      :prereleases: false
-      :nightlies: false
-    :test_lab:
-      :hostname: cucumber-chef
-      :tld: test-lab
-    :command_timeout: 1800
-    :provider: :vagrant
-    :aws:
-      :bootstrap_user: ubuntu
-      :lab_user: cucumber-chef
-      :lxc_user: root
-      :ssh:
-        :lab_port: 22
-        :lxc_port: 22
-      :ubuntu_release: precise
-      :aws_instance_arch: i386
-      :aws_instance_disk_store: ebs
-      :aws_instance_type: c1.medium
-      :aws_security_group: cucumber-chef
-      :identity_file:
-      :aws_access_key_id:
-      :aws_secret_access_key:
-      :aws_ssh_key_id:
-      :region: us-west-2
-      :availability_zone: us-west-2a
-    :vagrant:
-      :bootstrap_user: vagrant
-      :lab_user: cucumber-chef
-      :lxc_user: root
-      :ssh:
-        :lab_ip: 192.168.33.10
-        :lab_port: 22
-        :lxc_port: 22
-      :cpus: 4
-      :memory: 4096
-      :identity_file: /home/zpatten/.vagrant.d/insecure_private_key
-
-    --------------------------------------------------------------------------------
-                   root_dir = "/home/zpatten/.rvm/gems/ruby-1.9.3-p392@cc-chef-repo/gems/cucumber-chef-3.0.6"
-                   home_dir = "/home/zpatten/code/cc-chef-repo/.cucumber-chef"
-                   log_file = "/home/zpatten/code/cc-chef-repo/.cucumber-chef/cucumber-chef.log"
-              artifacts_dir = "/home/zpatten/code/cc-chef-repo/.cucumber-chef/vagrant/artifacts"
-                  config_rb = "/home/zpatten/code/cc-chef-repo/.cucumber-chef/config.rb"
-                    labfile = "/home/zpatten/code/cc-chef-repo/Labfile"
-                  chef_repo = "/home/zpatten/code/cc-chef-repo"
-                  chef_user = "zpatten"
-              chef_identity = "/home/zpatten/code/cc-chef-repo/.cucumber-chef/vagrant/zpatten.pem"
-             bootstrap_user = "vagrant"
-    bootstrap_user_home_dir = "/home/vagrant"
-         bootstrap_identity = "/home/zpatten/.vagrant.d/insecure_private_key"
-                   lab_user = "cucumber-chef"
-          lab_user_home_dir = "/home/cucumber-chef"
-               lab_identity = "/home/zpatten/code/cc-chef-repo/.cucumber-chef/vagrant/id_rsa-cucumber-chef"
-                   lxc_user = "root"
-          lxc_user_home_dir = "/root"
-               lxc_identity = "/home/zpatten/code/cc-chef-repo/.cucumber-chef/vagrant/id_rsa-root"
-                chef_pre_11 = false
-    --------------------------------------------------------------------------------
 
 
 # RESOURCES
