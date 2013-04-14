@@ -1,5 +1,4 @@
 .bundle
-.rvmrc
 .DS_Store
 bin
 *tar.gz
