@@ -30,7 +30,7 @@ source "https://rubygems.org"
 ###########
 # gem "chef", "10.24.0"
 # gem "chef", "11.4.0"
-gem "chef", "10.24.0"
+gem "chef"
 gem "librarian-chef"
 
 # DEVELOPMENT GEMS
