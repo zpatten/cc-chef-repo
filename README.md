@@ -1,3 +1,5 @@
+[![Dependency Status](https://gemnasium.com/zpatten/cc-chef-repo.png)](https://gemnasium.com/zpatten/cc-chef-repo)
+
 # OVERVIEW
 
 This is an example `chef-repo` meant to illustrate the usage of cucumber-chef.  ENJOY!
