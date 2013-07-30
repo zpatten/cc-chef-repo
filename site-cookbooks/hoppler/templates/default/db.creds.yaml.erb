@@ -1,0 +1,8 @@
+<% @dbi.each do |k, v| %>
+<%   if not k == 'id' %>
+<%= "%s: %s" % [
+       k,
+       v[@env]
+    ] %>
+<%   end %>
+<% end %>

@@ -10,10 +10,30 @@ ecosystem "quirkafleeg" do
     mac "00:00:5e:a2:c8:c9"
     chef_client (
                     {
-                        :run_list => [
+                        :environment => "cucumber",
+                        :run_list    => [
                             "role[base]",
                             "role[chef-client]",
                             "role[mongodb]"
+                        ]
+                    }
+                )
+  end
+
+  container "mysql-01" do
+    distro "ubuntu"
+    release "precise"
+    persist true
+    ip "192.168.99.20"
+    mac "00:00:5e:6a:94:a2"
+    chef_client (
+                    {
+                        :environment => "cucumber",
+                        :run_list => [
+                            "role[quirkafleeg]",
+                            "role[base]",
+                            "role[chef-client]",
+                            "role[mysql]"
                         ]
                     }
                 )

@@ -14,14 +14,35 @@ SITE
       runit (~> 1.0)
       windows (>= 0.0.0)
       yum (>= 0.0.0)
+    mysql (3.0.2)
+      build-essential (> 1.1.0)
+      openssl (>= 0.0.0)
     ntp (1.3.2)
+    openssl (1.0.2)
     postfix (2.1.6)
     runit (1.1.2)
       build-essential (>= 0.0.0)
       yum (>= 0.0.0)
     windows (1.8.8)
       chef_handler (>= 0.0.0)
+    xml (1.1.2)
+      build-essential (>= 0.0.0)
+    xslt (0.0.1)
     yum (2.2.0)
+
+GIT
+  remote: git://github.com/theodi/chef-envbuilder.git
+  ref: master
+  sha: c8a1384ad53d9e6d0b2e1989d99211d94b33e6d4
+  specs:
+    envbuilder (0.1.5)
+
+GIT
+  remote: git@github.com:theodi/chef-rvm.git
+  ref: master
+  sha: ee7847c86d14204be86cb4640008d2407b01c4b7
+  specs:
+    rvm (0.0.2)
 
 GIT
   remote: https://github.com/edelight/chef-mongodb
@@ -36,8 +57,13 @@ DEPENDENCIES
   apt (= 1.9.0)
   build-essential (>= 0)
   chef-client (>= 0)
+  envbuilder (>= 0)
   git (>= 0)
   mongodb (>= 0)
+  mysql (>= 0)
   ntp (>= 0)
   postfix (>= 0)
+  rvm (>= 0)
+  xml (>= 0)
+  xslt (>= 0)
 

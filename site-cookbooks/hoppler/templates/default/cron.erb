@@ -1,0 +1,6 @@
+# Dropped here by Chef
+
+SHELL=/bin/bash
+
+<%= @backup_minute %> <%= @backup_hour %> * * * root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:backup'
+0 <%= @cleanup_hour %> * * 7 root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:cleanup'

@@ -13,3 +13,4 @@ tmp
 public
 vendor/checkouts
 .idea/
+data_bags/
