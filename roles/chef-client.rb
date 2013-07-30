@@ -8,7 +8,7 @@ run_list(
 
 override_attributes(
   :chef_client => {
-    :server_url => "https://192.168.255.254",
+    :server_url => "https://192.168.33.10",
     :interval => 900,
     :splay => 900,
     :backup_path => "/var/chef/backup",

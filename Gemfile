@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
+
+#ruby=ruby-2.0.0
+#ruby-gemset=cc3
+
 #^syntax detection
 ################################################################################
 def gem_dev(gem_name, *args)

@@ -1,49 +1,68 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
-# Ecosystem Mock up
-ecosystem "mockup-app-1" do
-
-  container "devop-test-1" do
+ecosystem "quirkafleeg" do
+  container "mongo-01" do
     distro "ubuntu"
-    release "lucid"
+    release "precise"
     persist true
-    ip "192.168.0.1"
-    mac "00:00:5e:35:ea:d5"
-    chef_client  ({ :environment => "test",
-                    :run_list => [
-                      "role[base]",
-                      "role[chef-client]"
-                    ]
-                  })
+    ip "192.168.99.10"
+    mac "00:00:5e:a2:c8:c9"
+    chef_client (
+                    {
+                        :run_list => [
+                            "role[base]",
+                            "role[chef-client]",
+                            "recipe[postfix]"
+                        ]
+                    }
+                )
   end
-
-  # container "lb-test-1" do
-  #   distro "ubuntu"
-  #   release "lucid"
-  #   persist true
-  #   ip "192.168.0.2"
-  #   mac "00:00:5e:d1:fa:08"
-  #   chef_client  ({ :environment => "test",
-  #                   :run_list => [
-  #                     "role[base]",
-  #                     "role[chef-client]"
-  #                   ]
-  #                 })
-  # end
-
-  # container "app-test-1" do
-  #   distro "ubuntu"
-  #   release "lucid"
-  #   persist true
-  #   ip "192.168.0.3"
-  #   mac "00:00:5e:eb:8d:a3"
-  #   chef_client  ({ :environment => "test",
-  #                   :run_list => [
-  #                     "role[base]",
-  #                     "role[chef-client]"
-  #                   ]
-  #                 })
-  # end
-
 end
+
+# Ecosystem Mock up
+#ecosystem "mockup-app-1" do
+
+#  container "devop-test-1" do
+#    distro "ubuntu"
+#    release "lucid"
+#    persist true
+#    ip "192.168.0.1"
+#    mac "00:00:5e:35:ea:d5"
+#    chef_client ({ :environment => "test",
+#                   :run_list    => [
+#                       "role[base]",
+#                       "role[chef-client]"
+#                   ]
+#    })
+#  end
+
+# container "lb-test-1" do
+#   distro "ubuntu"
+#   release "lucid"
+#   persist true
+#   ip "192.168.0.2"
+#   mac "00:00:5e:d1:fa:08"
+#   chef_client  ({ :environment => "test",
+#                   :run_list => [
+#                     "role[base]",
+#                     "role[chef-client]"
+#                   ]
+#                 })
+# end
+
+# container "app-test-1" do
+#   distro "ubuntu"
+#   release "lucid"
+#   persist true
+#   ip "192.168.0.3"
+#   mac "00:00:5e:eb:8d:a3"
+#   chef_client  ({ :environment => "test",
+#                   :run_list => [
+#                     "role[base]",
+#                     "role[chef-client]"
+#                   ]
+#                 })
+# end
+
+#end

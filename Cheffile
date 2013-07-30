@@ -56,3 +56,5 @@ cookbook 'ssh_known_hosts'
 # Helper Cookbooks
 cookbook "motd-tail"
 cookbook "timezone"
+
+cookbook "postfix"

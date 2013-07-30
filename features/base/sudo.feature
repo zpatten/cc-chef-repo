@@ -5,7 +5,7 @@ Feature: Base Role Sudo Management
   I want to ensure that the deployer users sudo access is being managed properly
 
   Background:
-    * I ssh to "devop-test-1" with the following credentials:
+    * I ssh to "mongo-01" with the following credentials:
       | username | keyfile |
       | $lxc$ | $lxc$ |
 

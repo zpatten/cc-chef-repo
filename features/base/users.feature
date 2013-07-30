@@ -5,7 +5,7 @@ Feature: Base Role User Management
   I want to ensure that my users are being managed properly
 
   Background:
-    * I ssh to "devop-test-1" with the following credentials:
+    * I ssh to "mongo-01" with the following credentials:
       | username | keyfile |
       | $lxc$ | $lxc$ |
 
@@ -35,7 +35,7 @@ Feature: Base Role User Management
       And I should see "ServerAliveInterval 60" in the output
 
   Scenario: The deployer user can ssh to the devop-test-1
-    * I ssh to "devop-test-1" with the following credentials:
+    * I ssh to "mongo-01" with the following credentials:
       | username | keyfile |
       | deployer | features/support/keys/deployer |
     When I run "whoami"

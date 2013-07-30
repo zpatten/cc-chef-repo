@@ -5,7 +5,7 @@ Feature: Chef-Client Role
   I want to ensure that chef-client is daemonized on my servers
 
   Background:
-    * I ssh to "devop-test-1" with the following credentials:
+    * I ssh to "mongo-01" with the following credentials:
       | username | keyfile |
       | $lxc$ | $lxc$ |
 
@@ -19,3 +19,6 @@ Feature: Chef-Client Role
   Scenario: The Chef-Server validation key has been removed
     When I run "[[ ! -e /etc/chef/validation.pem ]]"
       Then the exit code should be "0"
+
+  Scenario: postfix is installed
+    * package "postfix" should be installed
