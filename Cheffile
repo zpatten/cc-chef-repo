@@ -1,60 +1,11 @@
 #!/usr/bin/env ruby
 #^syntax detection
-################################################################################
-def cookbook_dev(cookbook_name, *args)
-  verbose = (ENV['VERBOSE'] == "1")
-  cbdev = (ENV['CBDEV'] == "1")
-
-  if (File.exists?(path = File.join("vendor", "checkouts", cookbook_name)) && (cbdev == true))
-    if (arg = args.first{ |arg| arg.is_a?(Hash) })
-      arg.reject!{ |k,v| [:git,:ref].include?(k) }
-      arg.merge!(:path => path)
-    else
-      args << {:path => path}
-    end
-  end
-
-  if verbose
-    cookbook_details = args.collect{ |arg| arg.inspect }.join(", ")
-    !cookbook_details.empty? and (cookbook_details = ", #{cookbook_details}")
-    puts(" %2sCBDEV: %32s%s" % [((cbdev == true) ? "  " : "NO"), cookbook_name, cookbook_details])
-  end
-
-  cookbook(cookbook_name, *args)
-end
-################################################################################
 
 site 'http://community.opscode.com/api/v1'
 
-# Package Management Cookbooks
-cookbook "apt"
-
-# Process Management Cookbooks
-# cookbook "bluepill"
-
-# User Management Cookbooks
-cookbook_dev "users", :git => "git://github.com/zpatten/chef-cookbook-users.git"
-cookbook_dev "sudo", :git => "git://github.com/zpatten/chef-cookbook-sudo.git"
-
-# Compilation Tool Cookbooks
-cookbook "build-essential"
-
-# Opscode Chef-Client and Chef-Server Cookbooks
-cookbook "chef-client"
-cookbook "chef-server"
-
-# 'bind' Cookbooks
-cookbook "resolver"
-
-# 'git' Cookbooks
+cookbook 'chef-client' #, "=1.1.2"
+cookbook 'apt', '= 1.9.0'
 cookbook 'git'
-
-# 'ssh' Cookbooks
-cookbook 'openssh'
-cookbook 'ssh_known_hosts'
-
-# Helper Cookbooks
-cookbook "motd-tail"
-cookbook "timezone"
-
-cookbook "postfix"
+cookbook 'build-essential'
+cookbook 'postfix'
+cookbook 'ntp'

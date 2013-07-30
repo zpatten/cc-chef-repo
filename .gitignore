@@ -12,3 +12,4 @@ tmp
 .vagrant*
 public
 vendor/checkouts
+.idea/
