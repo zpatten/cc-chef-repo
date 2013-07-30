@@ -25,3 +25,9 @@ Feature: mongodb server role
   Scenario: ntp is installed
     When I run "ps ax | grep 'ntpd ' | grep -v grep"
     Then the exit code should be "0"
+
+  Scenario: mongodb is installed
+    * package "mongodb-10gen" should be installed
+
+  Scenario: mongodb be runnin'
+    * "mongod" should be running

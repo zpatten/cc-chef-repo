@@ -13,8 +13,7 @@ ecosystem "quirkafleeg" do
                         :run_list => [
                             "role[base]",
                             "role[chef-client]",
-                            "recipe[postfix]",
-                            "recipe[ntp]"
+                            "role[mongodb]"
                         ]
                     }
                 )
