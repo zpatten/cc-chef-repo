@@ -13,6 +13,7 @@ cookbook 'mongodb', :github => 'edelight/chef-mongodb'
 cookbook 'mysql'
 cookbook 'xml'
 cookbook 'xslt'
+cookbook 'nginx'
 
 cookbook 'rvm', :github => 'theodi/chef-rvm.git'
 cookbook 'envbuilder', :github => 'theodi/chef-envbuilder.git'

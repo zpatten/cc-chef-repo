@@ -2,7 +2,7 @@
 #^syntax detection
 
 ecosystem "quirkafleeg" do
-  container "mongo-quirkafleeg-cucumber-01" do
+  container "mongo-quirkafleeg-01" do
     distro "ubuntu"
     release "precise"
     persist true
@@ -29,11 +29,30 @@ ecosystem "quirkafleeg" do
     chef_client (
                     {
                         :environment => "cucumber",
-                        :run_list => [
+                        :run_list    => [
                             "role[quirkafleeg]",
                             "role[base]",
                             "role[chef-client]",
                             "role[mysql]"
+                        ]
+                    }
+                )
+  end
+
+  container "web-quirkafleeg-01" do
+    distro "ubuntu"
+    release "precise"
+    persist true
+    ip "192.168.99.30"
+    mac "00:00:5e:98:d4:a3"
+    chef_client (
+                    {
+                        :environment => "cucumber",
+                        :run_list    => [
+                            "role[quirkafleeg]",
+                            "role[base]",
+                            "role[chef-client]",
+                            "recipe[odi-nginx]"
                         ]
                     }
                 )
