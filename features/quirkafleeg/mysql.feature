@@ -72,3 +72,11 @@ Feature: mysql server role
     MYSQL_USERNAME='root'
     MYSQL_PASSWORD='passwordbeallfakeforquirkafleeg'
     """
+    * symlink "/home/hoppler/hoppler/.env" should exist
+    When I run "cat /home/hoppler/hoppler/.env"
+    Then I should see "RACKSPACE_USERNAME: rax" in the output
+    And I should see "RACKSPACE_API_KEY: 567" in the output
+    And I should see "RACKSPACE_CONTAINER: dat" in the output
+    And I should see "RACKSPACE_DIRECTORY_CONTAINER: theo" in the output
+    And I should see "RACKSPACE_API_ENDPOINT: lon.auth.api.rackspacecloud.com" in the output
+    And I should see "RACKSPACE_DIRECTORY_ASSET_HOST: http://3c15e47727" in the output
