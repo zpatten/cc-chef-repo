@@ -51,8 +51,8 @@ Feature: mysql server role
   @code
   Scenario: Hoppler is installed and cronned
     * path "/home/hoppler/hoppler" should exist
-    * file "/home/hoppler/hoppler/lib/hoppler.rb" should exist
-    * file "/etc/cron.d/hoppler" should contain
+    And file "/home/hoppler/hoppler/lib/hoppler.rb" should exist
+    And file "/etc/cron.d/hoppler" should contain
     """
 0 2 * * * root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:backup'
 0 3 * * 7 root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:cleanup'
@@ -67,12 +67,12 @@ Feature: mysql server role
   @envfile
   Scenario: ~/.mysql.env is correct
     * file "/home/hoppler/hoppler/.mysql.env" should be owned by "hoppler:hoppler"
-    * file "/home/hoppler/hoppler/.mysql.env" should contain
+    And file "/home/hoppler/hoppler/.mysql.env" should contain
     """
     MYSQL_USERNAME='root'
     MYSQL_PASSWORD='passwordbeallfakeforquirkafleeg'
     """
-    * symlink "/home/hoppler/hoppler/.env" should exist
+    And symlink "/home/hoppler/hoppler/.env" should exist
     When I run "cat /home/hoppler/hoppler/.env"
     Then I should see "RACKSPACE_USERNAME: rax" in the output
     And I should see "RACKSPACE_API_KEY: 567" in the output
