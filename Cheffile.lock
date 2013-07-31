@@ -31,20 +31,6 @@ SITE
     yum (2.2.0)
 
 GIT
-  remote: git://github.com/theodi/chef-envbuilder.git
-  ref: master
-  sha: c8a1384ad53d9e6d0b2e1989d99211d94b33e6d4
-  specs:
-    envbuilder (0.1.5)
-
-GIT
-  remote: git@github.com:theodi/chef-rvm.git
-  ref: master
-  sha: ee7847c86d14204be86cb4640008d2407b01c4b7
-  specs:
-    rvm (0.0.2)
-
-GIT
   remote: https://github.com/edelight/chef-mongodb
   ref: master
   sha: e56f80b599e05ff46039b09a0fa65d325c4ba46b
@@ -52,6 +38,20 @@ GIT
     mongodb (0.12.0)
       apt (>= 1.8.2)
       yum (>= 0.0.0)
+
+GIT
+  remote: https://github.com/theodi/chef-envbuilder.git
+  ref: master
+  sha: c8a1384ad53d9e6d0b2e1989d99211d94b33e6d4
+  specs:
+    envbuilder (0.1.5)
+
+GIT
+  remote: https://github.com/theodi/chef-rvm.git
+  ref: master
+  sha: ee7847c86d14204be86cb4640008d2407b01c4b7
+  specs:
+    rvm (0.0.2)
 
 DEPENDENCIES
   apt (= 1.9.0)

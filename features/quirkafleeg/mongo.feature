@@ -4,7 +4,7 @@ Feature: mongodb server role
   I want a mongodb server
 
   Background:
-    * I ssh to "mongo-01" with the following credentials:
+    * I ssh to "mongo-quirkafleeg-cucumber-01" with the following credentials:
       | username | keyfile |
       | $lxc$    | $lxc$   |
 

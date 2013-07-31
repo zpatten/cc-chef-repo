@@ -14,5 +14,5 @@ cookbook 'mysql'
 cookbook 'xml'
 cookbook 'xslt'
 
-cookbook 'rvm', :git => 'git@github.com:theodi/chef-rvm.git'
-cookbook 'envbuilder', :git => 'git://github.com/theodi/chef-envbuilder.git'
+cookbook 'rvm', :github => 'theodi/chef-rvm.git'
+cookbook 'envbuilder', :github => 'theodi/chef-envbuilder.git'

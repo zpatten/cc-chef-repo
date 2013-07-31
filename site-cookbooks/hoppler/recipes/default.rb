@@ -24,7 +24,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-hoppler = node["user"]
+hoppler = node["hoppler"]["user"]
 
 group "%s" % [
     hoppler
@@ -56,11 +56,15 @@ file "/etc/sudoers.d/%s" % [
   action :create
 end
 
+node['rvm'] = {} if not node['rvm']
+node['rvm']['user'] = hoppler
+node['rvm']['ruby'] = node['hoppler']['ruby']
+
 include_recipe "odi-rvm"
 
-dbi = data_bag_item 'databases', 'rootlogins'
+dbi = data_bag_item node['databags']['primary'], 'databases'
 
-node.set['mysql']['server_root_password'] = dbi[node['git_project']][node.chef_environment]
+node.set['mysql']['server_root_password'] = dbi['root'][node.chef_environment]
 
 git "/home/%s/hoppler" % [
     hoppler
@@ -112,7 +116,7 @@ template "/etc/cron.d/hoppler" do
   )
 end
 
-dbi = data_bag_item "databases", "credentials"
+#dbi = data_bag_item "databases", "credentials"
 
 template "/home/%s/hoppler/db.creds.yaml" % [
   hoppler

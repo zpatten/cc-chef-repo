@@ -29,14 +29,13 @@
 
 
 node.set['rvm']['user_installs'] = [
-  { 'user'          => node['user'],
-    'default_ruby'  => node['ruby'],
+  { 'user'          => node['rvm']['user'],
+    'default_ruby'  => node['rvm']['ruby'],
     'rubies'        => [
-      node['ruby']
+      node['rvm']['ruby']
     ]
   }
 ]
-
 
 include_recipe "odi-xml"
 include_recipe "xslt"

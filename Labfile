@@ -2,7 +2,7 @@
 #^syntax detection
 
 ecosystem "quirkafleeg" do
-  container "mongo-01" do
+  container "mongo-quirkafleeg-cucumber-01" do
     distro "ubuntu"
     release "precise"
     persist true
@@ -20,7 +20,7 @@ ecosystem "quirkafleeg" do
                 )
   end
 
-  container "mysql-01" do
+  container "mysql-quirkafleeg-cucumber" do
     distro "ubuntu"
     release "precise"
     persist true

@@ -4,7 +4,7 @@ Feature: mysql server role
   I want a mysql server
 
   Background:
-    * I ssh to "mysql-01" with the following credentials:
+    * I ssh to "mysql-quirkafleeg-cucumber" with the following credentials:
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
@@ -30,45 +30,45 @@ Feature: mysql server role
     * package "mysql-server" should be installed
 
   Scenario: Can connect to database server
-    When I run "mysql -p'password be all fake for quirkafleeg' -e 'show databases'"
+    When I run "mysql -p'passwordbeallfakeforquirkafleeg' -e 'show databases'"
     Then I should not see "ERROR" in the output
 
-#  @restore
-#  Scenario: Database "singon" exists
-#    When I run "mysql -p'password be all fake for quirkafleeg' -e 'show databases'"
-#    Then I should see "certificate" in the output
-#
+  @restore
+  Scenario: Database "singon" exists
+    When I run "mysql -p'passwordbeallfakeforquirkafleeg' -e 'show databases'"
+    Then I should see "signon" in the output
+
   @user
   Scenario: hoppler user exists
     When I run "su - hoppler -c 'echo ${SHELL}'"
     Then I should see "/bin/bash" in the output
-#
-#  @user
-#  Scenario: hoppler user has ruby 2
-#    When I run "su - hoppler -c 'ruby -v'"
-#    Then I should see "2.0.0" in the output
-#
-#  @code
-#  Scenario: Hoppler is installed and cronned
-#    * path "/home/hoppler/hoppler" should exist
-#    * file "/home/hoppler/hoppler/lib/hoppler.rb" should exist
-#    * file "/etc/cron.d/hoppler" should contain
-#    """
-#0 2 * * * root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:backup'
-#0 3 * * 7 root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:cleanup'
-#    """
-#
-#  @creds
-#  Scenario: passwords yaml file exists
-#    * file "/home/hoppler/hoppler/db.creds.yaml" should exist
-#    When I run "cat /home/hoppler/hoppler/db.creds.yaml"
-#    Then I should see "^certificate:" in the output
-#
-#  @envfile
-#  Scenario: ~/.mysql.env is correct
-#    * file "/home/hoppler/hoppler/.mysql.env" should be owned by "hoppler:hoppler"
-#    * file "/home/hoppler/hoppler/.mysql.env" should contain
-#    """
-#    MYSQL_USERNAME='root'
-#    MYSQL_PASSWORD='fakepasswordforcertificate'
-#    """
+
+  @user
+  Scenario: hoppler user has ruby 2
+    When I run "su - hoppler -c 'ruby -v'"
+    Then I should see "2.0.0" in the output
+
+  @code
+  Scenario: Hoppler is installed and cronned
+    * path "/home/hoppler/hoppler" should exist
+    * file "/home/hoppler/hoppler/lib/hoppler.rb" should exist
+    * file "/etc/cron.d/hoppler" should contain
+    """
+0 2 * * * root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:backup'
+0 3 * * 7 root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:cleanup'
+    """
+
+  @creds
+  Scenario: passwords yaml file exists
+    * file "/home/hoppler/hoppler/db.creds.yaml" should exist
+    When I run "cat /home/hoppler/hoppler/db.creds.yaml"
+    Then I should see "^signon:" in the output
+
+  @envfile
+  Scenario: ~/.mysql.env is correct
+    * file "/home/hoppler/hoppler/.mysql.env" should be owned by "hoppler:hoppler"
+    * file "/home/hoppler/hoppler/.mysql.env" should contain
+    """
+    MYSQL_USERNAME='root'
+    MYSQL_PASSWORD='passwordbeallfakeforquirkafleeg'
+    """
