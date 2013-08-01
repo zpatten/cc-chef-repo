@@ -51,8 +51,7 @@ ecosystem "quirkafleeg" do
                         :run_list    => [
                             "role[quirkafleeg]",
                             "role[base]",
-                            "role[chef-client]",
-                            "recipe[odi-nginx]"
+                            "role[chef-client]"
                         ]
                     }
                 )

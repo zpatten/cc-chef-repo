@@ -29,15 +29,15 @@ Feature: web node role
   Scenario: git is installed
     * package "git" should be installed
 
-  Scenario: nginx is installed
-    * package "nginx" should be installed
+#  Scenario: nginx is installed
+#    * package "nginx" should be installed
 
-#  Scenario: a load of other dependencies are installed
-#    * package "libxml2-dev" should be installed
-#    And package "libxslt-dev" should be installed
-#    And package "libmysqlclient-dev" should be installed
-#    And package "wbritish-large" should be installed
-#    And package "curl" should be installed
-#    And package "build-essential" should be installed
-#    When I run "node -h"
-#    Then I should not see "command not found" in the output
+  Scenario: a load of other dependencies are installed
+    * package "libxml2-dev" should be installed
+    And package "libxslt1-dev" should be installed
+    And package "libmysqlclient-dev" should be installed
+    And package "wbritish-large" should be installed
+    And package "curl" should be installed
+    And package "build-essential" should be installed
+    When I run "node -h"
+    Then I should not see "command not found" in the output
