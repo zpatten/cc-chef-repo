@@ -6,8 +6,9 @@ run_list(
     "recipe[git]",
     "recipe[postfix]",
     "recipe[ntp]",
-    "recipe[odi-xml]",
-    "recipe[xslt]",
+    "recipe[odi-users]",
+#    "recipe[odi-xml]",
+#    "recipe[xslt]",
     "recipe[mysql::client]",
     "recipe[dictionary]",
     "recipe[nodejs::install_from_package]"

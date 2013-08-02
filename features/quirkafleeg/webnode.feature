@@ -41,3 +41,28 @@ Feature: web node role
     And package "build-essential" should be installed
     When I run "node -h"
     Then I should not see "command not found" in the output
+
+  Scenario: User 'quirkafleeg' exists
+    When I run "su - quirkafleeg -c 'echo ${SHELL}'"
+    Then I should see "/bin/bash" in the output
+
+  Scenario: User can sudo with no password
+  # we cannot test this properly on Vagrant!
+  #  * I run "su - certificate -c 'sudo bash'"
+  #  * I should not see "password for certificate" in the output
+  # So we compromise with this
+    * file "/etc/sudoers.d/quirkafleeg" should exist
+    And file "/etc/sudoers.d/quirkafleeg" should contain
+    """
+quirkafleeg ALL=NOPASSWD:ALL
+    """
+    * file "/etc/sudoers" should contain
+    """
+#includedir /etc/sudoers.d
+    """
+    When I run "stat -c %a /etc/sudoers.d/quirkafleeg"
+    Then I should see "440" in the output
+
+  Scenario: Ruby 1.9.3 is installed
+    * I run "su - quirkafleeg -c 'ruby -v'"
+    * I should see "1.9.3" in the output
