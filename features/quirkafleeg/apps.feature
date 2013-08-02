@@ -33,3 +33,29 @@ Feature: GDS apps
     Then I should see "exec su - quirkafleeg -c 'cd /var/www/signon/releases/" in the output
     And I should see "export PORT=3000" in the output
     And I should see "bundle exec thin start -p \$PORT >> /var/log/quirkafleeg/signon/thin-1.log 2>&1" in the output
+
+  Scenario: vhost exists
+    * file "/var/www/signon/current/vhost" should exist
+    And file "/var/www/signon/current/vhost" should contain
+    """
+upstream signon {
+  server 127.0.0.1:3000;
+}
+
+server {
+  listen 80;
+  server_name signon.theodi.org;
+  access_log /var/log/nginx/signon.log;
+  error_log /var/log/nginx/signon.err;
+
+  location / {
+    try_files $uri @backend;
+  }
+
+  location @backend {
+    proxy_set_header X-Forwarded-Proto 'http';
+    proxy_set_header Host $server_name;
+    proxy_pass http://signon;
+  }
+}
+    """

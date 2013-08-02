@@ -6,6 +6,12 @@ default_attributes(
         :primary => "quirkafleeg"
     },
     :apps     => {
-        'signonotron2' => 'signon'
+        'signonotron2' => {
+            'deploy_name' => 'signon',
+            'port'        => 3000
+        }
+    },
+    :govuk    => {
+        :app_domain => "theodi.org"
     }
 )

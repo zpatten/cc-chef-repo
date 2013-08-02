@@ -13,8 +13,10 @@ directory deploy_root do
   action :create
 end
 
-node['apps'].each_pair do |github_name, deploy_name|
-  root_dir = "%s/%s" % [
+node['apps'].each_pair do |github_name, attributes|
+  deploy_name = attributes['deploy_name']
+  port        = attributes['port']
+  root_dir    = "%s/%s" % [
       deploy_root,
       deploy_name
   ]
@@ -44,7 +46,7 @@ node['apps'].each_pair do |github_name, deploy_name|
 
     environment "RACK_ENV"         => node['deployment']['rack_env'],
                 "HOME"             => "/home/#{user}",
-                "GOVUK_APP_DOMAIN" => "quirkafleeg.theodi.org"
+                "GOVUK_APP_DOMAIN" => node['govuk']['app_domain']
 
     keep_releases 10
     rollback_on_error true
@@ -107,9 +109,21 @@ node['apps'].each_pair do |github_name, deploy_name|
           -a #{deploy_name} \
           -u #{user} \
           -l /var/log/#{user}/#{deploy_name} \
-          -p 3000 \
+          -p #{port} \
           upstart /etc/init
         EOF
+      end
+
+      template "%s/vhost" % [
+          current_release_directory
+      ] do
+        source "vhost.erb"
+        variables(
+            :servername => deploy_name,
+            :port       => port,
+            :domain     => node['govuk']['app_domain']
+        )
+        action :create
       end
     end
     action :force_deploy
