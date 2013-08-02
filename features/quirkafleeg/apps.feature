@@ -14,6 +14,22 @@ Feature: GDS apps
     And directory "/var/www/signon/shared/log" should exist
     And directory "/var/www/signon/shared/log" should be owned by "quirkafleeg:quirkafleeg"
 
-  Scenario: Assets have been compiled
-    * directory "/var/www/signon/current/public/assets/" should exist
+#  Scenario: Assets have been compiled
+#    * directory "/var/www/signon/current/public/assets/" should exist
 
+  Scenario: env is all good
+    * file "/home/quirkafleeg/env" should exist
+    And symlink "/var/www/signon/current/.env" should exist
+    When I run "cat /var/www/signon/current/.env"
+    Then I should see "RACKSPACE_USERNAME: rax" in the output
+    And I should see "RACKSPACE_DIRECTORY_ASSET_HOST: http://3c1" in the output
+    And I should see "JENKINS_URL: http://jenkins.theodi.org" in the output
+
+  Scenario: startup scripts be all up in it
+    * file "/etc/init/signon.conf" should exist
+    And file "/etc/init/signon-thin.conf" should exist
+    And file "/etc/init/signon-thin-1.conf" should exist
+    When I run "cat /etc/init/signon-thin-1.conf"
+    Then I should see "exec su - quirkafleeg -c 'cd /var/www/signon/releases/" in the output
+    And I should see "export PORT=3000" in the output
+    And I should see "bundle exec thin start -p \$PORT >> /var/log/quirkafleeg/signon/thin-1.log 2>&1" in the output

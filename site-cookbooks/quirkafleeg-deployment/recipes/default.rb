@@ -42,8 +42,9 @@ node['apps'].each_pair do |github_name, deploy_name|
     user node['user']
     group node['user']
 
-    environment "RACK_ENV" => node['deployment']['rack_env'],
-                "HOME"     => "/home/#{user}"
+    environment "RACK_ENV"         => node['deployment']['rack_env'],
+                "HOME"             => "/home/#{user}",
+                "GOVUK_APP_DOMAIN" => "quirkafleeg.theodi.org"
 
     keep_releases 10
     rollback_on_error true
@@ -72,16 +73,45 @@ node['apps'].each_pair do |github_name, deploy_name|
         EOF
       end
 
-      script 'Precompiling assets' do
+      script 'Symlink env' do
         interpreter 'bash'
         cwd current_release_directory
         user running_deploy_user
         code <<-EOF
-        RAILS_ENV=#{node['deployment']['rack_env']} bundle exec rake assets:precompile
+        ln -sf /home/#{user}/env .env
+        EOF
+      end
+
+
+#      script 'Precompiling assets' do
+#        interpreter 'bash'
+#        cwd current_release_directory
+#        user running_deploy_user
+#        code <<-EOF
+#        GOVUK_APP_DOMAIN=quirkafleeg.theodi.org RAILS_ENV=#{node['deployment']['rack_env']} bundle exec rake assets:precompile
+#        EOF
+#      end
+    end
+
+    before_restart do
+      current_release_directory = release_path
+      running_deploy_user       = new_resource.user
+
+      script 'Start Me Up' do
+        interpreter 'bash'
+        cwd current_release_directory
+        user running_deploy_user
+        code <<-EOF
+        export rvmsudo_secure_path=1
+        /home/#{user}/.rvm/bin/rvmsudo bundle exec foreman export \
+          -a #{deploy_name} \
+          -u #{user} \
+          -l /var/log/#{user}/#{deploy_name} \
+          -p 3000 \
+          upstart /etc/init
         EOF
       end
     end
-
     action :force_deploy
   end
 end

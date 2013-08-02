@@ -6,10 +6,15 @@ default_attributes(
         'user' => 'quirkafleeg',
         'ruby' => '1.9.3'
     },
-    'aaa'  => 'fdasfdsfdsfdsafdsafdsafas'
+    'envbuilder'  => {
+        'base_dir' => '/home/quirkafleeg',
+        'owner' => 'quirkafleeg',
+        'group' => 'quirkafleeg'
+    }
 )
 
 run_list(
     "recipe[odi-rvm]",
+    "recipe[envbuilder]",
     "recipe[quirkafleeg-deployment]"
 )
