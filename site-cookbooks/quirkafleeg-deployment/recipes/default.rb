@@ -13,6 +13,11 @@ directory deploy_root do
   action :create
 end
 
+directory "/etc/nginx/sites-enabled" do
+  action :create
+  recursive true
+end
+
 node['apps'].each_pair do |github_name, attributes|
   deploy_name = attributes['deploy_name']
   port        = attributes['port']
@@ -125,7 +130,18 @@ node['apps'].each_pair do |github_name, attributes|
         )
         action :create
       end
+
+      link "/etc/nginx/sites-enabled/%s" % [
+          deploy_name
+      ] do
+        to "%s/vhost" % [
+            current_release_directory
+        ]
+      end
     end
+    notifies :restart, "service[nginx]"
+
     action :force_deploy
   end
 end
+

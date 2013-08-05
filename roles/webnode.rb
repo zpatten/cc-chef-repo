@@ -16,5 +16,6 @@ default_attributes(
 run_list(
     "recipe[odi-rvm]",
     "recipe[envbuilder]",
+    "recipe[odi-nginx]",
     "recipe[quirkafleeg-deployment]"
 )

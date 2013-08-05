@@ -29,8 +29,8 @@ Feature: web node role
   Scenario: git is installed
     * package "git" should be installed
 
-#  Scenario: nginx is installed
-#    * package "nginx" should be installed
+  Scenario: nginx is installed
+    * package "nginx" should be installed
 
   Scenario: a load of other dependencies are installed
     * package "libxml2-dev" should be installed

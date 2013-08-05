@@ -9,6 +9,10 @@ default_attributes(
         'signonotron2' => {
             'deploy_name' => 'signon',
             'port'        => 3000
+        },
+        'static'       => {
+            'deploy_name' => 'static',
+            'port'        => 4000
         }
     },
     :govuk    => {

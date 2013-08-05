@@ -59,3 +59,13 @@ server {
   }
 }
     """
+    And symlink "/etc/nginx/sites-enabled/signon" should exist
+
+  Scenario: further vhosts exist
+    * file "/var/www/static/current/vhost" should exist
+    And file "/var/www/static/current/vhost" should contain
+    """
+upstream static {
+  server 127.0.0.1:4000;
+}
+    """
