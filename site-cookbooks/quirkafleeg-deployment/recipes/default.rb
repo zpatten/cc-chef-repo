@@ -18,10 +18,20 @@ directory "/etc/nginx/sites-enabled" do
   recursive true
 end
 
+mongo_server = search(:node, "name:*mongo-#{node[:project]}* AND chef_environment:#{node.chef_environment}")[0]
+mongo_ip     = mongo_server['ipaddress']
+if mongo_server['rackspace']
+  mongo_ip = mongo_server['rackspace']['private_ip']
+end
+
 node['apps'].each_pair do |github_name, attributes|
-  deploy_name = attributes['deploy_name']
-  port        = attributes['port']
-  root_dir    = "%s/%s" % [
+  deploy_name = github_name
+  if attributes['deploy_name'] then
+    deploy_name = attributes['deploy_name']
+  end
+
+  port     = attributes['port']
+  root_dir = "%s/%s" % [
       deploy_root,
       deploy_name
   ]
@@ -68,6 +78,18 @@ node['apps'].each_pair do |github_name, attributes|
       running_deploy_user       = new_resource.user
       bundler_depot             = new_resource.shared_path + '/bundle'
 
+      template '%s/config/mongoid.yml' % [
+          current_release_directory
+      ] do
+        source "mongoid.yml.erb"
+        variables(
+            :mongoid_host     => mongo_ip,
+            :mongoid_port     => 27017,
+            :mongoid_database => attributes['mongo_db']
+        )
+        action :create
+      end
+
       script 'Bundling' do
         interpreter 'bash'
         cwd current_release_directory
@@ -89,15 +111,14 @@ node['apps'].each_pair do |github_name, attributes|
         EOF
       end
 
-
-#      script 'Precompiling assets' do
-#        interpreter 'bash'
-#        cwd current_release_directory
-#        user running_deploy_user
-#        code <<-EOF
-#        GOVUK_APP_DOMAIN=quirkafleeg.theodi.org RAILS_ENV=#{node['deployment']['rack_env']} bundle exec rake assets:precompile
-#        EOF
-#      end
+      script 'Precompiling assets' do
+        interpreter 'bash'
+        cwd current_release_directory
+        user running_deploy_user
+        code <<-EOF
+        GOVUK_APP_DOMAIN='' RAILS_ENV=#{node['deployment']['rack_env']} bundle exec rake assets:precompile
+        EOF
+      end
     end
 
     before_restart do

@@ -14,8 +14,8 @@ Feature: GDS apps
     And directory "/var/www/signon/shared/log" should exist
     And directory "/var/www/signon/shared/log" should be owned by "quirkafleeg:quirkafleeg"
 
-#  Scenario: Assets have been compiled
-#    * directory "/var/www/signon/current/public/assets/" should exist
+  Scenario: Assets have been compiled
+    * directory "/var/www/signon/current/public/assets/" should exist
 
   Scenario: env is all good
     * file "/home/quirkafleeg/env" should exist
@@ -68,4 +68,31 @@ server {
 upstream static {
   server 127.0.0.1:4000;
 }
+    """
+    And file "/var/www/panopticon/current/vhost" should exist
+    And file "/var/www/panopticon/current/vhost" should contain
+    """
+upstream panopticon {
+  server 127.0.0.1:5000;
+}
+    """
+#    And file "/var/www/publisher/current/vhost" should exist
+#    And file "/var/www/publisher/current/vhost" should contain
+#    """
+#upstream publisher {
+#  server 127.0.0.1:6000;
+#}
+#    """
+  @mongo
+  Scenario: mongoid conf file is correct
+    * file "/var/www/publisher/current/config/mongoid.yml" should exist
+    And file "/var/www/publisher/current/config/mongoid.yml" should contain
+    """
+production:
+  host: 192.168.99.10
+  port: 27017
+  username:
+  password:
+  database: govuk_content_publisher
+  use_activesupport_time_zone: true
     """

@@ -15,6 +15,7 @@ cookbook 'xml'
 cookbook 'xslt'
 cookbook 'nginx'
 cookbook 'nodejs'
+cookbook'capybara-webkit', :github => 'RichGuk/chef-capybara-webkit'
 
 cookbook 'rvm', :github => 'theodi/chef-rvm'
 cookbook 'envbuilder', :github => 'theodi/chef-envbuilder'

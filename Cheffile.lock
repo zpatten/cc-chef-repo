@@ -41,6 +41,13 @@ SITE
     yum (2.2.0)
 
 GIT
+  remote: https://github.com/RichGuk/chef-capybara-webkit
+  ref: master
+  sha: 891ec6bd663ae4f768bd729054585fb713245d78
+  specs:
+    capybara-webkit (0.1.0)
+
+GIT
   remote: https://github.com/edelight/chef-mongodb
   ref: master
   sha: e56f80b599e05ff46039b09a0fa65d325c4ba46b
@@ -73,6 +80,7 @@ GIT
 DEPENDENCIES
   apt (= 1.9.0)
   build-essential (>= 0)
+  capybara-webkit (>= 0)
   chef-client (>= 0)
   dictionary (>= 0)
   envbuilder (>= 0)
