@@ -14,9 +14,9 @@ Feature: GDS apps
     And directory "/var/www/signon/shared/log" should exist
     And directory "/var/www/signon/shared/log" should be owned by "quirkafleeg:quirkafleeg"
 
-  Scenario: Assets have been compiled
-    * directory "/var/www/signon/current/public/assets/" should exist
-
+##  Scenario: Assets have been compiled
+##    * directory "/var/www/signon/current/public/assets/" should exist
+##
   Scenario: env is all good
     * file "/home/quirkafleeg/env" should exist
     And symlink "/var/www/signon/current/.env" should exist
@@ -52,6 +52,13 @@ server {
     try_files $uri @backend;
   }
 
+  location ~ ^/(assets)/  {
+    root /var/www/signon/current/public/;
+    gzip_static on; # to serve pre-gzipped version
+    expires max;
+    add_header Cache-Control public;
+  }
+
   location @backend {
     proxy_set_header X-Forwarded-Proto 'http';
     proxy_set_header Host $server_name;
@@ -76,17 +83,17 @@ upstream panopticon {
   server 127.0.0.1:5000;
 }
     """
-#    And file "/var/www/publisher/current/vhost" should exist
-#    And file "/var/www/publisher/current/vhost" should contain
-#    """
-#upstream publisher {
-#  server 127.0.0.1:6000;
-#}
-#    """
+    And file "/var/www/publisher/current/vhost" should exist
+    And file "/var/www/publisher/current/vhost" should contain
+    """
+upstream publisher {
+  server 127.0.0.1:6000;
+}
+    """
   @mongo
   Scenario: mongoid conf file is correct
-    * file "/var/www/publisher/current/config/mongoid.yml" should exist
-    And file "/var/www/publisher/current/config/mongoid.yml" should contain
+    * file "/var/www/publisher/shared/config/mongoid.yml" should exist
+    And file "/var/www/publisher/shared/config/mongoid.yml" should contain
     """
 production:
   host: 192.168.99.10
@@ -95,4 +102,19 @@ production:
   password:
   database: govuk_content_publisher
   use_activesupport_time_zone: true
+    """
+    And symlink "/var/www/publisher/current/config/mongoid.yml" should exist
+    And symlink "/var/www/publisher/current/mongoid.yml" should exist
+
+  @mysql
+  Scenario: mysql conf is correct
+    * file "/var/www/signon/shared/config/database.yml" should exist
+    And file "/var/www/signon/shared/config/database.yml" should contain
+    """
+production:
+  adapter: mysql2
+  database: signon
+  username: signon
+  password: superawesomefakepassword
+  host: 192.168.99.20
     """
