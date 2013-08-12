@@ -56,9 +56,9 @@ file "/etc/sudoers.d/%s" % [
   action :create
 end
 
-node['rvm'] = {} if not node['rvm']
-node['rvm']['user'] = hoppler
-node['rvm']['ruby'] = node['hoppler']['ruby']
+node.set['rvm'] = {} if not node['rvm']
+node.set['rvm']['user'] = hoppler
+node.set['rvm']['ruby'] = node['hoppler']['ruby']
 
 include_recipe "odi-rvm"
 
