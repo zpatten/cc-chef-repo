@@ -37,6 +37,7 @@ source "https://rubygems.org"
 gem "chef"
 gem "librarian-chef"
 gem 'knife-spork', :github => 'jonlives/knife-spork'
+gem 'cucumber', :github => 'cucumber/cucumber'
 
 # DEVELOPMENT GEMS
 ###################
