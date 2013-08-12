@@ -12,8 +12,8 @@ Feature: mysql server role
     When I run "ps aux | grep [c]hef-client"
     Then the exit code should be "0"
     And I should see "chef-client" in the output
-    And I should see "-i 900" in the output
-    And I should see "-s 900" in the output
+    And I should see "-i 300" in the output
+    And I should see "-s 300" in the output
 
   Scenario: The Chef-Server validation key has been removed
     When I run "[[ ! -e /etc/chef/validation.pem ]]"
