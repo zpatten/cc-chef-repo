@@ -31,5 +31,9 @@ Feature: mongodb server role
   Scenario: mongodb is installed
     * package "mongodb-10gen" should be installed
 
+   Scenario: listening on specified ip address
+     When I run "ps ax | grep mongo"
+     Then I should see "--bind_ip 192.168.99.10" in the output
+
   Scenario: mongodb be runnin'
     * "mongod" should be running
