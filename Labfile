@@ -12,7 +12,8 @@ ecosystem "quirkafleeg" do
                     {
                         :environment => "cucumber",
                         :run_list    => [
-                            "role[base]",
+#                            "role[base]",
+                            "role[quirkafleeg]",
                             "role[chef-client]",
                             "role[mongodb]"
                         ]
@@ -31,7 +32,7 @@ ecosystem "quirkafleeg" do
                         :environment => "cucumber",
                         :run_list    => [
                             "role[quirkafleeg]",
-                            "role[base]",
+#                            "role[base]",
                             "role[chef-client]",
                             "role[mysql]"
                         ]
@@ -50,7 +51,7 @@ ecosystem "quirkafleeg" do
                         :environment => "cucumber",
                         :run_list    => [
                             "role[quirkafleeg]",
-                            "role[base]",
+#                            "role[base]",
                             "role[chef-client]",
                             "role[webnode]"
                         ]
