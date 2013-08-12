@@ -2,6 +2,7 @@ name "mysql"
 description "mysql server role"
 
 run_list(
+    "recipe[chef-client]",
     "recipe[odi-mysql::server]",
     "recipe[hoppler]"
 )
