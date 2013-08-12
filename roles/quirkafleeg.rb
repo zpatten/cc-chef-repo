@@ -49,4 +49,15 @@ default_attributes(
     :govuk    => {
         :app_domain => "theodi.org"
     }
+run_list(
+    "recipe[build-essential]",
+    "recipe[git]",
+    "recipe[postfix]",
+    "recipe[ntp]",
+    "recipe[odi-apt]",
+    "recipe[odi-users]",
+    "recipe[odi-pk]",
+    "recipe[mysql::client]",
+    "recipe[dictionary]",
+    "recipe[nodejs::install_from_package]"
 )
