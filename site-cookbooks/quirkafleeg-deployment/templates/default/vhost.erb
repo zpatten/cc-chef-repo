@@ -12,6 +12,7 @@ server {
     try_files $uri @backend;
   }
 
+<% if @static_assets %>
   location ~ ^/(assets)/  {
     root /var/www/<%= @servername %>/current/public/;
     gzip_static on; # to serve pre-gzipped version
@@ -19,6 +20,7 @@ server {
     add_header Cache-Control public;
   }
 
+<% end %>
   location @backend {
     proxy_set_header X-Forwarded-Proto 'http';
     proxy_set_header Host $server_name;

@@ -9,6 +9,39 @@
 
 deploy_root = node['deployment']['root']
 
+
+domain = node['govuk']['app_domain']
+if node.chef_environment !~ /production/ then
+  domain = "%s.xip.io" % [
+      node["ipaddress"]
+  ]
+end
+
+ruby_block "extra env bits" do
+  block do
+    extras = {
+        'DEV_DOMAIN'       => domain,
+        'GOVUK_APP_DOMAIN' => domain,
+        'GDS_SSO_STRATEGY' => 'real',
+        'STATIC_DEV'       => "http://static.%s" % [
+            domain
+        ],
+        'GOVUK_ASSET_ROOT' => "static.%s" % [
+            domain
+        ]
+
+    }
+    f      = File.open "/home/#{node['user']}/env", "a"
+    extras.each_pair do |key, value|
+      f.write "%s=%s\n" % [
+          key,
+          value
+      ]
+    end
+    f.close
+  end
+end
+
 directory deploy_root do
   action :create
 end
@@ -32,11 +65,15 @@ end
 
 dbi = data_bag_item node['databags']['primary'], 'databases'
 
-
 node['apps'].each_pair do |github_name, attributes|
   deploy_name = github_name
   if attributes['deploy_name'] then
     deploy_name = attributes['deploy_name']
+  end
+
+  precompile_assets = true
+  if attributes.has_key?(:precompile_assets) then
+    precompile_assets = attributes[:precompile_assets]
   end
 
   port     = attributes['port']
@@ -97,16 +134,9 @@ node['apps'].each_pair do |github_name, attributes|
             :mongoid_port     => 27017,
             :mongoid_database => attributes['mongo_db']
         )
-        action :create
-      end
-
-      template '%s/config/database.yml' % [
-          shared_directory
-      ]                   do
-        source "database.yml.erb"
-        variables(
-            :mysql_host => mysql_ip
-        )
+        user node['user']
+        group node['user']
+        mode "0644"
         action :create
       end
 
@@ -117,6 +147,35 @@ node['apps'].each_pair do |github_name, attributes|
         code <<-EOF
         ln -sf #{shared_directory}/config/mongoid.yml mongoid.yml
         ln -sf #{shared_directory}/config/mongoid.yml config/mongoid.yml
+        EOF
+      end
+
+      begin
+        mysql_password = dbi[attributes['mysql_db']][node.chef_environment]
+      rescue
+        mysql_password = 'derp'
+      end
+
+      template '%s/config/database.yml' % [
+          shared_directory
+      ] do
+        source "database.yml.erb"
+        variables(
+            :mysql_host     => mysql_ip,
+            :mysql_database => attributes[:mysql_db],
+            :mysql_username => attributes[:mysql_db],
+            :mysql_password => mysql_password
+        )
+        action :create
+      end
+
+      script 'Symlink database.yml' do
+        interpreter 'bash'
+        cwd current_release_directory
+        user running_deploy_user
+        code <<-EOF
+        ln -sf #{shared_directory}/config/database.yml database.yml
+        ln -sf #{shared_directory}/config/database.yml config/database.yml
         EOF
       end
 
@@ -141,13 +200,15 @@ node['apps'].each_pair do |github_name, attributes|
         EOF
       end
 
-      script 'Precompiling assets' do
-        interpreter 'bash'
-        cwd current_release_directory
-        user running_deploy_user
-        code <<-EOF
-#        GOVUK_APP_DOMAIN='' RAILS_ENV=#{node['deployment']['rack_env']} bundle exec rake assets:precompile
-        EOF
+      if precompile_assets then
+        script 'Precompiling assets' do
+          interpreter 'bash'
+          cwd current_release_directory
+          user running_deploy_user
+          code <<-EOF
+          GOVUK_APP_DOMAIN='' RAILS_ENV=#{node['deployment']['rack_env']} bundle exec rake assets:precompile
+          EOF
+        end
       end
     end
 
@@ -175,9 +236,10 @@ node['apps'].each_pair do |github_name, attributes|
       ] do
         source "vhost.erb"
         variables(
-            :servername => deploy_name,
-            :port       => port,
-            :domain     => node['govuk']['app_domain']
+            :servername    => deploy_name,
+            :port          => port,
+            :domain        => domain,
+            :static_assets => precompile_assets
         )
         action :create
       end
@@ -191,8 +253,14 @@ node['apps'].each_pair do |github_name, attributes|
       end
     end
     notifies :restart, "service[nginx]"
+#    notifies :restart, "service[#{deploy_name}]"
 
-    action :force_deploy
+    if node.chef_environment then
+      action :force_deploy
+    else
+      action :deploy
+    end
+#    action :force_deploy
   end
 end
 
