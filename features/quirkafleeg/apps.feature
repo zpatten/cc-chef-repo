@@ -17,6 +17,10 @@ Feature: GDS apps
 ##  Scenario: Assets have been compiled
 ##    * directory "/var/www/signon/current/public/assets/" should exist
 ##
+  Scenario: Assets have been compiled
+    * directory "/var/www/signon/current/public/assets/" should exist
+
+  @env
   Scenario: env is all good
     * file "/home/quirkafleeg/env" should exist
     And symlink "/var/www/signon/current/.env" should exist
