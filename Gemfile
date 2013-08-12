@@ -36,6 +36,7 @@ source "https://rubygems.org"
 # gem "chef", "11.4.0"
 gem "chef"
 gem "librarian-chef"
+gem 'knife-spork', :github => 'jonlives/knife-spork'
 
 # DEVELOPMENT GEMS
 ###################
