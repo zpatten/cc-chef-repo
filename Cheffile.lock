@@ -66,9 +66,9 @@ GIT
 GIT
   remote: https://github.com/theodi/chef-envbuilder
   ref: master
-  sha: c8a1384ad53d9e6d0b2e1989d99211d94b33e6d4
+  sha: 27252c8b85be41067ce364d62f9779855c5108b0
   specs:
-    envbuilder (0.1.5)
+    envbuilder (0.2.0)
 
 GIT
   remote: https://github.com/theodi/chef-rvm
