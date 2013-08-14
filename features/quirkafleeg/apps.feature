@@ -39,8 +39,11 @@ Feature: GDS apps
     And I should see "export PORT=3000" in the output
     And I should see "bundle exec thin start -p \$PORT >> /var/log/quirkafleeg/signon/thin-1.log 2>&1" in the output
 
-  Scenario: vhost exists
+  @fail
+  Scenario: signon vhost exists
     * file "/var/www/signon/current/vhost" should exist
+
+  Scenario: signon vhost is correct
     And file "/var/www/signon/current/vhost" should contain
     """
 upstream signon {
@@ -71,30 +74,43 @@ server {
   }
 }
     """
+
+  Scenario: signon vhost is symlinked
     And symlink "/etc/nginx/sites-enabled/signon" should exist
 
-  Scenario: further vhosts exist
+  Scenario: static vhost exist
     * file "/var/www/static/current/vhost" should exist
+
+  Scenario: static vhost is correct
     And file "/var/www/static/current/vhost" should contain
     """
 upstream static {
   server 127.0.0.1:4000;
 }
     """
+
+  Scenario: panopticon vhost exists
     And file "/var/www/panopticon/current/vhost" should exist
+
+  Scenario: panopticon vhost is correct
     And file "/var/www/panopticon/current/vhost" should contain
     """
 upstream panopticon {
   server 127.0.0.1:5000;
 }
     """
+
+  Scenario: publisher vhost exists
     And file "/var/www/publisher/current/vhost" should exist
+
+  Scenario: publisher vhost is correct
     And file "/var/www/publisher/current/vhost" should contain
     """
 upstream publisher {
   server 127.0.0.1:6000;
 }
     """
+
   @mongo
   Scenario: mongoid conf file is correct
     * file "/var/www/publisher/shared/config/mongoid.yml" should exist
