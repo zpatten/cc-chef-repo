@@ -10,9 +10,8 @@ ecosystem "quirkafleeg" do
     mac "00:00:5e:a2:c8:c9"
     chef_client (
                     {
-                        :environment => "cucumber",
+                        :environment => "quirkafleeg-preduction",
                         :run_list    => [
-#                            "role[base]",
                             "role[quirkafleeg]",
                             "role[chef-client]",
                             "role[mongodb]"
@@ -29,10 +28,9 @@ ecosystem "quirkafleeg" do
     mac "00:00:5e:6a:94:a2"
     chef_client (
                     {
-                        :environment => "cucumber",
+                        :environment => "quirkafleeg-preduction",
                         :run_list    => [
                             "role[quirkafleeg]",
-#                            "role[base]",
                             "role[chef-client]",
                             "role[mysql]"
                         ]
@@ -48,10 +46,9 @@ ecosystem "quirkafleeg" do
     mac "00:00:5e:98:d4:a3"
     chef_client (
                     {
-                        :environment => "cucumber",
+                        :environment => "quirkafleeg-preduction",
                         :run_list    => [
                             "role[quirkafleeg]",
-#                            "role[base]",
                             "role[chef-client]",
                             "role[webnode]"
                         ]
@@ -59,4 +56,3 @@ ecosystem "quirkafleeg" do
                 )
   end
 end
-
