@@ -24,40 +24,15 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+class Chef::Recipe
+  include ODI::Quirkafleeg::Helpers
+end
+
 deploy_root = node['deployment']['root']
 
+domain = get_domain
 
-domain = node['govuk']['app_domain']
-if node.chef_environment !~ /production/ then
-  domain = "%s.xip.io" % [
-      node["ipaddress"]
-  ]
-end
-
-ruby_block "extra env bits" do
-  block do
-    extras = {
-        'DEV_DOMAIN'       => domain,
-        'GOVUK_APP_DOMAIN' => domain,
-        'GDS_SSO_STRATEGY' => 'real',
-        'STATIC_DEV'       => "http://static.%s" % [
-            domain
-        ],
-        'GOVUK_ASSET_ROOT' => "static.%s" % [
-            domain
-        ]
-
-    }
-    f      = File.open "/home/#{node['user']}/env", "a"
-    extras.each_pair do |key, value|
-      f.write "%s=%s\n" % [
-          key,
-          value
-      ]
-    end
-    f.close
-  end
-end
+env_extras
 
 directory deploy_root do
   action :create
@@ -68,17 +43,27 @@ directory "/etc/nginx/sites-enabled" do
   recursive true
 end
 
-mongo_server = search(:node, "name:*mongo-#{node[:project]}* AND chef_environment:#{node.chef_environment}")[0]
-mongo_ip     = mongo_server['ipaddress']
-if mongo_server['rackspace']
-  mongo_ip = mongo_server['rackspace']['private_ip']
-end
+#mongo_server = nil
+#mysql_server = nil
+#if Chef::Config[:solo] then
+#  Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
+#else
+#  mongo_server = search(:node, "name:*mongo-#{node[:project]}* AND chef_environment:#{node.chef_environment}")[0]
+#  mysql_server = search(:node, "name:*mysql-#{node[:project]}* AND chef_environment:#{node.chef_environment}")[0]
+#end
 
-mysql_server = search(:node, "name:*mysql-#{node[:project]}* AND chef_environment:#{node.chef_environment}")[0]
-mysql_ip     = mysql_server['ipaddress']
-if mysql_server['rackspace']
-  mysql_ip = mysql_server['rackspace']['private_ip']
-end
+#mongo_ip = mongo_server['ipaddress']
+#if mongo_server['rackspace']
+#  mongo_ip = mongo_server['rackspace']['private_ip']
+#end
+
+#mysql_ip = mysql_server['ipaddress']
+#if mysql_server['rackspace']
+#  mysql_ip = mysql_server['rackspace']['private_ip']
+#end
+
+mysql_ip = find_a 'mysql'
+mongo_ip = find_a 'mongo'
 
 dbi = data_bag_item node['databags']['primary'], 'databases'
 
@@ -235,6 +220,7 @@ node['apps'].each_pair do |github_name, attributes|
 
       script 'Start Me Up' do
         interpreter 'bash'
+      foremanise deploy_name do
         cwd current_release_directory
         user running_deploy_user
         code <<-EOF
@@ -246,6 +232,7 @@ node['apps'].each_pair do |github_name, attributes|
           -p #{port} \
           upstart /etc/init
         EOF
+        port port
       end
 
       template "%s/vhost" % [
