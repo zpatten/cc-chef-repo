@@ -217,20 +217,9 @@ node['apps'].each_pair do |github_name, attributes|
       current_release_directory = release_path
       running_deploy_user       = new_resource.user
 
-      script 'Start Me Up' do
-        interpreter 'bash'
       foremanise deploy_name do
         cwd current_release_directory
         user running_deploy_user
-        code <<-EOF
-        export rvmsudo_secure_path=1
-        /home/#{user}/.rvm/bin/rvmsudo bundle exec foreman export \
-          -a #{deploy_name} \
-          -u #{user} \
-          -l /var/log/#{user}/#{deploy_name} \
-          -p #{port} \
-          upstart /etc/init
-        EOF
         port port
       end
 
