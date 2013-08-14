@@ -29,38 +29,18 @@ class Chef::Recipe
 end
 
 deploy_root = node['deployment']['root']
-
-domain = get_domain
-
+domain      = get_domain
 env_extras
 
-directory deploy_root do
-  action :create
+[
+    deploy_root,
+    "/etc/nginx/sites-enabled"
+].each do |dir|
+  directory dir do
+    action :create
+    recursive true
+  end
 end
-
-directory "/etc/nginx/sites-enabled" do
-  action :create
-  recursive true
-end
-
-#mongo_server = nil
-#mysql_server = nil
-#if Chef::Config[:solo] then
-#  Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
-#else
-#  mongo_server = search(:node, "name:*mongo-#{node[:project]}* AND chef_environment:#{node.chef_environment}")[0]
-#  mysql_server = search(:node, "name:*mysql-#{node[:project]}* AND chef_environment:#{node.chef_environment}")[0]
-#end
-
-#mongo_ip = mongo_server['ipaddress']
-#if mongo_server['rackspace']
-#  mongo_ip = mongo_server['rackspace']['private_ip']
-#end
-
-#mysql_ip = mysql_server['ipaddress']
-#if mysql_server['rackspace']
-#  mysql_ip = mysql_server['rackspace']['private_ip']
-#end
 
 mysql_ip = find_a 'mysql'
 mongo_ip = find_a 'mongo'
@@ -68,40 +48,15 @@ mongo_ip = find_a 'mongo'
 dbi = data_bag_item node['databags']['primary'], 'databases'
 
 node['apps'].each_pair do |github_name, attributes|
-  deploy_name = github_name
-  if attributes['deploy_name'] then
-    deploy_name = attributes['deploy_name']
-  end
-
-  precompile_assets = true
-  if attributes.has_key?(:precompile_assets) then
-    precompile_assets = attributes[:precompile_assets]
-  end
-
+  deploy_name = attributes['deploy_name'] ||= github_name
+  precompile_assets = !attributes.has_key?(:precompile_assets) and true
   port     = attributes['port']
   root_dir = "%s/%s" % [
       deploy_root,
       deploy_name
   ]
 
-  [
-      "shared",
-      "shared/config",
-      "shared/pids",
-      "shared/log",
-      "shared/system"
-  ].each do |d|
-    directory "%s/%s" % [
-        root_dir,
-        d
-    ] do
-      owner node['user']
-      group node['user']
-      action :create
-      mode "0775"
-      recursive true
-    end
-  end
+  make_shared_dirs root_dir
 
   deploy_revision root_dir do
     user node['user']
@@ -127,58 +82,45 @@ node['apps'].each_pair do |github_name, attributes|
       shared_directory          = new_resource.shared_path
       bundler_depot             = new_resource.shared_path + '/bundle'
 
-      template '%s/config/mongoid.yml' % [
-          new_resource.shared_path
-      ] do
-        source "mongoid.yml.erb"
-        variables(
-            :mongoid_host     => mongo_ip,
-            :mongoid_port     => 27017,
-            :mongoid_database => attributes['mongo_db']
-        )
-        user node['user']
-        group node['user']
-        mode "0644"
-        action :create
-      end
-
-      script 'Symlink mongoid.yml' do
-        interpreter 'bash'
-        cwd current_release_directory
-        user running_deploy_user
-        code <<-EOF
-        ln -sf #{shared_directory}/config/mongoid.yml mongoid.yml
-        ln -sf #{shared_directory}/config/mongoid.yml config/mongoid.yml
-        EOF
-      end
-
       begin
         mysql_password = dbi[attributes['mysql_db']][node.chef_environment]
       rescue
         mysql_password = 'derp'
       end
 
-      template '%s/config/database.yml' % [
-          shared_directory
-      ] do
-        source "database.yml.erb"
-        variables(
-            :mysql_host     => mysql_ip,
-            :mysql_database => attributes[:mysql_db],
-            :mysql_username => attributes[:mysql_db],
-            :mysql_password => mysql_password
-        )
-        action :create
-      end
+      {
+          'database.yml' => {
+              :mysql_host     => mysql_ip,
+              :mysql_database => attributes[:mysql_db],
+              :mysql_username => attributes[:mysql_db],
+              :mysql_password => mysql_password
+          },
+          'mongoid.yml'  => {
+              :mongoid_host     => mongo_ip,
+              :mongoid_port     => 27017,
+              :mongoid_database => attributes['mongo_db']
+          }
+      }.each_pair do |name, params|
+        template '%s/config/%s' % [
+            shared_directory,
+            name
+        ] do
+          source "%s.erb" % [
+              name
+          ]
+          variables(
+              params
+          )
+          user node['user']
+          group node['user']
+          mode "0644"
+          action :create
+        end
 
-      script 'Symlink database.yml' do
-        interpreter 'bash'
-        cwd current_release_directory
-        user running_deploy_user
-        code <<-EOF
-        ln -sf #{shared_directory}/config/database.yml database.yml
-        ln -sf #{shared_directory}/config/database.yml config/database.yml
-        EOF
+        db_conf_symlink name do
+          shared_dir shared_directory
+          current_dir current_release_directory
+        end
       end
 
       script 'Symlink env' do
@@ -207,7 +149,7 @@ node['apps'].each_pair do |github_name, attributes|
         cwd current_release_directory
         user running_deploy_user
         code <<-EOF
-          GOVUK_APP_DOMAIN='' RAILS_ENV=#{node['deployment']['rack_env']} bundle exec rake assets:precompile
+        GOVUK_APP_DOMAIN=#{domain} RAILS_ENV=#{node['deployment']['rack_env']} bundle exec rake assets:precompile
         EOF
         only_if { precompile_assets }
       end
@@ -245,11 +187,11 @@ node['apps'].each_pair do |github_name, attributes|
       end
     end
     notifies :restart, "service[nginx]"
-#    notifies :restart, "service[#{deploy_name}]"
 
-    if node.chef_environment then
+    if node['ipaddress'] =~ /192.168/ then
       action :force_deploy
     else
+      notifies :restart, "service[#{deploy_name}]", :delayed
       action :deploy
     end
 #    action :force_deploy
