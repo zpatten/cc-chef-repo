@@ -26,7 +26,7 @@ module ODI
                     domain
                 ]
             }
-            f = File.open "/home/#{node['user']}/env", "a"
+            f      = File.open "/home/#{node['user']}/env", "a"
             extras.each_pair do |key, value|
               f.write "%s=%s\n" % [
                   key,
@@ -48,13 +48,34 @@ module ODI
               node[:project],
               node.chef_environment
           ]
-          box = search(:node, search_string)[0]
+          box           = search(:node, search_string)[0]
           box_ip        = box['ipaddress']
           if box['rackspace']
             box_ip = box['rackspace']['private_ip']
           end
         end
         box_ip
+      end
+
+      def make_shared_dirs root_dir
+        [
+            "shared",
+            "shared/config",
+            "shared/pids",
+            "shared/log",
+            "shared/system"
+        ].each do |d|
+          directory "%s/%s" % [
+              root_dir,
+              d
+          ] do
+            owner node['user']
+            group node['user']
+            action :create
+            mode "0775"
+            recursive true
+          end
+        end
       end
     end
   end
