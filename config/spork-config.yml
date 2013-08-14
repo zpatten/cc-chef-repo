@@ -1,0 +1,8 @@
+default_environments:
+  - quirkafleeg-production
+
+environment_path: environments/
+
+plugins:
+  git:
+    enabled: true
