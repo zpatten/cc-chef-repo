@@ -202,15 +202,14 @@ node['apps'].each_pair do |github_name, attributes|
         EOF
       end
 
-      if precompile_assets then
-        script 'Precompiling assets' do
-          interpreter 'bash'
-          cwd current_release_directory
-          user running_deploy_user
-          code <<-EOF
+      script 'Precompiling assets' do
+        interpreter 'bash'
+        cwd current_release_directory
+        user running_deploy_user
+        code <<-EOF
           GOVUK_APP_DOMAIN='' RAILS_ENV=#{node['deployment']['rack_env']} bundle exec rake assets:precompile
-          EOF
-        end
+        EOF
+        only_if { precompile_assets }
       end
     end
 
