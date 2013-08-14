@@ -27,6 +27,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.5)
     app_conf (0.4.1)
     archive-tar-minitar (0.5.2)
     atomic (1.1.12)
@@ -45,6 +46,7 @@ GEM
       ohai (>= 0.6.0)
       rest-client (>= 1.0.4, < 1.7.0)
       yajl-ruby (~> 1.1)
+    choice (0.1.6)
     cucumber-chef (3.0.8)
       cucumber
       fog (>= 1.3.1)
@@ -75,6 +77,8 @@ GEM
     i18n (0.6.4)
     ipaddress (0.8.0)
     json (1.7.7)
+    launchy (2.3.0)
+      addressable (~> 2.3)
     librarian (0.1.0)
       highline
       thor (~> 0.15)
@@ -82,6 +86,14 @@ GEM
       archive-tar-minitar (>= 0.5.2)
       chef (>= 0.10)
       librarian (~> 0.1.0)
+    lolcommits (0.2.0)
+      choice (~> 0.1.6)
+      git (~> 1.2.5)
+      launchy
+      methadone (~> 1.2.1)
+      rmagick (~> 2.13.1)
+    methadone (1.2.6)
+      bundler
     mime-types (1.23)
     mini_portile (0.5.1)
     minitest (4.7.5)
@@ -116,6 +128,7 @@ GEM
     rake (10.1.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rmagick (2.13.2)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -147,4 +160,5 @@ DEPENDENCIES
   cucumber-chef
   knife-spork!
   librarian-chef
+  lolcommits
   ztk
