@@ -30,6 +30,6 @@ Vagrant.configure("2") do |config|
     end
 
     test_lab.vm.provision :shell,
-                          :inline => "head -$((`wc -l /etc/rc.local | cut -d ' ' -f 1` - 1)) /etc/rc.local > /tmp/rc.local && for line in '/sbin/iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE' '/sbin/iptables -A FORWARD -i eth0 -o br1 -m state --state RELATED,ESTABLISHED -j ACCEPT' '/sbin/iptables -A FORWARD -i eth1 -o br1 -j ACCEPT' ; do echo ${line} >> /tmp/rc.local ; done && echo 'exit 0' >> /tmp/rc.local && sudo cp /tmp/rc.local /etc/ && sudo /etc/rc.local 2> /dev/null && echo '1' | sudo tee /proc/sys/net/ipv4/ip_forward && echo net.ipv4.ip_forward=1 | sudo tee -a /etc/sysctl.conf > /dev/null"
+                            :path => "vagrant/packetpasser.sh"
   end
 end
