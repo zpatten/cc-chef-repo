@@ -2,6 +2,7 @@
 
 #ruby=ruby-2.0.0
 #ruby-gemset=cc3
+#ruby-gemset=odi-chef
 
 #^syntax detection
 ################################################################################
