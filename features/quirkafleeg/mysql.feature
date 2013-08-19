@@ -34,7 +34,7 @@ Feature: mysql server role
     Then I should not see "ERROR" in the output
 
   @restore
-  Scenario: Database "singon" exists
+  Scenario: Database "signon" exists
     When I run "mysql -p'passwordbeallfakeforquirkafleeg' -e 'show databases'"
     Then I should see "signon" in the output
 
