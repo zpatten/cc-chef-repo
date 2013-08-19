@@ -39,6 +39,7 @@ gem "librarian-chef"
 gem 'knife-spork', :github => 'jonlives/knife-spork'
 gem 'cucumber', :github => 'cucumber/cucumber'
 gem 'lolcommits'
+gem 'foodcritic'
 
 # DEVELOPMENT GEMS
 ###################
