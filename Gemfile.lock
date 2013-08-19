@@ -18,19 +18,30 @@ GIT
       chef (>= 0.10.4)
       git (>= 1.2.5)
 
+GIT
+  remote: git://github.com/theodi/cucumber-chef.git
+  revision: 15491dcaf6db85ad6b7ab4857ac476ca5b1acbb4
+  specs:
+    cucumber-chef (3.0.8)
+      cucumber
+      fog (>= 1.3.1)
+      mixlib-config (>= 1.1.2)
+      rake (>= 0.9.2)
+      rspec
+      thor (>= 0.15.2)
+      ubuntu_ami (>= 0.4.0)
+      whichr (>= 0.3.6)
+      ztk (>= 1.0.9)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (4.0.0)
+    activesupport (3.2.14)
       i18n (~> 0.6, >= 0.6.4)
-      minitest (~> 4.2)
-      multi_json (~> 1.3)
-      thread_safe (~> 0.1)
-      tzinfo (~> 0.3.37)
+      multi_json (~> 1.0)
     addressable (2.3.5)
     app_conf (0.4.1)
     archive-tar-minitar (0.5.2)
-    atomic (1.1.12)
     builder (3.2.2)
     chef (11.6.0)
       erubis
@@ -47,19 +58,12 @@ GEM
       rest-client (>= 1.0.4, < 1.7.0)
       yajl-ruby (~> 1.1)
     choice (0.1.6)
-    cucumber-chef (3.0.8)
-      cucumber
-      fog (>= 1.3.1)
-      mixlib-config (>= 1.1.2)
-      rake (>= 0.9.2)
-      rspec
-      thor (>= 0.15.2)
-      ubuntu_ami (>= 0.4.0)
-      ztk (>= 1.0.9)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     excon (0.25.3)
-    fog (1.14.0)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
+    fog (1.15.0)
       builder
       excon (~> 0.25.0)
       formatador (~> 0.2.0)
@@ -74,10 +78,16 @@ GEM
       multi_json (~> 1.3)
     git (1.2.5)
     highline (1.6.19)
-    i18n (0.6.4)
+    httmultiparty (0.3.10)
+      httparty (>= 0.7.3)
+      multipart-post
+    httparty (0.11.0)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
+    i18n (0.6.5)
     ipaddress (0.8.0)
     json (1.7.7)
-    launchy (2.3.0)
+    launchy (2.2.0)
       addressable (~> 2.3)
     librarian (0.1.0)
       highline
@@ -86,17 +96,25 @@ GEM
       archive-tar-minitar (>= 0.5.2)
       chef (>= 0.10)
       librarian (~> 0.1.0)
-    lolcommits (0.2.0)
+    lolcommits (0.4.6)
+      activesupport (~> 3.2.12)
       choice (~> 0.1.6)
       git (~> 1.2.5)
-      launchy
-      methadone (~> 1.2.1)
-      rmagick (~> 2.13.1)
+      httmultiparty
+      json (~> 1.7.6)
+      launchy (~> 2.2.0)
+      methadone (~> 1.2.4)
+      mini_magick (~> 3.5)
+      oauth
+      open4 (~> 1.3.0)
+      rest-client
+      twitter
     methadone (1.2.6)
       bundler
-    mime-types (1.23)
+    mime-types (1.24)
+    mini_magick (3.6.0)
+      subexec (~> 0.2.1)
     mini_portile (0.5.1)
-    minitest (4.7.5)
     mixlib-authentication (1.3.0)
       mixlib-log
     mixlib-cli (1.3.0)
@@ -105,6 +123,8 @@ GEM
     mixlib-shellout (1.2.0)
     multi_json (1.7.9)
     multi_test (0.0.2)
+    multi_xml (0.5.5)
+    multipart-post (1.2.0)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -117,6 +137,7 @@ GEM
       net-ssh-gateway (>= 0.99.0)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    oauth (0.4.7)
     ohai (6.18.0)
       ipaddress
       mixlib-cli
@@ -125,27 +146,36 @@ GEM
       mixlib-shellout
       systemu
       yajl-ruby
+    open4 (1.3.0)
+    os (0.9.6)
     rake (10.1.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rmagick (2.13.2)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    rspec-core (2.14.4)
-    rspec-expectations (2.14.1)
+    rspec-core (2.14.5)
+    rspec-expectations (2.14.2)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.3)
     ruby-hmac (0.4.0)
+    sane (0.25.6)
+      os
+      os
+    simple_oauth (0.2.0)
+    subexec (0.2.3)
     systemu (2.5.2)
     thor (0.18.1)
-    thread_safe (0.1.2)
-      atomic
-    tzinfo (0.3.37)
+    twitter (4.8.1)
+      faraday (~> 0.8, < 0.10)
+      multi_json (~> 1.0)
+      simple_oauth (~> 0.2)
     ubuntu_ami (0.4.1)
+    whichr (0.3.6)
+      sane
     yajl-ruby (1.1.0)
-    ztk (1.6.26)
+    ztk (1.6.30)
       activesupport
       erubis
       net-sftp
@@ -157,7 +187,7 @@ PLATFORMS
 DEPENDENCIES
   chef
   cucumber!
-  cucumber-chef
+  cucumber-chef!
   knife-spork!
   librarian-chef
   lolcommits

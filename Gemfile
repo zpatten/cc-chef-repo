@@ -45,3 +45,4 @@ gem 'lolcommits'
 ###################
 gem_dev "ztk"
 gem_dev "cucumber-chef"
+gem_dev "cucumber-chef", :github => 'theodi/cucumber-chef' # :path => "/Users/sam/Github/cucumber-chef"
