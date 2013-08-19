@@ -6,7 +6,7 @@ cookbooks
 tmp
 *pem
 *log
-.cucumber-chef/*.log
+.cucumber-chef/*.log*
 .cucumber-chef/aws
 .cucumber-chef/vagrant
 .vagrant*
