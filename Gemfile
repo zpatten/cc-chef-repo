@@ -35,7 +35,7 @@ source "https://rubygems.org"
 ###########
 # gem "chef", "10.24.0"
 # gem "chef", "11.4.0"
-gem "chef"
+gem 'chef'
 gem 'librarian-chef', :github => 'applicationsonline/librarian-chef'
 gem 'knife-spork', :github => 'jonlives/knife-spork'
 gem 'cucumber', :github => 'cucumber/cucumber'
@@ -43,5 +43,5 @@ gem 'foodcritic'
 
 # DEVELOPMENT GEMS
 ###################
-gem_dev "ztk"
-gem_dev "cucumber-chef", :github => 'theodi/cucumber-chef'
+gem_dev 'ztk'
+gem_dev 'cucumber-chef', :github => 'theodi/cucumber-chef'
