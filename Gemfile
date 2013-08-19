@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 #ruby=ruby-2.0.0
-#ruby-gemset=cc3
 #ruby-gemset=odi-chef
 
 #^syntax detection
@@ -44,5 +43,4 @@ gem 'lolcommits'
 # DEVELOPMENT GEMS
 ###################
 gem_dev "ztk"
-gem_dev "cucumber-chef"
 gem_dev "cucumber-chef", :github => 'theodi/cucumber-chef' # :path => "/Users/sam/Github/cucumber-chef"
