@@ -1,0 +1,5 @@
+# Dropped here by Chef
+
+SHELL=/bin/bash
+
+<%= @minute %> <%= @hour %> * * * root su - certificate -c 'cd /var/www/certificates.theodi.org/current && RAILS_ENV=production `which rake` <%= @task %>'
