@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+ecosystem "odc" do
+  container "web-odc-01" do
+    distro "ubuntu"
+    release "precise"
+    persist true
+    ip "192.168.98.10"
+    mac "00:00:5e:a2:c8:c9"
+    chef_client (
+                    {
+                        :run_list => [
+                            "recipe[odc-tools::purge_questionnaires]"
+                        ]
+                    }
+                )
+  end
+end
