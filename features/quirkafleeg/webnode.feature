@@ -1,4 +1,4 @@
-@web
+@quirkafleeg @web
 Feature: web node role
   In order to run Quirkafleeg
   I need some webserver action
