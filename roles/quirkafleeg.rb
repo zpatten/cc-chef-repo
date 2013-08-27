@@ -3,6 +3,7 @@ description "quirkafleeg project wrapper role"
 
 default_attributes(
     :project  => 'quirkafleeg',
+    :database => 'signon',
     :databags => {
         :primary => 'quirkafleeg'
     },
@@ -10,13 +11,15 @@ default_attributes(
         'signonotron2'     => {
             :deploy_name => 'signon',
             :port        => 3000,
-            :mysql_db    => 'signon'
+            :mysql_db    => 'signon',
+            :migrate     => 'bundle exec rake db:migrate'
         },
         'static'           => {
             :port => 4000
         },
         'panopticon'       => {
-            :port => 5000
+            :port     => 5000,
+            :mongo_db => 'govuk_content_publisher'
         },
         'publisher'        => {
             :port     => 6000,
@@ -26,14 +29,11 @@ default_attributes(
         'content_api'      => {
             :deploy_name       => 'contentapi',
             :port              => 7000,
-            :precompile_assets => false
+            :precompile_assets => false,
+            :mongo_db          => 'govuk_content_publisher'
         },
         'people'           => {
             :port => 8000
-        },
-        'frontend'         => {
-            :deploy_name => 'private-frontend',
-            :port        => 9000
         },
         'frontend-news'    => {
             :deploy_name => 'news',
@@ -46,7 +46,12 @@ default_attributes(
         'frontend-courses' => {
             :deploy_name => 'courses',
             :port        => 12000
-        }
+        },
+        'asset-manager'    => {
+            :port     => 13000,
+            :mongo_db => 'govuk_content_publisher',
+            :precompile_assets => false
+        },
     },
     :govuk    => {
         :app_domain => "theodi.org"
@@ -54,11 +59,11 @@ default_attributes(
 )
 
 run_list(
+    "recipe[odi-apt]",
     "recipe[build-essential]",
     "recipe[git]",
     "recipe[postfix]",
     "recipe[ntp]",
-    "recipe[odi-apt]",
     "recipe[odi-users]",
     "recipe[odi-pk]",
     "recipe[mysql::client]",
