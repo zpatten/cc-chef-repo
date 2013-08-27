@@ -1,4 +1,4 @@
-@mysql
+@quirkafleeg @mysql
 Feature: mysql server role
   In order to run Quirkafleeg
   I want a mysql server
