@@ -2,14 +2,15 @@
   "name" : "quirkafleeg-preduction",
   "description" : "quirkafleeg-preduction",
   "cookbook_versions" : {
-    "quirkafleeg-deployment" : "= 0.2.0"
+    "quirkafleeg-deployment" : "= 0.2.10"
   },
   "json_class" : "Chef::Environment",
   "chef_type" : "environment",
   "default_attributes" : {
     "ENV" : "production",
     "deployment" : {
-      "revision" : "master"
+      "revision" : "master",
+      "rack_env" : "production"
     }
   },
   "override_attributes" : {}
