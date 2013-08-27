@@ -24,30 +24,42 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-if node['user']
-  group "%s" % [
+users = nil
+
+if node['user'] then
+  users = [
       node['user']
+  ]
+end
+
+if node['users'] then
+  users = node['users']
+end
+
+users.each do |u|
+  group "%s" % [
+      u
   ] do
     action :create
   end
 
   user "%s" % [
-      node['user']
+      u
   ] do
-    gid node['user']
+    gid u
     shell "/bin/bash"
     home "/home/%s" % [
-        node['user']
+        u
     ]
     supports :manage_home => true
     action :create
   end
 
   file "/etc/sudoers.d/%s" % [
-      node['user']
+      u
   ] do
     content "%s ALL=NOPASSWD:ALL" % [
-        node['user']
+        u
     ]
     mode "0440"
     action :create
