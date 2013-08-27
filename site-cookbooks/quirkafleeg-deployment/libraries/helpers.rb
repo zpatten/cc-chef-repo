@@ -31,7 +31,7 @@ module ODI
             }
             f      = File.open "/home/#{node['user']}/env", "a"
             extras.each_pair do |key, value|
-              f.write "%s=%s\n" % [
+              f.write "%s: %s\n" % [
                   key,
                   value
               ]
