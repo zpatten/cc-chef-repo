@@ -1,4 +1,4 @@
-@mongo
+@quirkafleeg @mongo
 Feature: mongodb server role
   In order to run Quirkafleeg
   I want a mongodb server
