@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+ecosystem "git-data-viewer" do
+  container "git-data-viewer" do
+    distro "ubuntu"
+    release "precise"
+    persist true
+    ip "192.168.97.10"
+    mac "00:00:5e:84:98:f2"
+    chef_client (
+                    {
+                        :environment => 'production',
+                         :run_list => [
+                             "role[git-data-viewer]"
+                         ]
+                    }
+                )
+  end
+end
