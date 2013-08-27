@@ -74,7 +74,8 @@ node['apps'].each_pair do |github_name, attributes|
 
     keep_releases 10
     rollback_on_error true
-#    migrate true
+    migrate           = node.has_key? :migrate
+    migration_command = node[:migrate]
 
     revision node['deployment']['revision']
 
