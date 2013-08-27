@@ -1,0 +1,1 @@
+default['odi-memcached']['memory'] = 768
