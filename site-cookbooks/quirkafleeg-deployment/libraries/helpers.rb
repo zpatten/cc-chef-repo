@@ -24,6 +24,9 @@ module ODI
                 ],
                 'GOVUK_ASSET_ROOT' => "static.%s" % [
                     domain
+                ],
+                'GOVUK_WEBSITE_ROOT' => "www.%s" % [
+                    domain
                 ]
             }
             f      = File.open "/home/#{node['user']}/env", "a"
