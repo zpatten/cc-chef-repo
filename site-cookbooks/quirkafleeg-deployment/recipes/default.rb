@@ -48,10 +48,16 @@ mongo_ip = find_a 'mongo'
 dbi = data_bag_item node['databags']['primary'], 'databases'
 
 node['apps'].each_pair do |github_name, attributes|
-  deploy_name = attributes['deploy_name'] ||= github_name
-  precompile_assets = !attributes.has_key?(:precompile_assets) and true
-  port     = attributes['port']
-  root_dir = "%s/%s" % [
+  deploy_name = github_name
+
+  if attributes['deploy_name'] then
+    deploy_name = attributes['deploy_name']
+  end
+
+#  precompile_assets = !attributes.has_key?(:precompile_assets) and true
+  precompile_assets = attributes[:precompile_assets].nil? ? true : attributes[:precompile_assets]
+  port              = attributes['port']
+  root_dir          = "%s/%s" % [
       deploy_root,
       deploy_name
   ]
