@@ -92,7 +92,7 @@ node['apps'].each_pair do |github_name, attributes|
       begin
         mysql_password = dbi[attributes['mysql_db']][node.chef_environment]
       rescue
-        mysql_password = 'derp'
+        mysql_password = 'ThisPasswordIntentionallyLeftBlank'
       end
 
       {
