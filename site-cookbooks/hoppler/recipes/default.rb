@@ -123,8 +123,8 @@ template "/home/%s/hoppler/db.creds.yaml" % [
 ] do
   source "db.creds.yaml.erb"
   variables(
-      :dbi => dbi,
-      :env => node.chef_environment
+      :database => node[:database],
+      :password => dbi[node[:database][node.chef_environment]]
   )
   owner hoppler
   group hoppler
