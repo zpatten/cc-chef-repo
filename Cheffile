@@ -15,8 +15,12 @@ cookbook 'xml'
 cookbook 'xslt'
 cookbook 'nginx'
 cookbook 'nodejs'
-cookbook'capybara-webkit', :github => 'RichGuk/chef-capybara-webkit'
+cookbook 'capybara-webkit', :github => 'RichGuk/chef-capybara-webkit'
+cookbook 'memcached'
 
 cookbook 'rvm', :github => 'theodi/chef-rvm'
 cookbook 'envbuilder', :github => 'theodi/chef-envbuilder'
 cookbook 'dictionary', :github => 'theodi/chef-dictionary'
+cookbook 'sqlite', :git => 'git@github.com:theodi/chef-sqlite.git'
+cookbook 'libcurl', :git => 'git@github.com:theodi/chef-libcurl.git'
+

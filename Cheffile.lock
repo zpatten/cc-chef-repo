@@ -14,6 +14,9 @@ SITE
       runit (~> 1.0)
       windows (>= 0.0.0)
       yum (>= 0.0.0)
+    memcached (1.4.0)
+      runit (~> 1.0)
+      yum (>= 0.0.0)
     mysql (3.0.2)
       build-essential (> 1.1.0)
       openssl (>= 0.0.0)
@@ -39,6 +42,20 @@ SITE
       build-essential (>= 0.0.0)
     xslt (0.0.1)
     yum (2.2.0)
+
+GIT
+  remote: git@github.com:theodi/chef-libcurl.git
+  ref: master
+  sha: 3473e7424f1eaa673766c9d09fa0135733ece81d
+  specs:
+    libcurl (0.1.0)
+
+GIT
+  remote: git@github.com:theodi/chef-sqlite.git
+  ref: master
+  sha: d44f9eae431a29fd908e60d485636232739b9b4d
+  specs:
+    sqlite (0.1.0)
 
 GIT
   remote: https://github.com/RichGuk/chef-capybara-webkit
@@ -85,6 +102,8 @@ DEPENDENCIES
   dictionary (>= 0)
   envbuilder (>= 0)
   git (>= 0)
+  libcurl (>= 0)
+  memcached (>= 0)
   mongodb (>= 0)
   mysql (>= 0)
   nginx (>= 0)
@@ -92,6 +111,7 @@ DEPENDENCIES
   ntp (>= 0)
   postfix (>= 0)
   rvm (>= 0)
+  sqlite (>= 0)
   xml (>= 0)
   xslt (>= 0)
 
