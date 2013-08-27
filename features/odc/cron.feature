@@ -4,7 +4,7 @@ Feature: cron jobs
   I need some cron jobs
 
   Background:
-    * I ssh to "web-odc-01" with the following credentials:
+    * I ssh to "web-certificate-01" with the following credentials:
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
