@@ -193,6 +193,8 @@ node['apps'].each_pair do |github_name, attributes|
         ]
       end
     end
+
+    restart_command "sudo service #{deploy_name} restart"
     notifies :restart, "service[nginx]"
 
     if node['ipaddress'] =~ /192.168/ then
