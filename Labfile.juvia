@@ -12,25 +12,27 @@ ecosystem "juvia" do
                     {
                         :environment => 'juvia-production',
                         :run_list    => [
+                            "role[juvia]",
+                            "role[mysql]"
                         ]
                     }
                 )
   end
 
-  container "juvia" do
-    distro "ubuntu"
-    release "precise"
-    persist true
-    ip "192.168.96.11"
-    mac "00:00:5e:f0:fc:0c"
-    chef_client (
-                    {
-                        :environment => 'juvia-production',
-                        :run_list    => [
-                            "role[juvia]"
-                        ]
-                    }
-                )
-  end
+#  container "juvia" do
+#    distro "ubuntu"
+#    release "precise"
+#    persist true
+#    ip "192.168.96.11"
+#    mac "00:00:5e:f0:fc:0c"
+#    chef_client (
+#                    {
+#                        :environment => 'juvia-production',
+#                        :run_list    => [
+#                            "role[juvia]"
+#                        ]
+#                    }
+#                )
+#  end
 
 end

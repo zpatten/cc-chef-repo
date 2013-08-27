@@ -1,27 +1,21 @@
 name "juvia"
 
 default_attributes(
-    :users              => [
-        'juvia',
-        'quirkafleeg'
+    :databags    => {
+        :primary => 'juvia'
+    },
+    :users       => [
+        'juvia'
     ],
-    'envbuilder'  => {
-        'base_dir' => '/home/quirkafleeg',
-        'owner' => 'quirkafleeg',
-        'group' => 'quirkafleeg'
+    'envbuilder' => {
+        'base_dir' => '/home/juvia',
+        'owner'    => 'juvia',
+        'group'    => 'quirkafleeg'
     },
-    :rvm               => {
-        :user => 'juvia',
-        :ruby => '1.9.3'
-    },
-    :project_fqdn      => 'juvia.theodi.org',
-    :mysql_db          => 'juvia',
-    :memcached_node    => 'juvia',
-    :git_project       => 'juvia',
-    :migration_command => 'bundle exec rake db:migrate',
+    :database   => 'juvia'
 )
 
-run_list "role[base]",
-         "recipe[odi-rvm]",
-         "recipe[envbuilder]",
-         "recipe[odi-deployment]"
+run_list(
+    "role[base]",
+    "role[chef-client]"
+)
