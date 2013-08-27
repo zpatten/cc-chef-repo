@@ -1,4 +1,4 @@
-@apps
+@quirkafleeg @apps
 Feature: GDS apps
   In order to run Quirkafleeg
   I need some apps
@@ -100,9 +100,11 @@ upstream panopticon {
 }
     """
 
+  @failboat
   Scenario: publisher vhost exists
     And file "/var/www/publisher/current/vhost" should exist
 
+  @failboat
   Scenario: publisher vhost is correct
     And file "/var/www/publisher/current/vhost" should contain
     """
@@ -111,7 +113,7 @@ upstream publisher {
 }
     """
 
-  @mongo
+  @mongo  @failboat
   Scenario: mongoid conf file is correct
     * file "/var/www/publisher/shared/config/mongoid.yml" should exist
     And file "/var/www/publisher/shared/config/mongoid.yml" should contain
@@ -142,6 +144,7 @@ production:
     And symlink "/var/www/signon/current/config/database.yml" should exist
     And symlink "/var/www/signon/current/database.yml" should exist
 
+  @failboat
   Scenario: contentapi vhost is correct
     * file "/etc/nginx/sites-enabled/contentapi" should contain
     """
