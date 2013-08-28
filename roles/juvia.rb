@@ -1,16 +1,14 @@
 name "juvia"
 
 default_attributes(
-    :databags    => {
+    :databags   => {
         :primary => 'juvia'
     },
-    :users       => [
-        'juvia'
-    ],
-    'envbuilder' => {
-        'base_dir' => '/home/juvia',
-        'owner'    => 'juvia',
-        'group'    => 'quirkafleeg'
+    :user       => 'juvia',
+    :envbuilder => {
+        :base_dir => '/home/juvia',
+        :owner    => 'juvia',
+        :group    => 'juvia'
     },
     :database   => 'juvia'
 )
