@@ -3,6 +3,7 @@ description "sample base role"
 
 run_list(
     "recipe[odi-apt]",
+    "recipe[odi-pk]",
     "recipe[build-essential]",
     "recipe[git]",
     "recipe[postfix]",
