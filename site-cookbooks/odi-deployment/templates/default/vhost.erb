@@ -1,0 +1,29 @@
+upstream <%= @servername %> {
+  server 127.0.0.1:<%= @port %>;
+}
+
+server {
+  listen 80;
+  server_name <%= @servername %>.<%= @domain %>;
+  access_log /var/log/nginx/<%= @servername %>.<%= @domain %>.log;
+  error_log /var/log/nginx/<%= @servername %>.<%= @domain %>.err;
+
+  location / {
+    try_files $uri @backend;
+  }
+
+<% if @static_assets %>
+  location ~ ^/(assets)/  {
+    root /var/www/<%= @servername %>.<%= @domain %>/current/public/;
+    gzip_static on; # to serve pre-gzipped version
+    expires max;
+    add_header Cache-Control public;
+  }
+
+<% end %>
+  location @backend {
+    proxy_set_header X-Forwarded-Proto 'http';
+    proxy_set_header Host $server_name;
+    proxy_pass http://<%= @servername %>;
+  }
+}
