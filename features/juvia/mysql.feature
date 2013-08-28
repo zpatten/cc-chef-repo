@@ -33,22 +33,18 @@ Feature: mysql server role
     When I run "mysql -p'passwordbeallfakeforjuvia' -e 'show databases'"
     Then I should not see "ERROR" in the output
 
-  @restore
   Scenario: Database "juvia" exists
     When I run "mysql -p'passwordbeallfakeforjuvia' -e 'show databases'"
     Then I should see "juvia" in the output
 
-  @user
   Scenario: hoppler user exists
     When I run "su - hoppler -c 'echo ${SHELL}'"
     Then I should see "/bin/bash" in the output
 
-  @user
   Scenario: hoppler user has ruby 2
     When I run "su - hoppler -c 'ruby -v'"
     Then I should see "2.0.0" in the output
 
-  @code
   Scenario: Hoppler is installed and cronned
     * path "/home/hoppler/hoppler" should exist
     And file "/home/hoppler/hoppler/lib/hoppler.rb" should exist
@@ -58,13 +54,11 @@ Feature: mysql server role
 0 3 * * 7 root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:cleanup'
     """
 
-  @creds
   Scenario: passwords yaml file exists
     * file "/home/hoppler/hoppler/db.creds.yaml" should exist
     When I run "cat /home/hoppler/hoppler/db.creds.yaml"
     Then I should see "^juvia:" in the output
 
-  @envfile
   Scenario: ~/.mysql.env is correct
     * file "/home/hoppler/hoppler/.mysql.env" should be owned by "hoppler:hoppler"
     And file "/home/hoppler/hoppler/.mysql.env" should contain
@@ -80,4 +74,3 @@ Feature: mysql server role
     And I should see "RACKSPACE_DIRECTORY_CONTAINER: theo" in the output
     And I should see "RACKSPACE_API_ENDPOINT: lon.auth.api.rackspacecloud.com" in the output
     And I should see "RACKSPACE_DIRECTORY_ASSET_HOST: http://3c15e47727" in the output
-#
