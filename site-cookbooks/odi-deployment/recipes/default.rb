@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: odi-deployment
+# Cookbook Name:: quirkafleeg-deployment
 # Recipe:: default
 #
 # Copyright 2013, The Open Data Institute
@@ -24,187 +24,170 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-include_recipe 'git'
+class Chef::Recipe
+  include ODI::Deployment::Helpers
+end
 
-#if [
-#    'experimental',
-#    'production',
-#    'odc-production',
-#    'odc-staging',
-#    'cucumber',
-#    'cucumber-staging',
-#    'quirkafleeg-preduction'
-#].include? node.chef_environment
-root_dir = "/var/www/%s" % [
-    node['project_fqdn']
-]
+deploy_root = node[:deployment][:root]
+domain      = get_domain
 
 [
-    "",
-    "shared",
-    "shared/config",
-    "shared/pids",
-    "shared/log",
-    "shared/system"
-].each do |d|
-  directory "%s/%s" % [
-      root_dir,
-      d
-  ] do
-    owner node['user']
-    group node['group']
+    deploy_root,
+    "/etc/nginx/sites-enabled"
+].each do |dir|
+  directory dir do
     action :create
-    mode "0775"
     recursive true
   end
 end
 
-dbi     = data_bag_item "databases", "credentials"
-db_pass = dbi[node['mysql_db']][node.chef_environment]
+mysql_ip = find_a 'mysql'
 
-db_box = search(:node, "name:*mysql-#{node['mysql_db']}* AND chef_environment:#{node.chef_environment}")[0]
-db_ip  = db_box["ipaddress"]
-if db_box["rackspace"]
-  db_ip = db_box["rackspace"]["private_ip"]
-end
+dbi = data_bag_item node['databags']['primary'], 'databases'
 
-mcs = search(:node, "name:*-memcached-#{node['memcached_node']}* AND chef_environment:#{node.chef_environment}")
+precompile_assets = node[:deployment][:precompile_assets].nil? ? true : node[:deployment][:precompile_assets]
+port              = node[:deployment][:port]
+root_dir          = "%s/%s" % [
+    deploy_root,
+    node[:project_fqdn]
+]
+
+make_shared_dirs root_dir
 
 deploy_revision root_dir do
-  user node['user']
-  group node['group']
-  environment "RACK_ENV" => node['RACK_ENV'],
-              "HOME"     => "/home/#{user}"
+  user node[:user]
+  group node[:user]
+
+  environment(
+      "RACK_ENV" => node[:deployment][:rack_env],
+      "HOME"     => "/home/%s" % [
+          user
+      ]
+  )
 
   keep_releases 10
-  rollback_on_error true
+  rollback_on_error false
+  migrate           = node.has_key? :migrate
+  migration_command = node[:migrate]
+
+  revision node[:deployment][:revision]
 
   repo "git://github.com/theodi/%s.git" % [
-      node['git_project']
+      node[:git_project]
   ]
-
-  revision node['deploy']['revision']
-  symlink_before_migrate.clear
 
   before_migrate do
     current_release_directory = release_path
     running_deploy_user       = new_resource.user
+    shared_directory          = new_resource.shared_path
     bundler_depot             = new_resource.shared_path + '/bundle'
 
-    template "%s/%s/%s" % [
-        current_release_directory,
-        "config",
-        "database.yml"
-    ] do
-      action :create
-      source "database.yml.erb"
-      owner running_deploy_user
-      group running_deploy_user
-      variables(
-          :database => node['mysql_db'],
-          :db_user  => node['mysql_db'],
-          :db_pass  => db_pass,
-          :db_host  => db_ip
-      )
+    begin
+      mysql_password = dbi[node[:database]][node.chef_environment]
+    rescue
+      mysql_password = 'ThisPasswordIntentionallyLeftBlank'
     end
 
-    script 'Link me some links' do
+    {
+        'database.yml' => {
+            :mysql_host     => mysql_ip,
+            :mysql_database => node[:database],
+            :mysql_username => node[:database],
+            :mysql_password => mysql_password
+        }
+    }.each_pair do |name, params|
+      template '%s/config/%s' % [
+          shared_directory,
+          name
+      ] do
+        source "%s.erb" % [
+            name
+        ]
+        variables(
+            params
+        )
+        user node['user']
+        group node['user']
+        mode "0644"
+        action :create
+      end
+
+      db_conf_symlink name do
+        shared_dir shared_directory
+        current_dir current_release_directory
+      end
+    end
+
+    script 'Symlink env' do
       interpreter 'bash'
       cwd current_release_directory
       user running_deploy_user
       code <<-EOF
-        ln -sf ../../shared/config/env .env
+        ln -sf /home/#{user}/env .env
       EOF
     end
 
-    script 'Bundling the gems' do
+    script 'Bundling' do
       interpreter 'bash'
       cwd current_release_directory
       user running_deploy_user
       code <<-EOF
         bundle install \
-          --without=development \
+          --without=development test\
           --quiet \
           --path #{bundler_depot}
       EOF
     end
 
-    script 'Precompile the assets' do
+    script 'Precompiling assets' do
       interpreter 'bash'
       cwd current_release_directory
       user running_deploy_user
       code <<-EOF
-        RAILS_ENV=production bundle exec rake assets:precompile
+        RAILS_ENV=#{node[:deployment][:rack_env]} bundle exec rake assets:precompile
       EOF
+      only_if { precompile_assets }
     end
   end
-
-  migration_command node["migration_command"]
-  migrate node['deploy']['migrate']
 
   before_restart do
     current_release_directory = release_path
     running_deploy_user       = new_resource.user
 
-    if node['require_memcached']
-      memcached_nodes = []
-      mcs.each do |mc|
-        ip = mc['ipaddress']
-        if mc['rackspace']
-          ip = mc['rackspace']['private_ip']
-        end
-
-        memcached_nodes << ip
-      end
-
-      e = "%s/.env.%s" % [
-          current_release_directory,
-          node["RACK_ENV"]
-      ]
-
-      f = File.open e, "a"
-
-      f.write "MEMCACHED_HOSTS: %s\n" % [
-          memcached_nodes.join(" ")
-      ]
-      f.close
-      FileUtils.chown running_deploy_user, running_deploy_user, e
-    end
-
-    script 'Generate startup scripts with Foreman' do
-      interpreter 'bash'
+    foremanise node[:git_project] do
       cwd current_release_directory
       user running_deploy_user
-      code <<-EOF
-        export rvmsudo_secure_path=1
-        /home/#{user}/.rvm/bin/rvmsudo bundle exec foreman export \
-          -a #{node['git_project']} \
-          -u #{node['user']} \
-          -t config/foreman \
-          -p 3000 \
-          upstart /etc/init
-      EOF
+      port port
+    end
+
+    template "%s/vhost" % [
+        current_release_directory
+    ] do
+      source "vhost.erb"
+      variables(
+          :servername    => node[:git_project],
+          :port          => node[:deployment][:port],
+          :domain        => domain,
+          :static_assets => precompile_assets
+      )
+      action :create
+    end
+
+    link "/etc/nginx/sites-enabled/%s" % [
+        node[:project_fqdn]
+    ] do
+      to "%s/vhost" % [
+          current_release_directory
+      ]
     end
   end
 
-  restart_command "sudo service #{node['git_project']} restart"
-
-  after_restart do
-    running_deploy_user       = new_resource.user
-    current_release_directory = release_path
-
-    (node['after_restart_commands'] || []).each do |command|
-      script command do
-        interpreter 'bash'
-        cwd current_release_directory
-        user running_deploy_user
-        code <<-EOF
-          RAILS_ENV=production #{command}
-        EOF
-      end
-    end
-  end
+  restart_command "sudo service %s restart" % [
+      node[:git_project]
+  ]
+  notifies :restart, "service[nginx]"
 
   action :deploy
+
 end
-#end
+
