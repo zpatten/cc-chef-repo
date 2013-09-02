@@ -3,9 +3,9 @@ description "sample base role"
 
 run_list(
     "recipe[odi-apt]",
+    "recipe[git]",
     "recipe[odi-pk]",
     "recipe[build-essential]",
-    "recipe[git]",
     "recipe[postfix]",
     "recipe[ntp]",
     "recipe[odi-users]",
