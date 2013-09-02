@@ -1,14 +1,19 @@
 {
-  "name" : "juvia-production",
-  "description" : "juvia-production",
-  "json_class" : "Chef::Environment",
-  "chef_type" : "environment",
-  "default_attributes" : {
-    "ENV" : "production",
-    "deployment" : {
-      "revision" : "master",
-      "rack_env" : "production"
+  "name": "juvia-production",
+  "description": "juvia-production",
+  "cookbook_versions": {
+    "hoppler": "= 0.2.1",
+    "odi-deployment": "= 0.3.2"
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+    "ENV": "production",
+    "deployment": {
+      "revision": "master",
+      "rack_env": "production"
     }
   },
-  "override_attributes" : {}
+  "override_attributes": {
+  }
 }
