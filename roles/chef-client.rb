@@ -3,7 +3,7 @@ description "sample chef-client role"
 run_list(
   "recipe[chef-client::delete_validation]",
   "recipe[chef-client::config]",
-  "recipe[chef-client::service]"
+  "recipe[chef-client::cron]"
 )
 
 override_attributes(
