@@ -127,3 +127,10 @@ server {
 }
     """
     And symlink "/etc/nginx/sites-enabled/juvia.theodi.org" should exist
+
+  @chef-client
+  Scenario: chef-client should be cronned
+    When I run "cat /etc/cron.d/chef-client"
+    Then I should see "^\*/5 .* /usr/bin/chef-client &> /var/log/chef/cron.log" in the output
+    When I run "ps ax"
+    Then I should not see "chef-client .* -i .* -s" in the output
