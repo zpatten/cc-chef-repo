@@ -2,12 +2,12 @@ name "quirkafleeg"
 description "quirkafleeg project wrapper role"
 
 default_attributes(
-    :project  => 'quirkafleeg',
-    :database => 'signon',
-    :databags => {
+    :project      => 'quirkafleeg',
+    :database     => 'signon',
+    :databags     => {
         :primary => 'quirkafleeg'
     },
-    :apps     => {
+    :apps         => {
         'signonotron2'     => {
             :deploy_name => 'signon',
             :port        => 3000,
@@ -48,13 +48,22 @@ default_attributes(
             :port        => 12000
         },
         'asset-manager'    => {
-            :port     => 13000,
-            :mongo_db => 'govuk_content_publisher',
+            :port              => 13000,
+            :mongo_db          => 'govuk_content_publisher',
             :precompile_assets => false
         },
     },
-    :govuk    => {
+    :govuk        => {
         :app_domain => "theodi.org"
+    },
+    'chef_client' => {
+        'cron'  => {
+            'use_cron_d' => true,
+            'hour'       => "*",
+            'minute'     => "*/5",
+            'log_file'   => "/var/log/chef/cron.log"
+        },
+        'splay' => 250
     }
 )
 
@@ -62,11 +71,13 @@ run_list(
     "recipe[odi-apt]",
     "recipe[build-essential]",
     "recipe[git]",
+    "role[chef-client]",
     "recipe[postfix]",
     "recipe[ntp]",
     "recipe[odi-users]",
     "recipe[odi-pk]",
     "recipe[mysql::client]",
     "recipe[dictionary]",
-    "recipe[nodejs::install_from_package]"
+    "recipe[nodejs::install_from_package]",
+    "recipe[fail2ban]"
 )
