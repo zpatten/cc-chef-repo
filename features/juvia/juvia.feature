@@ -79,6 +79,7 @@ juvia ALL=NOPASSWD:ALL
     And I should see "JUVIA_EMAIL_FROM: juvia@theodi.org" in the output
     And I should see "RACK_ENV: production" in the output
 
+  @failtruck
   Scenario: configuration stuff is correct
     * symlink "/var/www/juvia.theodi.org/current/config/database.yml" should exist
     When I run "stat -c %N /var/www/juvia.theodi.org/current/config/database.yml"
