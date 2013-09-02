@@ -14,7 +14,6 @@ default_attributes(
 )
 
 run_list(
-    "recipe[chef-client]",
     "recipe[odi-rvm]",
     "recipe[envbuilder]",
     "recipe[odi-nginx]",
