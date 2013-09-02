@@ -81,7 +81,9 @@ juvia ALL=NOPASSWD:ALL
 
   Scenario: configuration stuff is correct
     * symlink "/var/www/juvia.theodi.org/current/config/database.yml" should exist
-    And file "/var/www/juvia.theodi.org/current/database.yml" should be owned by "juvia:juvia"
+    When I run "stat -c %N /var/www/juvia.theodi.org/current/config/database.yml"
+    Then I should see "/var/www/juvia.theodi.org/shared/config/database.yml" in the output
+    And file "/var/www/juvia.theodi.org/shared/config/database.yml" should be owned by "juvia:juvia"
     When I run "cat /var/www/juvia.theodi.org/current/config/database.yml"
     Then I should see "production:" in the output
     And I should see "adapter: mysql2" in the output
