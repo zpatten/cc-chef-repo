@@ -57,8 +57,23 @@ quirkafleeg ALL=NOPASSWD:ALL
     Then I should see "440" in the output
 
   Scenario: Ruby 1.9.3 is installed
-    * I run "su - quirkafleeg -c 'ruby -v'"
-    * I should see "1.9.3" in the output
+    When I run "su - quirkafleeg -c 'ruby -v'"
+    Then I should see "1.9.3" in the output
+
+  @varnish
+  Scenario: varnish is installed
+    * package "varnish" should be installed
+    And file "/etc/varnish/default.vcl" should contain
+    """
+    backend default {
+        .host = "localhost";
+        .port = "8080";
+}
+    """
+    When I run "ps ax | grep varnish"
+    Then I should see " -a :80 " in the output
+
+
   @chef-client
   Scenario: chef-client should be cronned
     When I run "cat /etc/cron.d/chef-client"
