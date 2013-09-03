@@ -8,13 +8,6 @@ Feature: web node role
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
-  Scenario: Chef-Client is running as a daemon
-    When I run "ps aux | grep [c]hef-client"
-    Then the exit code should be "0"
-    And I should see "chef-client" in the output
-    And I should see "-i 300" in the output
-    And I should see "-s 300" in the output
-
   Scenario: The Chef-Server validation key has been removed
     When I run "[[ ! -e /etc/chef/validation.pem ]]"
     Then the exit code should be "0"
@@ -66,3 +59,9 @@ quirkafleeg ALL=NOPASSWD:ALL
   Scenario: Ruby 1.9.3 is installed
     * I run "su - quirkafleeg -c 'ruby -v'"
     * I should see "1.9.3" in the output
+  @chef-client
+  Scenario: chef-client should be cronned
+    When I run "cat /etc/cron.d/chef-client"
+    Then I should see "^\*/5 .* /usr/bin/chef-client &> /var/log/chef/cron.log" in the output
+    When I run "ps ax"
+    Then I should not see "chef-client .* -i .* -s" in the output
