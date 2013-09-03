@@ -180,7 +180,8 @@ node['apps'].each_pair do |github_name, attributes|
             :servername    => deploy_name,
             :port          => port,
             :domain        => domain,
-            :static_assets => precompile_assets
+            :static_assets => precompile_assets,
+            :listen_port   => node[:nginx][:listen_port]
         )
         action :create
       end
