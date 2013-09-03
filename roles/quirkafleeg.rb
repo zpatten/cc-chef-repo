@@ -64,6 +64,9 @@ default_attributes(
             'log_file'   => "/var/log/chef/cron.log"
         },
         'splay' => 250
+    },
+    :varnish => {
+        :listen_port => 80
     }
 )
 
