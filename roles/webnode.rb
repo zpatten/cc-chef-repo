@@ -19,5 +19,6 @@ run_list(
     "recipe[odi-nginx]",
     # it would be loads better if this wasn't required
     "recipe[capybara-webkit]",
-    "recipe[quirkafleeg-deployment]"
+    "recipe[quirkafleeg-deployment]",
+    "recipe[varnish]"
 )
