@@ -3,7 +3,7 @@ upstream <%= @servername %> {
 }
 
 server {
-  listen 80;
+  listen <%= @listen_port %>;
   server_name <%= @servername %>.<%= @domain %>;
   access_log /var/log/nginx/<%= @servername %>.log;
   error_log /var/log/nginx/<%= @servername %>.err;
