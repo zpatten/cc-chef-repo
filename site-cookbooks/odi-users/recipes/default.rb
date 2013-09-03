@@ -36,32 +36,34 @@ if node['users'] then
   users = node['users']
 end
 
-users.each do |u|
-  group "%s" % [
-      u
-  ] do
-    action :create
-  end
-
-  user "%s" % [
-      u
-  ] do
-    gid u
-    shell "/bin/bash"
-    home "/home/%s" % [
+if users
+  users.each do |u|
+    group "%s" % [
         u
-    ]
-    supports :manage_home => true
-    action :create
-  end
+    ] do
+      action :create
+    end
 
-  file "/etc/sudoers.d/%s" % [
-      u
-  ] do
-    content "%s ALL=NOPASSWD:ALL" % [
+    user "%s" % [
         u
-    ]
-    mode "0440"
-    action :create
+    ] do
+      gid u
+      shell "/bin/bash"
+      home "/home/%s" % [
+          u
+      ]
+      supports :manage_home => true
+      action :create
+    end
+
+    file "/etc/sudoers.d/%s" % [
+        u
+    ] do
+      content "%s ALL=NOPASSWD:ALL" % [
+          u
+      ]
+      mode "0440"
+      action :create
+    end
   end
 end
