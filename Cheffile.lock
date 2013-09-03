@@ -82,6 +82,13 @@ GIT
       yum (>= 0.0.0)
 
 GIT
+  remote: https://github.com/opscode-cookbooks/varnish
+  ref: master
+  sha: 6eb6faa965adc21edc6921087acf793aa965164d
+  specs:
+    varnish (0.9.9)
+
+GIT
   remote: https://github.com/theodi/chef-dictionary
   ref: master
   sha: 1ea6ff5a5cf716f50f0bf428688e9e3916bff30d
@@ -121,6 +128,7 @@ DEPENDENCIES
   postfix (>= 0)
   rvm (>= 0)
   sqlite (>= 0)
+  varnish (>= 0)
   xml (>= 0)
   xslt (>= 0)
 

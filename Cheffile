@@ -18,6 +18,7 @@ cookbook 'nodejs'
 cookbook 'capybara-webkit', :github => 'RichGuk/chef-capybara-webkit'
 cookbook 'memcached'
 cookbook 'fail2ban', :github => 'opscode-cookbooks/fail2ban'
+cookbook 'varnish', :github => 'opscode-cookbooks/varnish'
 
 cookbook 'rvm', :github => 'theodi/chef-rvm'
 cookbook 'envbuilder', :github => 'theodi/chef-envbuilder'
