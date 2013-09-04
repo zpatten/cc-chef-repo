@@ -56,6 +56,7 @@ node['apps'].each_pair do |github_name, attributes|
 
 #  precompile_assets = !attributes.has_key?(:precompile_assets) and true
   precompile_assets = attributes[:precompile_assets].nil? ? true : attributes[:precompile_assets]
+  assets_path = attributes[:assets_path].nil? ? 'assets' : attributes[:assets_path]
   port              = attributes['port']
   root_dir          = "%s/%s" % [
       deploy_root,
@@ -181,6 +182,7 @@ node['apps'].each_pair do |github_name, attributes|
             :port          => port,
             :domain        => domain,
             :static_assets => precompile_assets,
+            :assets_path   => assets_path,
             :listen_port   => node[:nginx][:listen_port]
         )
         action :create
