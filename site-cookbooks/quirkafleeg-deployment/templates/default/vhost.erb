@@ -13,7 +13,7 @@ server {
   }
 
 <% if @static_assets %>
-  location ~ ^/(assets)/  {
+  location ~ ^/(<%= @assets_path %>)/  {
     root /var/www/<%= @servername %>/current/public/;
     gzip_static on; # to serve pre-gzipped version
     expires max;
