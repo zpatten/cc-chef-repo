@@ -15,7 +15,8 @@ default_attributes(
             :migrate     => 'bundle exec rake db:migrate'
         },
         'static'           => {
-            :port => 4000
+            :port        => 4000,
+            :assets_path => 'static'
         },
         'panopticon'       => {
             :port     => 5000,
@@ -65,7 +66,7 @@ default_attributes(
         },
         'splay' => 250
     },
-    :varnish => {
+    :varnish      => {
         :listen_port => 80
     }
 )
