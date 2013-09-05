@@ -66,7 +66,7 @@ quirkafleeg ALL=NOPASSWD:ALL
     And file "/etc/varnish/default.vcl" should contain
     """
     backend default {
-        .host = "localhost";
+        .host = "127.0.0.1";
         .port = "8080";
 }
     """
