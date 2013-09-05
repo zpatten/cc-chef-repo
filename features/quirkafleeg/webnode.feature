@@ -70,9 +70,10 @@ quirkafleeg ALL=NOPASSWD:ALL
         .port = "8080";
 }
     """
-    When I run "ps ax | grep varnish"
-    Then I should see " -a :80 " in the output
-
+    And file "/etc/default/varnish" should contain
+    """
+    DAEMON_OPTS="-a :80 \
+    """
 
   @chef-client
   Scenario: chef-client should be cronned
