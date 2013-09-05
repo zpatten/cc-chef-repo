@@ -64,9 +64,13 @@ default_attributes(
             'log_file'   => "/var/log/chef/cron.log"
         },
         'splay' => 250
-    },
-    :varnish      => {
-        :listen_port => 80
+    }
+)
+
+override_attributes(
+    :varnish => {
+        :listen_port  => 80,
+        :backend_host => '127.0.0.1'
     }
 )
 
