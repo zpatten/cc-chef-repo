@@ -9,7 +9,7 @@
   "default_attributes" : {
     "ENV" : "production",
     "deployment" : {
-      "revision" : "master",
+      "revision" : "CURRENT",
       "rack_env" : "production"
     }
   },
