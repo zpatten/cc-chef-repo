@@ -24,7 +24,6 @@ default_attributes(
         },
         'publisher'        => {
             :port     => 6000,
-            # not sure about this
             :mongo_db => 'govuk_content_publisher'
         },
         'content_api'      => {
