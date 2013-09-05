@@ -15,10 +15,10 @@ default_attributes(
 
 run_list(
     "recipe[odi-rvm]",
+    "recipe[varnish]",
     "recipe[envbuilder]",
     "recipe[odi-nginx]",
     # it would be loads better if this wasn't required
     "recipe[capybara-webkit]",
-    "recipe[quirkafleeg-deployment]",
-    "recipe[varnish]"
+    "recipe[quirkafleeg-deployment]"
 )
