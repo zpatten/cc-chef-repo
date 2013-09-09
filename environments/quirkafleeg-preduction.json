@@ -1,17 +1,18 @@
 {
-  "name" : "quirkafleeg-preduction",
-  "description" : "quirkafleeg-preduction",
-  "cookbook_versions" : {
-    "quirkafleeg-deployment" : "= 0.2.11"
+  "name": "quirkafleeg-preduction",
+  "description": "quirkafleeg-preduction",
+  "cookbook_versions": {
+    "quirkafleeg-deployment": "= 0.2.12"
   },
-  "json_class" : "Chef::Environment",
-  "chef_type" : "environment",
-  "default_attributes" : {
-    "ENV" : "production",
-    "deployment" : {
-      "revision" : "CURRENT",
-      "rack_env" : "production"
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+    "ENV": "production",
+    "deployment": {
+      "revision": "CURRENT",
+      "rack_env": "production"
     }
   },
-  "override_attributes" : {}
+  "override_attributes": {
+  }
 }
