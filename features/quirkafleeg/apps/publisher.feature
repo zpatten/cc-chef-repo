@@ -24,9 +24,9 @@ Feature: GDS apps
     Then I should see "RACKSPACE_USERNAME: rax" in the output
     And I should see "RACKSPACE_DIRECTORY_ASSET_HOST: http://3c1" in the output
     And I should see "JENKINS_URL: http://jenkins.theodi.org" in the output
-    And I should see "GOVUK_ASSET_ROOT: static.192.168.99.30.xip.io" in the output
-    And I should see "DEV_DOMAIN: 192.168.99.30.xip.io" in the output
-    And I should see "GOVUK_APP_DOMAIN: 192.168.99.30.xip.io" in the output
+    And I should see "GOVUK_ASSET_ROOT: static.quirkafleeg.info" in the output
+    And I should see "DEV_DOMAIN: quirkafleeg.info" in the output
+    And I should see "GOVUK_APP_DOMAIN: quirkafleeg.info" in the output
     And I should see "GDS_SSO_STRATEGY: real" in the output
 
   Scenario: startup scripts be all up in it
@@ -50,7 +50,7 @@ upstream publisher {
 
 server {
   listen 8080;
-  server_name publisher.192.168.99.30.xip.io;
+  server_name publisher.quirkafleeg.info;
   access_log /var/log/nginx/publisher.log;
   error_log /var/log/nginx/publisher.err;
 
