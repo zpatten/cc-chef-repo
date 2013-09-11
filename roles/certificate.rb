@@ -50,5 +50,4 @@ run_list "role[base]",
          "recipe[mysql::client]",
          "recipe[sqlite::dev]",
          "recipe[envbuilder]",
-         "recipe[odi-deployment]",
-         "recipe[odi-logstash::agent]"
+         "recipe[odi-deployment]"
