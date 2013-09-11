@@ -1,4 +1,4 @@
-name "webnode"
+name "quirkafleeg-webnode"
 
 default_attributes(
     'user' => 'quirkafleeg',
