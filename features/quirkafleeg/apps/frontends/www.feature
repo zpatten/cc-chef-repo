@@ -4,7 +4,7 @@ Feature: GDS apps
   I need to run the www frontend
 
   Background:
-    * I ssh to "web-quirkafleeg-01" with the following credentials:
+    * I ssh to "frontend-quirkafleeg-01" with the following credentials:
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
@@ -35,7 +35,7 @@ Feature: GDS apps
     And file "/etc/init/www-thin-1.conf" should exist
     When I run "cat /etc/init/www-thin-1.conf"
     Then I should see "exec su - quirkafleeg -c 'cd /var/www/www/releases/" in the output
-    And I should see "export PORT=11000" in the output
+    And I should see "export PORT=3020" in the output
     And I should see "bundle exec thin start -p \$PORT >> /var/log/quirkafleeg/www/thin-1.log 2>&1" in the output
 
   Scenario: www vhost exists
@@ -45,7 +45,7 @@ Feature: GDS apps
     And file "/var/www/www/current/vhost" should contain
     """
 upstream www {
-  server 127.0.0.1:11000;
+  server 127.0.0.1:3020;
 }
 
 server {

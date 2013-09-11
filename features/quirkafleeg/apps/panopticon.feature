@@ -4,7 +4,7 @@ Feature: GDS apps
   I need to run panopticon
 
   Background:
-    * I ssh to "web-quirkafleeg-01" with the following credentials:
+    * I ssh to "backend-quirkafleeg-01" with the following credentials:
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
@@ -35,7 +35,7 @@ Feature: GDS apps
     And file "/etc/init/panopticon-thin-1.conf" should exist
     When I run "cat /etc/init/panopticon-thin-1.conf"
     Then I should see "exec su - quirkafleeg -c 'cd /var/www/panopticon/releases/" in the output
-    And I should see "export PORT=5000" in the output
+    And I should see "export PORT=4020" in the output
     And I should see "bundle exec thin start -p \$PORT >> /var/log/quirkafleeg/panopticon/thin-1.log 2>&1" in the output
 
   Scenario: panopticon vhost exists
@@ -45,7 +45,7 @@ Feature: GDS apps
     And file "/var/www/panopticon/current/vhost" should contain
     """
 upstream panopticon {
-  server 127.0.0.1:5000;
+  server 127.0.0.1:4020;
 }
 
 server {

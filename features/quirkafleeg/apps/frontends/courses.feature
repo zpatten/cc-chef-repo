@@ -4,7 +4,7 @@ Feature: GDS apps
   I need to run the courses frontend
 
   Background:
-    * I ssh to "web-quirkafleeg-01" with the following credentials:
+    * I ssh to "frontend-quirkafleeg-01" with the following credentials:
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
@@ -35,7 +35,7 @@ Feature: GDS apps
     And file "/etc/init/courses-thin-1.conf" should exist
     When I run "cat /etc/init/courses-thin-1.conf"
     Then I should see "exec su - quirkafleeg -c 'cd /var/www/courses/releases/" in the output
-    And I should see "export PORT=12000" in the output
+    And I should see "export PORT=3030" in the output
     And I should see "bundle exec thin start -p \$PORT >> /var/log/quirkafleeg/courses/thin-1.log 2>&1" in the output
 
   Scenario: courses vhost exists
@@ -45,7 +45,7 @@ Feature: GDS apps
     And file "/var/www/courses/current/vhost" should contain
     """
 upstream courses {
-  server 127.0.0.1:12000;
+  server 127.0.0.1:3030;
 }
 
 server {

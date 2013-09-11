@@ -4,7 +4,7 @@ Feature: GDS apps
   I need to run signonatron
 
   Background:
-    * I ssh to "web-quirkafleeg-01" with the following credentials:
+    * I ssh to "backend-quirkafleeg-01" with the following credentials:
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
@@ -36,7 +36,7 @@ Feature: GDS apps
     And file "/etc/init/signon-thin-1.conf" should exist
     When I run "cat /etc/init/signon-thin-1.conf"
     Then I should see "exec su - quirkafleeg -c 'cd /var/www/signon/releases/" in the output
-    And I should see "export PORT=3000" in the output
+    And I should see "export PORT=4000" in the output
     And I should see "bundle exec thin start -p \$PORT >> /var/log/quirkafleeg/signon/thin-1.log 2>&1" in the output
 
   Scenario: signon vhost exists
@@ -46,7 +46,7 @@ Feature: GDS apps
     And file "/var/www/signon/current/vhost" should contain
     """
 upstream signon {
-  server 127.0.0.1:3000;
+  server 127.0.0.1:4000;
 }
 
 server {

@@ -4,7 +4,7 @@ Feature: GDS apps
   I need to run publisher
 
   Background:
-    * I ssh to "web-quirkafleeg-01" with the following credentials:
+    * I ssh to "backend-quirkafleeg-01" with the following credentials:
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
@@ -35,7 +35,7 @@ Feature: GDS apps
     And file "/etc/init/publisher-thin-1.conf" should exist
     When I run "cat /etc/init/publisher-thin-1.conf"
     Then I should see "exec su - quirkafleeg -c 'cd /var/www/publisher/releases/" in the output
-    And I should see "export PORT=6000" in the output
+    And I should see "export PORT=4030" in the output
     And I should see "bundle exec thin start -p \$PORT >> /var/log/quirkafleeg/publisher/thin-1.log 2>&1" in the output
 
   Scenario: publisher vhost exists
@@ -45,7 +45,7 @@ Feature: GDS apps
     And file "/var/www/publisher/current/vhost" should contain
     """
 upstream publisher {
-  server 127.0.0.1:6000;
+  server 127.0.0.1:4030;
 }
 
 server {

@@ -4,7 +4,7 @@ Feature: GDS apps
   I need to run contentapi
 
   Background:
-    * I ssh to "web-quirkafleeg-01" with the following credentials:
+    * I ssh to "backend-quirkafleeg-01" with the following credentials:
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
@@ -32,7 +32,7 @@ Feature: GDS apps
     And file "/etc/init/contentapi-thin-1.conf" should exist
     When I run "cat /etc/init/contentapi-thin-1.conf"
     Then I should see "exec su - quirkafleeg -c 'cd /var/www/contentapi/releases/" in the output
-    And I should see "export PORT=7000" in the output
+    And I should see "export PORT=4040" in the output
     And I should see "bundle exec thin start -p \$PORT >> /var/log/quirkafleeg/contentapi/thin-1.log 2>&1" in the output
 
   Scenario: contentapi vhost exists
@@ -42,7 +42,7 @@ Feature: GDS apps
     And file "/var/www/contentapi/current/vhost" should contain
     """
 upstream contentapi {
-  server 127.0.0.1:7000;
+  server 127.0.0.1:4040;
 }
 
 server {

@@ -4,7 +4,7 @@ Feature: GDS apps
   I need to run the people frontend
 
   Background:
-    * I ssh to "web-quirkafleeg-01" with the following credentials:
+    * I ssh to "frontend-quirkafleeg-01" with the following credentials:
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
@@ -35,7 +35,7 @@ Feature: GDS apps
     And file "/etc/init/people-thin-1.conf" should exist
     When I run "cat /etc/init/people-thin-1.conf"
     Then I should see "exec su - quirkafleeg -c 'cd /var/www/people/releases/" in the output
-    And I should see "export PORT=8000" in the output
+    And I should see "export PORT=3000" in the output
     And I should see "bundle exec thin start -p \$PORT >> /var/log/quirkafleeg/people/thin-1.log 2>&1" in the output
 
   Scenario: people vhost exists
@@ -45,7 +45,7 @@ Feature: GDS apps
     And file "/var/www/people/current/vhost" should contain
     """
 upstream people {
-  server 127.0.0.1:8000;
+  server 127.0.0.1:3000;
 }
 
 server {
