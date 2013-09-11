@@ -38,7 +38,7 @@ ecosystem "quirkafleeg" do
                 )
   end
 
-  container "web-quirkafleeg-01" do
+  container "frontend-quirkafleeg-01" do
     distro "ubuntu"
     release "precise"
     persist true
@@ -48,9 +48,27 @@ ecosystem "quirkafleeg" do
                     {
                         :environment => "quirkafleeg-preduction",
                         :run_list    => [
-                            "role[quirkafleeg]",
+                            "role[quirkafleeg-frontend]",
                             "role[chef-client]",
-                            "role[webnode]"
+                            "role[quirkafleeg-webnode]"
+                        ]
+                    }
+                )
+  end
+
+  container "backend-quirkafleeg-01" do
+    distro "ubuntu"
+    release "precise"
+    persist true
+    ip "192.168.99.40"
+    mac "00:00:5e:ad:9f:21"
+    chef_client (
+                    {
+                        :environment => "quirkafleeg-preduction",
+                        :run_list    => [
+                            "role[quirkafleeg-backend]",
+                            "role[chef-client]",
+                            "role[quirkafleeg-webnode]"
                         ]
                     }
                 )
