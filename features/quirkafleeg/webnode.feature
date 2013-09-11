@@ -4,7 +4,7 @@ Feature: web node role
   I need some webserver action
 
   Background:
-    * I ssh to "web-quirkafleeg-01" with the following credentials:
+    * I ssh to "frontend-quirkafleeg-01" with the following credentials:
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
