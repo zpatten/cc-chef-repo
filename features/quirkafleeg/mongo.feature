@@ -15,6 +15,12 @@ Feature: mongodb server role
   Scenario: postfix is installed
     * package "postfix" should be installed
 
+  Scenario: git is installed
+    * package "git" should be installed
+
+  Scenario: odi user exists
+    * user "odi" should exist
+
   Scenario: ntp is installed
     When I run "ps ax | grep 'ntpd ' | grep -v grep"
     Then the exit code should be "0"
