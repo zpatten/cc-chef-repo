@@ -74,6 +74,7 @@ server {
 }
     """
 
+  @mysqlconf
   Scenario: mysql conf is correct
     * file "/var/www/signon/shared/config/database.yml" should exist
     And file "/var/www/signon/shared/config/database.yml" should contain

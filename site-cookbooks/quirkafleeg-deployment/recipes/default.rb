@@ -42,10 +42,16 @@ env_extras
   end
 end
 
-mysql_ip = find_a 'mysql'
-mongo_ip = find_a 'mongo'
-
 dbi = data_bag_item node['databags']['primary'], 'databases'
+
+mysql_ip = ''
+if dbi['host']
+  mysql_ip = dbi['host']
+else
+  mysql_ip = find_a 'mysql'
+end
+
+mongo_ip = find_a 'mongo'
 
 node['apps'].each_pair do |github_name, attributes|
   deploy_name = github_name

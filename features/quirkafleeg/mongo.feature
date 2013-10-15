@@ -19,7 +19,8 @@ Feature: mongodb server role
     * package "git" should be installed
 
   Scenario: odi user exists
-    * user "odi" should exist
+    When I run "su - odi -c 'echo ${SHELL}'"
+    Then I should see "/bin/bash" in the output
 
   Scenario: ntp is installed
     When I run "ps ax | grep 'ntpd ' | grep -v grep"

@@ -2,14 +2,6 @@ module ODI
   module Quirkafleeg
     module Helpers
       def get_domain
-#        domain = node['govuk']['app_domain']
-#        if node.chef_environment !~ /production/ then
-#          domain = "%s.xip.io" % [
-#              node["ipaddress"]
-#          ]
-#          domain = 'quirkafleeg.info'
-#        end
-#        domain
         node['govuk']['app_domain']
       end
 
