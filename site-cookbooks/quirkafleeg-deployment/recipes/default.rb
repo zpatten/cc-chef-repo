@@ -44,7 +44,7 @@ end
 
 dbi = data_bag_item node['databags']['primary'], 'databases'
 
-mysql_ip = ''
+#mysql_ip = ''
 if dbi['host']
   mysql_ip = dbi['host']
 else
