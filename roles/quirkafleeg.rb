@@ -29,6 +29,7 @@ override_attributes(
 )
 
 run_list(
+    "recipe[odi-monitoring]",
     "recipe[odi-apt]",
     "recipe[build-essential]",
     "recipe[git]",
