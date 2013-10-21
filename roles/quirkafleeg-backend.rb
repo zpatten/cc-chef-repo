@@ -41,5 +41,6 @@ default_attributes(
 )
 
 run_list(
-    "role[quirkafleeg]"
+    "role[quirkafleeg]",
+    "recipe[ImageMagick]"
 )
