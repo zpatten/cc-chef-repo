@@ -1,10 +1,19 @@
+<%
+   @canonical_name = "%s.%s" % [
+           @servername,
+           @domain
+   ]
+   if @naked_domain
+     @canonical_name = @domain
+   end
+%>
 upstream <%= @servername %> {
   server 127.0.0.1:<%= @port %>;
 }
 
 server {
-  listen <%= @listen_port %>;
-  server_name <%= @servername %>.<%= @domain %>;
+  listen <%= @listen_port %><%= if @default then " default" end %>;
+  server_name <%= @canonical_name %>;
   access_log /var/log/nginx/<%= @servername %>.log;
   error_log /var/log/nginx/<%= @servername %>.err;
 
@@ -26,4 +35,22 @@ server {
     proxy_set_header Host $server_name;
     proxy_pass http://<%= @servername %>;
   }
+<% if @redirects %>
+
+     <% @redirects.each do |source, target| %>
+  <%= "rewrite %s http://%s%s permanent;" % [
+      source,
+      @canonical_name,
+      target
+  ] %>
+     <% end %>
+<% end %>
 }
+<% if @naked_domain %>
+
+server {
+  listen <%= @listen_port %>;
+  server_name <%= @servername %>.<%= @domain %>;
+  rewrite ^/(.*) http://<%= @canonical_name %>/$1 permanent;
+}
+<% end %>
