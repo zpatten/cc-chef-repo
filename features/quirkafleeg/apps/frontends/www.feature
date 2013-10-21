@@ -51,6 +51,8 @@ upstream www {
 server {
   listen 8080;
   server_name www.quirkafleeg.info;
+  listen 8080 default;
+  server_name quirkafleeg.info;
   access_log /var/log/nginx/www.log;
   error_log /var/log/nginx/www.err;
 
@@ -70,5 +72,11 @@ server {
     proxy_set_header Host $server_name;
     proxy_pass http://www;
   }
+}
+
+server {
+  listen 8080;
+  server_name www.quirkafleeg.info;
+  rewrite ^/(.*) http://quirkafleeg.info/$1 permanent;
 }
     """
