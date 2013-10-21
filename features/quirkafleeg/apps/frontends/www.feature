@@ -72,6 +72,29 @@ server {
     proxy_set_header Host $server_name;
     proxy_pass http://www;
   }
+
+  rewrite ^/about/space$ http://quirkafleeg.info/space permanent;
+  rewrite ^/people$ http://quirkafleeg.info/team permanent;
+  rewrite ^/people/(.*)$ http://quirkafleeg.info/team/$1 permanent;
+  rewrite ^/join-us$ http://quirkafleeg.info/membership permanent;
+  rewrite ^/start-up$ http://quirkafleeg.info/start-ups permanent;
+  rewrite ^/start-up/(.*)$ http://quirkafleeg.info/start-ups/$1 permanent;
+  rewrite ^/events/OpenDataChallengeSeries$ http://quirkafleeg.info/challenge-series permanent;
+  rewrite ^/content/ODChallengeSeriesDates$ http://quirkafleeg.info/challenge-series/dates permanent;
+  rewrite ^/content/crime-and-justice-series$ http://quirkafleeg.info/challenge-series/crime-and-justice permanent;
+  rewrite ^/content/energy-and-environment-programme$ http://quirkafleeg.info/challenge-series/energy-and-environment permanent;
+  rewrite ^/events/gallery$ http://quirkafleeg.info/events permanent;
+  rewrite ^/training$ http://quirkafleeg.info/learning permanent;
+  rewrite ^/excellence/pg_certificate$ http://quirkafleeg.info/pg-certificate permanent;
+  rewrite ^/library$ http://quirkafleeg.info/ permanent;
+  rewrite ^/guide$ http://quirkafleeg.info/guides permanent;
+  rewrite ^/guide/(.*)$ http://quirkafleeg.info/guides/$1 permanent;
+  rewrite ^/case-study$ http://quirkafleeg.info/case-studies permanent;
+  rewrite ^/case-study/(.*)$ http://quirkafleeg.info/case-studies/$1 permanent;
+  rewrite ^/consultation-response$ http://quirkafleeg.info/consultation-responses permanent;
+  rewrite ^/consultation-response/(.*)$ http://quirkafleeg.info/consultation-responses/$1 permanent;
+  rewrite ^/odi-in-the-news$ http://quirkafleeg.info/news permanent;
+  rewrite ^/feedback$ http://quirkafleeg.info/contact permanent;
 }
 
 server {
