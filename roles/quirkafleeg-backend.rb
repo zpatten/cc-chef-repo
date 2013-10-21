@@ -23,7 +23,8 @@ default_attributes(
         },
         'publisher'     => {
             :port     => 4030,
-            :mongo_db => 'govuk_content_publisher'
+            :mongo_db => 'govuk_content_publisher',
+            :migrate  => 'bundle exec rake db:seed'
         },
         'content_api'   => {
             :deploy_name       => 'contentapi',
