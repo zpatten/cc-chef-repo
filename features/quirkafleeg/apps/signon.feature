@@ -42,6 +42,7 @@ Feature: GDS apps
   Scenario: signon vhost exists
     * file "/var/www/signon/current/vhost" should exist
 
+  @vhost
   Scenario: signon vhost is correct
     And file "/var/www/signon/current/vhost" should contain
     """
@@ -50,7 +51,7 @@ upstream signon {
 }
 
 server {
-  listen 8080;
+  listen 8080 default;
   server_name signon.quirkafleeg.info;
   access_log /var/log/nginx/signon.log;
   error_log /var/log/nginx/signon.err;
