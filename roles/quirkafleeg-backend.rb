@@ -7,11 +7,8 @@ default_attributes(
             :deploy_name => 'signon',
             :port        => 4000,
             :mysql_db    => 'signon',
-            :migrate     => 'bundle exec rake db:migrate'
-        },
-        'static'        => {
-            :port        => 4010,
-            :assets_path => 'static'
+            :migrate     => 'bundle exec rake db:migrate',
+            :is_default  => true
         },
 #        'static'        => {
 #            :port        => 4010,
