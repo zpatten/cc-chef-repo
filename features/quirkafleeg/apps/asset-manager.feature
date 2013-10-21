@@ -8,6 +8,9 @@ Feature: GDS apps
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
+  Scenario: ImageMagick is installed
+    * package "imagemagick" should be installed
+
   Scenario: asset-manager exists
     * directory "/var/www/asset-manager" should exist
     And directory "/var/www/asset-manager/shared" should exist
