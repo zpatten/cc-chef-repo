@@ -2,7 +2,7 @@
   "name": "quirkafleeg-preduction",
   "description": "quirkafleeg-preduction",
   "cookbook_versions": {
-    "quirkafleeg-deployment": "= 0.2.17"
+    "quirkafleeg-deployment": "= 0.2.18"
   },
   "json_class": "Chef::Environment",
   "chef_type": "environment",
