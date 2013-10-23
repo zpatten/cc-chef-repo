@@ -49,7 +49,7 @@ upstream publisher {
 }
 
 server {
-  listen 8080;
+  listen 80;
   server_name publisher.quirkafleeg.info;
   access_log /var/log/nginx/publisher.log;
   error_log /var/log/nginx/publisher.err;

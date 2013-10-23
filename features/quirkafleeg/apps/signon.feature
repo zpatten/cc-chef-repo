@@ -51,7 +51,7 @@ upstream signon {
 }
 
 server {
-  listen 8080 default;
+  listen 80 default;
   server_name signon.quirkafleeg.info;
   access_log /var/log/nginx/signon.log;
   error_log /var/log/nginx/signon.err;

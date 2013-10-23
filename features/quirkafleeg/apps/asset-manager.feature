@@ -49,7 +49,7 @@ upstream asset-manager {
 }
 
 server {
-  listen 8080;
+  listen 80;
   server_name asset-manager.quirkafleeg.info;
   access_log /var/log/nginx/asset-manager.log;
   error_log /var/log/nginx/asset-manager.err;

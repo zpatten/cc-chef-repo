@@ -49,7 +49,7 @@ upstream panopticon {
 }
 
 server {
-  listen 8080;
+  listen 80;
   server_name panopticon.quirkafleeg.info;
   access_log /var/log/nginx/panopticon.log;
   error_log /var/log/nginx/panopticon.err;

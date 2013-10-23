@@ -8,6 +8,10 @@ Feature: GDS apps
       | username | keyfile |
       | $lxc$    | $lxc$   |
 
+  Scenario: varnish is not installed
+    When I run "dpkg --list"
+    Then I should not see "varnish" in the output
+
   Scenario: contentapi exists
     * directory "/var/www/contentapi" should exist
     And directory "/var/www/contentapi/shared" should exist
@@ -46,7 +50,7 @@ upstream contentapi {
 }
 
 server {
-  listen 8080;
+  listen 80;
   server_name contentapi.quirkafleeg.info;
   access_log /var/log/nginx/contentapi.log;
   error_log /var/log/nginx/contentapi.err;

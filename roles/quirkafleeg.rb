@@ -21,15 +21,7 @@ default_attributes(
     }
 )
 
-override_attributes(
-    :varnish => {
-        :listen_port  => 80,
-        :backend_host => '127.0.0.1'
-    }
-)
-
 run_list(
-    "recipe[odi-monitoring]",
     "recipe[odi-apt]",
     "recipe[build-essential]",
     "recipe[git]",
