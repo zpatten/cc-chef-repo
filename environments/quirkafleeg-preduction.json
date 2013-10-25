@@ -2,7 +2,7 @@
   "name": "quirkafleeg-preduction",
   "description": "quirkafleeg-preduction",
   "cookbook_versions": {
-    "quirkafleeg-deployment": "= 0.2.19"
+    "quirkafleeg-deployment": "= 0.2.20"
   },
   "json_class": "Chef::Environment",
   "chef_type": "environment",
@@ -15,7 +15,7 @@
   },
   "override_attributes": {
     "govuk": {
-      "app_domain": "quirkafleeg.info"
+      "app_domain": "theodi.org"
     }
   }
 }
