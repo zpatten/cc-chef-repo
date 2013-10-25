@@ -74,7 +74,13 @@ server {
 
   rewrite ^/about/space$ http://theodi.org/space permanent;
   rewrite ^/people$ http://theodi.org/team permanent;
+  rewrite ^/people/nrs$ http://theodi.org/team/nigel-shadbolt permanent;
   rewrite ^/people/(.*)$ http://theodi.org/team/$1 permanent;
+  rewrite ^/team/board$ http://theodi.org/team permanent;
+  rewrite ^/team/executive$ http://theodi.org/team permanent;
+  rewrite ^/team/commercial$ http://theodi.org/team permanent;
+  rewrite ^/team/technical$ http://theodi.org/team permanent;
+  rewrite ^/team/operations-team$ http://theodi.org/team permanent;
   rewrite ^/join-us$ http://theodi.org/membership permanent;
   rewrite ^/start-up$ http://theodi.org/start-ups permanent;
   rewrite ^/start-up/(.*)$ http://theodi.org/start-ups/$1 permanent;
@@ -89,11 +95,36 @@ server {
   rewrite ^/guide$ http://theodi.org/guides permanent;
   rewrite ^/guide/(.*)$ http://theodi.org/guides/$1 permanent;
   rewrite ^/case-study$ http://theodi.org/case-studies permanent;
-  rewrite ^/case-study/(.*)$ http://theodi.org/case-studies/$1 permanent;
+  rewrite ^/case-study/(.*)$ http://theodi.org/case-studies/$1-case-study permanent;
   rewrite ^/consultation-response$ http://theodi.org/consultation-responses permanent;
   rewrite ^/consultation-response/(.*)$ http://theodi.org/consultation-responses/$1 permanent;
   rewrite ^/odi-in-the-news$ http://theodi.org/news permanent;
   rewrite ^/feedback$ http://theodi.org/contact permanent;
+  rewrite ^/calendar$ http://theodi.org/events permanent;
+  rewrite ^/past-events$ http://theodi.org/events permanent;
+  rewrite ^/content/news-open-data-institute$ http://theodi.org/newsletters permanent;
+  rewrite ^/news/assets$ http://theodi.org/newsroom permanent;
+  rewrite ^/media-release$ http://theodi.org/media-releases permanent;
+  rewrite ^/media-release/(.*)$ http://theodi.org/media-releases/$1 permanent;
+  rewrite ^/sites/default/files/360s/(.*)$ http://theodi.org/360s/$1 permanent;
+  rewrite ^/news/bigger-and-better-us-–-introducing-our-two-newest-members$ http://theodi.org/news/bigger-and-better-us-introducing-our-two-newest-members permanent;
+  rewrite ^/news/odi-startup-demand-logic-saves-king’s-college-london-£390000-year-energy-costs$ http://theodi.org/news/odi-startup-demand-logic-saves-king-s-college-london-390000-year-energy-costs permanent;
+  rewrite ^/news/odi-telefónica-and-mit-set-data-challenge-campus-party-2013$ http://theodi.org/news/odi-telef-nica-and-mit-set-data-challenge-campus-party-2013 permanent;
+  rewrite ^/blog/‘knowledge-everyone’-–-my-first-few-months-odi-training-team$ http://theodi.org/blog/knowledge-everyone-my-first-few-months-odi-training-team permanent;
+  rewrite ^/blog/guest-blog-innovating-drive-new-economic-insight-new-zealand’s-open-transport-data$ http://theodi.org/blog/guest-blog-innovating-drive-new-economic-insight-new-zealand-s-open-transport-data permanent;
+  rewrite ^/news/odi-chairman-nigel-shadbolt-knighted-queen’s-birthday-honours$ http://theodi.org/news/odi-chairman-nigel-shadbolt-knighted-queen-s-birthday-honours permanent;
+  rewrite ^/news/odi-welcomes-information-economy-strategy-–-launched-g8-innovation-conference$ http://theodi.org/news/odi-welcomes-information-economy-strategy-launched-g8-innovation-conference permanent;
+  rewrite ^/blog/training-odi-it’s-date$ http://theodi.org/blog/training-odi-it-s-date permanent;
+  rewrite ^/news/odi’s-jeni-tennison-appointed-government’s-new-open-standards-board$ http://theodi.org/news/odi-s-jeni-tennison-appointed-government-s-new-open-standards-board permanent;
+  rewrite ^/news/odi-ceo-joins-mayor’s-smart-london-board$ http://theodi.org/news/odi-ceo-joins-mayor-s-smart-london-board permanent;
+  rewrite ^/news/odi-based-company-helps-londoners-understand-mayor’s-policing-plans$ http://theodi.org/news/odi-based-company-helps-londoners-understand-mayor-s-policing-plans permanent;
+  rewrite ^/news/odi-launches-£850k-scheme-create-businesses-open-data$ http://theodi.org/news/odi-launches-850k-scheme-create-businesses-open-data permanent;
+  rewrite ^/news/glasgow-wins-£24m-boost-after-recognising-“revolutionary-impact”-open-data$ http://theodi.org/news/glasgow-wins-24m-boost-after-recognising-revolutionary-impact-open-data permanent;
+  rewrite ^/news/gains-opening-supermarket-pricing-information-“should-not-be-under-estimated”-says-odi$ http://theodi.org/news/gains-opening-supermarket-pricing-information-should-not-be-under-estimated-says-odi permanent;
+  rewrite ^/blog/guest-blog-“great-prize”-offer-embracing-open-data$ http://theodi.org/blog/guest-blog-great-prize-offer-embracing-open-data permanent;
+  rewrite ^/news/£11m-boost-open-data-innovation$ http://theodi.org/news/11m-boost-open-data-innovation permanent;
+  rewrite ^/news/inspiration-personal-data-odi’s-midata-hackathon$ http://theodi.org/news/inspiration-personal-data-odi-s-midata-hackathon permanent;
+  rewrite ^/blog/guest-blog-odi’s-first-incubator-business-pioneering-open-data$ http://theodi.org/blog/guest-blog-odi-s-first-incubator-business-pioneering-open-data permanent;
 }
 
 server {
