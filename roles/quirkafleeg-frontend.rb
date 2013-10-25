@@ -11,7 +11,13 @@ default_attributes(
             :redirects    => {
                 "^/about/space$"                              => "/space",
                 "^/people$"                                   => "/team",
+                "^/people/nrs$"                               => "/team/nigel-shadbolt",
                 "^/people/(.*)$"                              => "/team/$1",
+                "^/team/board$"                               => "/team",
+                "^/team/executive$"                           => "/team",
+                "^/team/commercial$"                          => "/team",
+                "^/team/technical$"                           => "/team",
+                "^/team/operations-team$"                     => "/team",
                 "^/join-us$"                                  => "/membership",
                 "^/start-up$"                                 => "/start-ups",
                 "^/start-up/(.*)$"                            => "/start-ups/$1",
@@ -30,7 +36,14 @@ default_attributes(
                 "^/consultation-response$"                    => "/consultation-responses",
                 "^/consultation-response/(.*)$"               => "/consultation-responses/$1",
                 "^/odi-in-the-news$"                          => "/news",
-                "^/feedback$"                                 => "/contact"
+                "^/feedback$"                                 => "/contact",
+                "^/calendar$"                                 => "/events",
+                "^/past-events$"                              => "/events",
+                "^/content/news-open-data-institute$"         => "/newsletter",
+                "^/news/assets$"                              => "/newsroom",
+                "^/media-release$"                            => "/media-releases",
+                "^/media-release/(.*)$"                       => "/media-releases/$1",
+                "^/sites/default/files/360s/(.*)$"            => "/360s/$1",
             }
         },
         #        'people'           => {

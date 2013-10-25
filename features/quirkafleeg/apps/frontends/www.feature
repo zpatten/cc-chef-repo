@@ -74,7 +74,13 @@ server {
 
   rewrite ^/about/space$ http://theodi.org/space permanent;
   rewrite ^/people$ http://theodi.org/team permanent;
+  rewrite ^/people/nrs$ http://theodi.org/team/nigel-shadbolt permanent;
   rewrite ^/people/(.*)$ http://theodi.org/team/$1 permanent;
+  rewrite ^/team/board$ http://theodi.org/team permanent;
+  rewrite ^/team/executive$ http://theodi.org/team permanent;
+  rewrite ^/team/commercial$ http://theodi.org/team permanent;
+  rewrite ^/team/technical$ http://theodi.org/team permanent;
+  rewrite ^/team/operations-team$ http://theodi.org/team permanent;
   rewrite ^/join-us$ http://theodi.org/membership permanent;
   rewrite ^/start-up$ http://theodi.org/start-ups permanent;
   rewrite ^/start-up/(.*)$ http://theodi.org/start-ups/$1 permanent;
@@ -94,6 +100,13 @@ server {
   rewrite ^/consultation-response/(.*)$ http://theodi.org/consultation-responses/$1 permanent;
   rewrite ^/odi-in-the-news$ http://theodi.org/news permanent;
   rewrite ^/feedback$ http://theodi.org/contact permanent;
+  rewrite ^/calendar$ http://theodi.org/events permanent;
+  rewrite ^/past-events$ http://theodi.org/events permanent;
+  rewrite ^/content/news-open-data-institute$ http://theodi.org/newsletter permanent;
+  rewrite ^/news/assets$ http://theodi.org/newsroom permanent;
+  rewrite ^/media-release$ http://theodi.org/media-releases permanent;
+  rewrite ^/media-release/(.*)$ http://theodi.org/media-releases/$1 permanent;
+  rewrite ^/sites/default/files/360s/(.*)$ http://theodi.org/360s/$1 permanent;
 }
 
 server {
