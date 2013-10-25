@@ -10,16 +10,17 @@ module ODI
         ruby_block "env extras" do
           block do
             extras = {
-                'DEV_DOMAIN'       => domain,
-                'GOVUK_APP_DOMAIN' => domain,
-                'GDS_SSO_STRATEGY' => 'real',
-                'STATIC_DEV'       => "http://static.%s" % [
+                'DEV_DOMAIN'         => domain,
+                'GOVUK_APP_DOMAIN'   => domain,
+                'GDS_SSO_STRATEGY'   => 'real',
+                'STATIC_DEV'         => "http://static.%s" % [
                     domain
                 ],
-                'GOVUK_ASSET_ROOT' => "static.%s" % [
+                'GOVUK_ASSET_ROOT'   => "static.%s" % [
                     domain
                 ],
-                'GOVUK_WEBSITE_ROOT' => "www.%s" % [
+                #                'GOVUK_WEBSITE_ROOT' => "www.%s" % [
+                'GOVUK_WEBSITE_ROOT' => "%s" % [
                     domain
                 ]
             }
