@@ -26,7 +26,7 @@ default_attributes(
                 "^/guide$"                                    => "/guides",
                 "^/guide/(.*)$"                               => "/guides/$1",
                 "^/case-study$"                               => "/case-studies",
-                "^/case-study/(.*)$"                          => "/case-studies/$1",
+                "^/case-study/(.*)$"                          => "/case-studies/$1-case-study",
                 "^/consultation-response$"                    => "/consultation-responses",
                 "^/consultation-response/(.*)$"               => "/consultation-responses/$1",
                 "^/odi-in-the-news$"                          => "/news",

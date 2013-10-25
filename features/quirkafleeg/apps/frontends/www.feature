@@ -89,7 +89,7 @@ server {
   rewrite ^/guide$ http://theodi.org/guides permanent;
   rewrite ^/guide/(.*)$ http://theodi.org/guides/$1 permanent;
   rewrite ^/case-study$ http://theodi.org/case-studies permanent;
-  rewrite ^/case-study/(.*)$ http://theodi.org/case-studies/$1 permanent;
+  rewrite ^/case-study/(.*)$ http://theodi.org/case-studies/$1-case-study permanent;
   rewrite ^/consultation-response$ http://theodi.org/consultation-responses permanent;
   rewrite ^/consultation-response/(.*)$ http://theodi.org/consultation-responses/$1 permanent;
   rewrite ^/odi-in-the-news$ http://theodi.org/news permanent;
