@@ -24,9 +24,9 @@ Feature: GDS apps
     Then I should see "RACKSPACE_USERNAME: rax" in the output
     And I should see "RACKSPACE_DIRECTORY_ASSET_HOST: http://3c1" in the output
     And I should see "JENKINS_URL: http://jenkins.theodi.org" in the output
-    And I should see "GOVUK_ASSET_ROOT: static.quirkafleeg.info" in the output
-    And I should see "DEV_DOMAIN: quirkafleeg.info" in the output
-    And I should see "GOVUK_APP_DOMAIN: quirkafleeg.info" in the output
+    And I should see "GOVUK_ASSET_ROOT: static.theodi.org" in the output
+    And I should see "DEV_DOMAIN: theodi.org" in the output
+    And I should see "GOVUK_APP_DOMAIN: theodi.org" in the output
     And I should see "GDS_SSO_STRATEGY: real" in the output
 
   Scenario: startup scripts be all up in it
@@ -50,16 +50,16 @@ upstream panopticon {
 
 server {
   listen 80;
-  server_name panopticon.quirkafleeg.info;
+  server_name panopticon.theodi.org;
   access_log /var/log/nginx/panopticon.log;
   error_log /var/log/nginx/panopticon.err;
+  root /var/www/panopticon/current/public/;
 
   location / {
     try_files $uri @backend;
   }
 
-  location ~ ^/(assets)/  {
-    root /var/www/panopticon/current/public/;
+  location ~ ^/(assets)/ {
     gzip_static on; # to serve pre-gzipped version
     expires max;
     add_header Cache-Control public;

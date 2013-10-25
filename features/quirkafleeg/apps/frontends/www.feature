@@ -24,9 +24,9 @@ Feature: GDS apps
     Then I should see "RACKSPACE_USERNAME: rax" in the output
     And I should see "RACKSPACE_DIRECTORY_ASSET_HOST: http://3c1" in the output
     And I should see "JENKINS_URL: http://jenkins.theodi.org" in the output
-    And I should see "GOVUK_ASSET_ROOT: static.quirkafleeg.info" in the output
-    And I should see "DEV_DOMAIN: quirkafleeg.info" in the output
-    And I should see "GOVUK_APP_DOMAIN: quirkafleeg.info" in the output
+    And I should see "GOVUK_ASSET_ROOT: static.theodi.org" in the output
+    And I should see "DEV_DOMAIN: theodi.org" in the output
+    And I should see "GOVUK_APP_DOMAIN: theodi.org" in the output
     And I should see "GDS_SSO_STRATEGY: real" in the output
 
   Scenario: startup scripts be all up in it
@@ -50,16 +50,16 @@ upstream www {
 
 server {
   listen 8080 default;
-  server_name quirkafleeg.info;
+  server_name theodi.org;
   access_log /var/log/nginx/www.log;
   error_log /var/log/nginx/www.err;
+  root /var/www/www/current/public/;
 
   location / {
     try_files $uri @backend;
   }
 
-  location ~ ^/(assets)/  {
-    root /var/www/www/current/public/;
+  location ~ ^/(assets)/ {
     gzip_static on; # to serve pre-gzipped version
     expires max;
     add_header Cache-Control public;
@@ -71,33 +71,33 @@ server {
     proxy_pass http://www;
   }
 
-  rewrite ^/about/space$ http://quirkafleeg.info/space permanent;
-  rewrite ^/people$ http://quirkafleeg.info/team permanent;
-  rewrite ^/people/(.*)$ http://quirkafleeg.info/team/$1 permanent;
-  rewrite ^/join-us$ http://quirkafleeg.info/membership permanent;
-  rewrite ^/start-up$ http://quirkafleeg.info/start-ups permanent;
-  rewrite ^/start-up/(.*)$ http://quirkafleeg.info/start-ups/$1 permanent;
-  rewrite ^/events/OpenDataChallengeSeries$ http://quirkafleeg.info/challenge-series permanent;
-  rewrite ^/content/ODChallengeSeriesDates$ http://quirkafleeg.info/challenge-series/dates permanent;
-  rewrite ^/content/crime-and-justice-series$ http://quirkafleeg.info/challenge-series/crime-and-justice permanent;
-  rewrite ^/content/energy-and-environment-programme$ http://quirkafleeg.info/challenge-series/energy-and-environment permanent;
-  rewrite ^/events/gallery$ http://quirkafleeg.info/events permanent;
-  rewrite ^/training$ http://quirkafleeg.info/learning permanent;
-  rewrite ^/excellence/pg_certificate$ http://quirkafleeg.info/pg-certificate permanent;
-  rewrite ^/library$ http://quirkafleeg.info/ permanent;
-  rewrite ^/guide$ http://quirkafleeg.info/guides permanent;
-  rewrite ^/guide/(.*)$ http://quirkafleeg.info/guides/$1 permanent;
-  rewrite ^/case-study$ http://quirkafleeg.info/case-studies permanent;
-  rewrite ^/case-study/(.*)$ http://quirkafleeg.info/case-studies/$1 permanent;
-  rewrite ^/consultation-response$ http://quirkafleeg.info/consultation-responses permanent;
-  rewrite ^/consultation-response/(.*)$ http://quirkafleeg.info/consultation-responses/$1 permanent;
-  rewrite ^/odi-in-the-news$ http://quirkafleeg.info/news permanent;
-  rewrite ^/feedback$ http://quirkafleeg.info/contact permanent;
+  rewrite ^/about/space$ http://theodi.org/space permanent;
+  rewrite ^/people$ http://theodi.org/team permanent;
+  rewrite ^/people/(.*)$ http://theodi.org/team/$1 permanent;
+  rewrite ^/join-us$ http://theodi.org/membership permanent;
+  rewrite ^/start-up$ http://theodi.org/start-ups permanent;
+  rewrite ^/start-up/(.*)$ http://theodi.org/start-ups/$1 permanent;
+  rewrite ^/events/OpenDataChallengeSeries$ http://theodi.org/challenge-series permanent;
+  rewrite ^/content/ODChallengeSeriesDates$ http://theodi.org/challenge-series/dates permanent;
+  rewrite ^/content/crime-and-justice-series$ http://theodi.org/challenge-series/crime-and-justice permanent;
+  rewrite ^/content/energy-and-environment-programme$ http://theodi.org/challenge-series/energy-and-environment permanent;
+  rewrite ^/events/gallery$ http://theodi.org/events permanent;
+  rewrite ^/training$ http://theodi.org/learning permanent;
+  rewrite ^/excellence/pg_certificate$ http://theodi.org/pg-certificate permanent;
+  rewrite ^/library$ http://theodi.org/ permanent;
+  rewrite ^/guide$ http://theodi.org/guides permanent;
+  rewrite ^/guide/(.*)$ http://theodi.org/guides/$1 permanent;
+  rewrite ^/case-study$ http://theodi.org/case-studies permanent;
+  rewrite ^/case-study/(.*)$ http://theodi.org/case-studies/$1 permanent;
+  rewrite ^/consultation-response$ http://theodi.org/consultation-responses permanent;
+  rewrite ^/consultation-response/(.*)$ http://theodi.org/consultation-responses/$1 permanent;
+  rewrite ^/odi-in-the-news$ http://theodi.org/news permanent;
+  rewrite ^/feedback$ http://theodi.org/contact permanent;
 }
 
 server {
   listen 8080;
-  server_name www.quirkafleeg.info;
-  rewrite ^/(.*) http://quirkafleeg.info/$1 permanent;
+  server_name www.theodi.org;
+  rewrite ^/(.*) http://theodi.org/$1 permanent;
 }
     """
