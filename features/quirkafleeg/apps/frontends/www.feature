@@ -102,7 +102,7 @@ server {
   rewrite ^/feedback$ http://theodi.org/contact permanent;
   rewrite ^/calendar$ http://theodi.org/events permanent;
   rewrite ^/past-events$ http://theodi.org/events permanent;
-  rewrite ^/content/news-open-data-institute$ http://theodi.org/newsletter permanent;
+  rewrite ^/content/news-open-data-institute$ http://theodi.org/newsletters permanent;
   rewrite ^/news/assets$ http://theodi.org/newsroom permanent;
   rewrite ^/media-release$ http://theodi.org/media-releases permanent;
   rewrite ^/media-release/(.*)$ http://theodi.org/media-releases/$1 permanent;

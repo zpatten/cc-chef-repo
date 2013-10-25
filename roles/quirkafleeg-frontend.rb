@@ -39,7 +39,7 @@ default_attributes(
                 "^/feedback$"                                                                                    => "/contact",
                 "^/calendar$"                                                                                    => "/events",
                 "^/past-events$"                                                                                 => "/events",
-                "^/content/news-open-data-institute$"                                                            => "/newsletter",
+                "^/content/news-open-data-institute$"                                                            => "/newsletters",
                 "^/news/assets$"                                                                                 => "/newsroom",
                 "^/media-release$"                                                                               => "/media-releases",
                 "^/media-release/(.*)$"                                                                          => "/media-releases/$1",
