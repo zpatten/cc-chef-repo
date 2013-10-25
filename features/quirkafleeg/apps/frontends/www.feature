@@ -28,6 +28,7 @@ Feature: GDS apps
     And I should see "DEV_DOMAIN: theodi.org" in the output
     And I should see "GOVUK_APP_DOMAIN: theodi.org" in the output
     And I should see "GDS_SSO_STRATEGY: real" in the output
+    And I should see "GOVUK_WEBSITE_ROOT: theodi.org" in the output
 
   Scenario: startup scripts be all up in it
     * file "/etc/init/www.conf" should exist
