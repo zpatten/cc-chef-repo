@@ -16,14 +16,14 @@ server {
   server_name <%= @canonical_name %>;
   access_log /var/log/nginx/<%= @servername %>.log;
   error_log /var/log/nginx/<%= @servername %>.err;
+  root /var/www/<%= @servername %>/current/public/;
 
   location / {
     try_files $uri @backend;
   }
 
 <% if @static_assets %>
-  location ~ ^/(<%= @assets_path %>)/  {
-    root /var/www/<%= @servername %>/current/public/;
+  location ~ ^/(<%= @assets_path %>)/ {
     gzip_static on; # to serve pre-gzipped version
     expires max;
     add_header Cache-Control public;
