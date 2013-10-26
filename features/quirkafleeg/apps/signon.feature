@@ -52,7 +52,7 @@ upstream signon {
 
 server {
   listen 80 default;
-  server_name signon.theodi.org;
+  server_name signon.theodi.org sign-in.theodi.org sign-on.theodi.org;
   access_log /var/log/nginx/signon.log;
   error_log /var/log/nginx/signon.err;
   root /var/www/signon/current/public/;
