@@ -13,7 +13,19 @@ upstream <%= @servername %> {
 
 server {
   listen <%= @listen_port %><%= if @default then " default" end %>;
-  server_name <%= @canonical_name %><%= if @aliases then " %s" % [ (@aliases.map { |a| "%s.%s" % [ a, @domain ] } ).join(" ") ] end %>;
+  server_name <%= @canonical_name %><%=
+    if @aliases then
+      @aliases.map! do |a|
+        "%s.%s" % [
+                a,
+                @domain
+        ]
+      end
+      " %s" % [
+              @aliases.join(" ")
+      ]
+    end
+%>;
   access_log /var/log/nginx/<%= @servername %>.log;
   error_log /var/log/nginx/<%= @servername %>.err;
   root /var/www/<%= @servername %>/current/public/;
