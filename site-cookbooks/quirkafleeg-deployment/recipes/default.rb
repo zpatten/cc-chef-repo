@@ -192,7 +192,8 @@ node['apps'].each_pair do |github_name, attributes|
             :listen_port   => node[:nginx][:listen_port],
             :default       => attributes[:is_default],
             :redirects     => attributes[:redirects],
-            :naked_domain  => attributes[:naked_domain]
+            :naked_domain  => attributes[:naked_domain],
+            :aliases       => attributes[:aliases]
         )
         action :create
       end
