@@ -117,26 +117,33 @@ server {
   Scenario: horrible rewrites are correct
     * file "/var/www/www/current/vhost" should contain
   """
-  rewrite ^/news/bigger-and-better-us.*introducing-our-two-newest-members$ http://theodi.org/news/bigger-and-better-us-introducing-our-two-newest-members permanent;
-  rewrite ^/news/odi-startup-demand-logic-saves-king.*s-college-london-.*390000-year-energy-costs$ http://theodi.org/news/odi-startup-demand-logic-saves-king-s-college-london-390000-year-energy-costs permanent;
-  rewrite ^/news/odi-telef.*nica-and-mit-set-data-challenge-campus-party-2013$ http://theodi.org/news/odi-telef-nica-and-mit-set-data-challenge-campus-party-2013 permanent;
-  rewrite ^/blog/.*knowledge-everyone.*my-first-few-months-odi-training-team$ http://theodi.org/blog/knowledge-everyone-my-first-few-months-odi-training-team permanent;
-  rewrite ^/blog/guest-blog-innovating-drive-new-economic-insight-new-zealand.*s-open-transport-data$ http://theodi.org/blog/guest-blog-innovating-drive-new-economic-insight-new-zealand-s-open-transport-data permanent;
-  rewrite ^/news/odi-chairman-nigel-shadbolt-knighted-queen.*s-birthday-honours$ http://theodi.org/news/odi-chairman-nigel-shadbolt-knighted-queen-s-birthday-honours permanent;
-  rewrite ^/news/odi-welcomes-information-economy-strategy.*launched-g8-innovation-conference$ http://theodi.org/news/odi-welcomes-information-economy-strategy-launched-g8-innovation-conference permanent;
-  rewrite ^/blog/training-odi-it.*s-date$ http://theodi.org/blog/training-odi-it-s-date permanent;
-  rewrite ^/news/odi.*s-jeni-tennison-appointed-government.*s-new-open-standards-board$ http://theodi.org/news/odi-s-jeni-tennison-appointed-government-s-new-open-standards-board permanent;
-  rewrite ^/news/odi-ceo-joins-mayor.*s-smart-london-board$ http://theodi.org/news/odi-ceo-joins-mayor-s-smart-london-board permanent;
-  rewrite ^/news/odi-based-company-helps-londoners-understand-mayor.*s-policing-plans$ http://theodi.org/news/odi-based-company-helps-londoners-understand-mayor-s-policing-plans permanent;
-  rewrite ^/news/odi-launches-.*850k-scheme-create-businesses-open-data$ http://theodi.org/news/odi-launches-850k-scheme-create-businesses-open-data permanent;
-  rewrite ^/news/glasgow-wins-.*24m-boost-after-recognising-.*revolutionary-impact.*-open-data$ http://theodi.org/news/glasgow-wins-24m-boost-after-recognising-revolutionary-impact-open-data permanent;
-  rewrite ^/news/gains-opening-supermarket-pricing-information-.*should-not-be-under-estimated.*-says-odi$ http://theodi.org/news/gains-opening-supermarket-pricing-information-should-not-be-under-estimated-says-odi permanent;
-  rewrite ^/blog/guest-blog-.*great-prize.*-offer-embracing-open-data$ http://theodi.org/blog/guest-blog-great-prize-offer-embracing-open-data permanent;
-  rewrite ^/news/.*11m-boost-open-data-innovation$ http://theodi.org/news/11m-boost-open-data-innovation permanent;
-  rewrite ^/news/inspiration-personal-data-odi.*s-midata-hackathon$ http://theodi.org/news/inspiration-personal-data-odi-s-midata-hackathon permanent;
-  rewrite ^/blog/guest-blog-odi.*s-first-incubator-business-pioneering-open-data$ http://theodi.org/blog/guest-blog-odi-s-first-incubator-business-pioneering-open-data permanent;
-}
+  rewrite ^/blog/odi-summit-qa-kevin-merritt$ http://theodi.org/blog/odi-summit-qa-with-kevin-merritt permanent;
   """
+
+#  rewrite ^/blog/odi-summit-qa-beth-simone-noveck$ http://theodi.org/blog/odi-summit-qa-with-beth-simone-noveck permanent;
+#  rewrite ^/news/bigger-and-better-us-[^-]*-introducing-our-two-newest-members$ http://theodi.org/news/a-bigger-and-better-us-introducing-our-two-newest-members permanent;
+#  rewrite ^/blog/odi-summit-qa-martin-tisne$ http://theodi.org/blog/odi-summit-qa-with-martin-tisne permanent;
+#  rewrite ^/news/new-initiatives-combat-crime-open-data-0$ http://theodi.org/news/new-initiatives-combat-crime-open-data permanent;
+#  rewrite ^/news/odi-startup-demand-logic-saves-king[^-]*s-college-london-[^-]*390000-year-energy-costs$ http://theodi.org/news/odi-startup-demand-logic-saves-king-s-college-london-390000-year-energy-costs permanent;
+# rewrite ^/blog/odi-celebrates-first-birthday-announcing-university-southampton-honorary-partner$ http://theodi.org/news/odi-celebrates-first-birthday-announcing-university-southampton-honorary-partner permanent;
+# rewrite ^/news/odi-telef[^-]*nica-and-mit-set-data-challenge-campus-party-2013$ http://theodi.org/news/odi-telef-nica-and-mit-set-data-challenge-campus-party-2013 permanent;
+# rewrite ^/blog/[^-]*knowledge-everyone-[^-]-*my-first-few-months-odi-training-team$ http://theodi.org/blog/knowledge-everyone-my-first-few-months-odi-training-team permanent;
+# rewrite ^/blog/guest-blog-innovating-drive-new-economic-insight-new-zealand[^-]*s-open-transport-data$ http://theodi.org/blog/guest-blog-innovating-drive-new-economic-insight-new-zealand-s-open-transport-data permanent;
+# rewrite ^/news/odi-chairman-nigel-shadbolt-knighted-queen[^-]*s-birthday-honours$ http://theodi.org/news/odi-chairman-nigel-shadbolt-knighted-queen-s-birthday-honours permanent;
+# rewrite ^/news/odi-welcomes-information-economy-strategy-[^-]*-launched-g8-innovation-conference$ http://theodi.org/news/odi-welcomes-information-economy-strategy-launched-g8-innovation-conference permanent;
+# rewrite ^/blog/training-odi-it[^-]*s-date$ http://theodi.org/blog/training-odi-it-s-date permanent;
+# rewrite ^/news/odi[^-]*s-jeni-tennison-appointed-government[^-]*s-new-open-standards-board$ http://theodi.org/news/odi-s-jeni-tennison-appointed-government-s-new-open-standards-board permanent;
+# rewrite ^/news/odi-ceo-joins-mayor[^-]*s-smart-london-board$ http://theodi.org/news/odi-ceo-joins-mayor-s-smart-london-board permanent;
+# rewrite ^/news/odi-based-company-helps-londoners-understand-mayor[^-]*s-policing-plans$ http://theodi.org/news/odi-based-company-helps-londoners-understand-mayor-s-policing-plans permanent;
+# rewrite ^/news/odi-launches-[^-]*850k-scheme-create-businesses-open-data$ http://theodi.org/news/odi-launches-850k-scheme-create-businesses-open-data permanent;
+# rewrite ^/news/glasgow-wins-[^-]*24m-boost-after-recognising-[^-]*revolutionary-impact[^-]*-open-data$ http://theodi.org/news/glasgow-wins-24m-boost-after-recognising-revolutionary-impact-open-data permanent;
+# rewrite ^/news/gains-opening-supermarket-pricing-information-[^-]*should-not-be-under-estimated[^-]*-says-odi$ http://theodi.org/news/gains-opening-supermarket-pricing-information-should-not-be-under-estimated-says-odi permanent;
+# rewrite ^/blog/guest-blog-[^-]*great-prize[^-]*-offer-embracing-open-data$ http://theodi.org/blog/guest-blog-great-prize-offer-embracing-open-data permanent;
+# rewrite ^/news/[^-]*11m-boost-open-data-innovation$ http://theodi.org/news/11m-boost-open-data-innovation permanent;
+# rewrite ^/news/inspiration-personal-data-odi[^-]*s-midata-hackathon$ http://theodi.org/news/inspiration-personal-data-odi-s-midata-hackathon permanent;
+# rewrite ^/blog/guest-blog-odi[^-]*s-first-incubator-business-pioneering-open-data$ http://theodi.org/blog/guest-blog-odi-s-first-incubator-business-pioneering-open-data permanent;
+#
+# """
 
   Scenario: vhost redirects are correct
     And file "/var/www/www/current/vhost" should contain
