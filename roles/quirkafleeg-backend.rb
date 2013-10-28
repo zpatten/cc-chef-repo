@@ -8,11 +8,7 @@ default_attributes(
             :port        => 4000,
             :mysql_db    => 'signon',
             :migrate     => 'bundle exec rake db:migrate',
-            :is_default  => true,
-            :aliases      => [
-                "sign-in",
-                "sign-on"
-            ]
+            :is_default  => true
         },
         #        'static'        => {
         #            :port        => 4010,
