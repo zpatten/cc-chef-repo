@@ -9,8 +9,7 @@ default_attributes 'user'              => 'certificate',
                    'git_project'       => 'open-data-certificate',
                    'migration_command' => 'bundle exec rake db:migrate',
                    'after_restart_commands' => [
-                       'bundle exec rake surveyor:enqueue_surveys',
-                       'bundle exec rake cache:clear'
+                       'bundle exec rake odc:deploy'
                    ],
                    'nginx'             => {
                        'force_ssl'     => true,
