@@ -2,7 +2,9 @@
   "name": "quirkafleeg-preduction",
   "description": "quirkafleeg-preduction",
   "cookbook_versions": {
-    "quirkafleeg-deployment": "= 0.2.20"
+    "quirkafleeg-deployment": "= 0.2.20",
+    "hoppler": "= 0.2.2",
+    "odi-mongodb": "= 0.1.1"
   },
   "json_class": "Chef::Environment",
   "chef_type": "environment",
