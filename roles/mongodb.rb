@@ -2,7 +2,11 @@ name "mongodb"
 description "mongodb server role"
 
 default_attributes(
-    'user' => 'hoppler'
+    'user'    => 'hoppler',
+    'hoppler' => {
+        'backup_command' => 'backup_mongo',
+        'do_restore'     => false
+    }
 )
 
 override_attributes(

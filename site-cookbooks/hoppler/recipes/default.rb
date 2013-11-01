@@ -109,17 +109,18 @@ end
 template "/etc/cron.d/hoppler" do
   source "cron.erb"
   variables(
-      :backup_hour  => node["hoppler"]["backup_hour"],
+      :backup_hour    => node["hoppler"]["backup_hour"],
       :backup_minute  => node["hoppler"]["backup_minute"],
-      :cleanup_hour => node["hoppler"]["cleanup_hour"],
-      :cleanup_day  => node["hoppler"]["cleanup_day"]
+      :cleanup_hour   => node["hoppler"]["cleanup_hour"],
+      :cleanup_day    => node["hoppler"]["cleanup_day"],
+      :backup_command => node["hoppler"]["backup_command"]
   )
 end
 
 #dbi = data_bag_item "databases", "credentials"
 
 template "/home/%s/hoppler/db.creds.yaml" % [
-  hoppler
+    hoppler
 ] do
   source "db.creds.yaml.erb"
   variables(
@@ -135,4 +136,6 @@ script "restore some DBs" do
   code <<-EOF
   su - hoppler -c "cd /home/hoppler/hoppler && rake hoppler:restore"
   EOF
+
+  only_if { node["hoppler"]["do_restore"] }
 end

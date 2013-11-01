@@ -35,3 +35,14 @@ node.save
 node.run_list << "mongodb"
 
 include_recipe "mongodb::default"
+
+lockfile = "/root/mongo_restarted"
+service "mongodb" do
+  action :restart
+
+  not_if { File.exists? lockfile }
+end
+
+file lockfile do
+  action :create
+end

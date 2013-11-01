@@ -2,5 +2,5 @@
 
 SHELL=/bin/bash
 
-<%= @backup_minute %> <%= @backup_hour %> * * * root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:backup'
+<%= @backup_minute %> <%= @backup_hour %> * * * root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:<%= @backup_command %>'
 0 <%= @cleanup_hour %> * * <%= @cleanup_day %> root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:cleanup'
