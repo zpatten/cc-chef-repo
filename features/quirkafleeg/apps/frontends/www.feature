@@ -141,6 +141,9 @@ server {
   rewrite ^/news/odi-launches-..850k-scheme-create-businesses-open-data$ http://theodi.org/news/odi-launches-850k-scheme-create-businesses-open-data permanent;
   rewrite ^/news/..11m-boost-open-data-innovation$ http://theodi.org/news/11m-boost-open-data-innovation permanent;
   rewrite ^/news/branding$ http://theodi.org/newsroom permanent;
+  rewrite ^/news/feed$ http://theodi.org/news.atom permanent;
+  rewrite ^/jobs/feed$ http://theodi.org/jobs.atom permanent;
+  rewrite ^/events/feed$ http://theodi.org/events.atom permanent;
 }
   """
 

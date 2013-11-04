@@ -67,7 +67,10 @@ default_attributes(
                 "^/news/odi-telef..nica-and-mit-set-data-challenge-campus-party-2013$"                               => "/news/odi-telef-nica-and-mit-set-data-challenge-campus-party-2013",
                 "^/news/odi-launches-..850k-scheme-create-businesses-open-data$"                                     => "/news/odi-launches-850k-scheme-create-businesses-open-data",
                 "^/news/..11m-boost-open-data-innovation$"                                                           => "/news/11m-boost-open-data-innovation",
-                "^/news/branding$"                                                                                   => "/newsroom"
+                "^/news/branding$"                                                                                   => "/newsroom",
+                "^/news/feed$"                                                                                       => "/news.atom",
+                "^/jobs/feed$"                                                                                       => "/jobs.atom",
+                "^/events/feed$"                                                                                     => "/events.atom"
             }
         },
         #        'people'           => {
