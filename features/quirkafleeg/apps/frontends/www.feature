@@ -144,6 +144,7 @@ server {
   rewrite ^/news/feed$ http://theodi.org/news.atom permanent;
   rewrite ^/jobs/feed$ http://theodi.org/jobs.atom permanent;
   rewrite ^/events/feed$ http://theodi.org/events.atom permanent;
+  rewrite ^/blog/feed$ http://theodi.org/blog.atom permanent;
 }
   """
 

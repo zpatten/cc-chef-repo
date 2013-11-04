@@ -70,7 +70,8 @@ default_attributes(
                 "^/news/branding$"                                                                                   => "/newsroom",
                 "^/news/feed$"                                                                                       => "/news.atom",
                 "^/jobs/feed$"                                                                                       => "/jobs.atom",
-                "^/events/feed$"                                                                                     => "/events.atom"
+                "^/events/feed$"                                                                                     => "/events.atom",
+                "^/blog/feed$"                                                                                       => "/blog.atom"
             }
         },
         #        'people'           => {
