@@ -79,6 +79,8 @@ server {
   rewrite ^/about/space$ http://theodi.org/space permanent;
   rewrite ^/people$ http://theodi.org/team permanent;
   rewrite ^/people/nrs$ http://theodi.org/team/nigel-shadbolt permanent;
+  rewrite ^/people/gavin$ http://theodi.org/team/gavin-starks permanent;
+  rewrite ^/people/jeni$ http://theodi.org/team/jeni-tennison permanent;
   rewrite ^/people/(.*)$ http://theodi.org/team/$1 permanent;
   rewrite ^/team/board$ http://theodi.org/team permanent;
   rewrite ^/team/executive$ http://theodi.org/team permanent;

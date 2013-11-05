@@ -12,6 +12,8 @@ default_attributes(
                 "^/about/space$"                                                                                     => "/space",
                 "^/people$"                                                                                          => "/team",
                 "^/people/nrs$"                                                                                      => "/team/nigel-shadbolt",
+                "^/people/gavin$"                                                                                    => "/team/gavin-starks",
+                "^/people/jeni$"                                                                                     => "/team/jeni-tennison",
                 "^/people/(.*)$"                                                                                     => "/team/$1",
                 "^/team/board$"                                                                                      => "/team",
                 "^/team/executive$"                                                                                  => "/team",
