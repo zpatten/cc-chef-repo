@@ -33,5 +33,6 @@ run_list(
     "recipe[mysql::client]",
     "recipe[dictionary]",
     "recipe[nodejs::install_from_package]",
+    "recipe[odi-statsd]",
     "recipe[fail2ban]"
 )
