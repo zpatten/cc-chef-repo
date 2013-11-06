@@ -36,11 +36,4 @@ end
 node.set['mysql']['bind_address'] = listen_address
 node.save
 
-#script "ffs" do
-#  interpreter 'bash'
-#  code <<-EOF
-#echo #{node.set['mysql']['server_root_password']} > /tmp/ffs
-#  EOF
-#end
-
 include_recipe "mysql::server"
