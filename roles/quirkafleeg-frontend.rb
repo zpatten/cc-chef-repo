@@ -14,7 +14,7 @@ default_attributes(
                 "^/people/nrs$"                                                                                      => "/team/nigel-shadbolt",
                 "^/people/gavin$"                                                                                    => "/team/gavin-starks",
                 "^/people/jeni$"                                                                                     => "/team/jeni-tennison",
-                "^/people/dr-david-tarrant$"                                                                         => "/team/david-tarrant",
+                "^/team/dr-david-tarrant$"                                                                           => "/team/david-tarrant",
                 "^/people/(.*)$"                                                                                     => "/team/$1",
                 "^/team/board$"                                                                                      => "/team",
                 "^/team/executive$"                                                                                  => "/team",
