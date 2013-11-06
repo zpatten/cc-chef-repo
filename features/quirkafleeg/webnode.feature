@@ -81,3 +81,19 @@ quirkafleeg ALL=NOPASSWD:ALL
     Then I should see "^\*/5 .* /usr/bin/chef-client &> /var/log/chef/cron.log" in the output
     When I run "ps ax"
     Then I should not see "chef-client .* -i .* -s" in the output
+
+  @statsd
+  Scenario: statsd should be installed
+    When I run "ps ax | grep statsd"
+    Then I should see "/usr/share/statsd/scripts/start" in the output
+    * file "/etc/statsd/config.js" should contain
+    """
+    "backends": [
+      "./backends/graphite",
+      "statsd-librato-backend"
+    ],
+    "librato": {
+      "email": "tech@theodi.org",
+      "token": "fakelibratotoken"
+    },
+    """
