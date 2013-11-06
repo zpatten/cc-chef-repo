@@ -81,7 +81,7 @@ server {
   rewrite ^/people/nrs$ http://theodi.org/team/nigel-shadbolt permanent;
   rewrite ^/people/gavin$ http://theodi.org/team/gavin-starks permanent;
   rewrite ^/people/jeni$ http://theodi.org/team/jeni-tennison permanent;
-  rewrite ^/people/dr-david-tarrant$ http://theodi.org/team/david-tarrant permanent;
+  rewrite ^/team/dr-david-tarrant$ http://theodi.org/team/david-tarrant permanent;
   rewrite ^/people/(.*)$ http://theodi.org/team/$1 permanent;
   rewrite ^/team/board$ http://theodi.org/team permanent;
   rewrite ^/team/executive$ http://theodi.org/team permanent;
