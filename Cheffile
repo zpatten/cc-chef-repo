@@ -21,6 +21,7 @@ cookbook 'fail2ban', :github => 'opscode-cookbooks/fail2ban'
 cookbook 'varnish', :github => 'opscode-cookbooks/varnish'
 cookbook 'cloud_monitoring', :github => 'racker/cookbook-cloudmonitoring'
 cookbook 'ImageMagick', :github => 'opscode-cookbooks/imagemagick'
+cookbook 'statsd', :github => 'librato/statsd-cookbook'
 
 cookbook 'rvm', :github => 'theodi/chef-rvm'
 cookbook 'envbuilder', :github => 'theodi/chef-envbuilder'

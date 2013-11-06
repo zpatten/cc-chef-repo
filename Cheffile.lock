@@ -77,6 +77,16 @@ GIT
       yum (>= 0.0.0)
 
 GIT
+  remote: https://github.com/librato/statsd-cookbook
+  ref: master
+  sha: be5de4f7a6c78479947bd6c82d4c01d3a1c41f27
+  specs:
+    statsd (0.1.1)
+      build-essential (>= 0.0.0)
+      git (>= 0.0.0)
+      nodejs (>= 0.5.2)
+
+GIT
   remote: https://github.com/opscode-cookbooks/fail2ban
   ref: master
   sha: 4a652e0f0128d68c156c3e1d2ccd436b2860b94f
@@ -151,6 +161,7 @@ DEPENDENCIES
   postfix (>= 0)
   rvm (>= 0)
   sqlite (>= 0)
+  statsd (>= 0)
   varnish (>= 0)
   xml (>= 0)
   xslt (>= 0)
