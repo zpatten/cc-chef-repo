@@ -22,6 +22,8 @@ cookbook 'varnish', :github => 'opscode-cookbooks/varnish'
 cookbook 'cloud_monitoring', :github => 'racker/cookbook-cloudmonitoring'
 cookbook 'ImageMagick', :github => 'opscode-cookbooks/imagemagick'
 cookbook 'statsd', :github => 'librato/statsd-cookbook'
+cookbook 'java', :github => 'opscode-cookbooks/java'
+cookbook 'elasticsearch', :github => 'elasticsearch/cookbook-elasticsearch'
 
 cookbook 'rvm', :github => 'theodi/chef-rvm'
 cookbook 'envbuilder', :github => 'theodi/chef-envbuilder'
