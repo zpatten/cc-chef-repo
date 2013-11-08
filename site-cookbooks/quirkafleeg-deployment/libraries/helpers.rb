@@ -10,7 +10,6 @@ module ODI
         ruby_block "env extras" do
           block do
             extras = {
-                'DEV_DOMAIN'         => domain,
                 'GOVUK_APP_DOMAIN'   => domain,
                 'GDS_SSO_STRATEGY'   => 'real',
                 'STATIC_DEV'         => "http://static.%s" % [
@@ -19,12 +18,16 @@ module ODI
                 'GOVUK_ASSET_ROOT'   => "static.%s" % [
                     domain
                 ],
-                #                'GOVUK_WEBSITE_ROOT' => "www.%s" % [
                 'GOVUK_WEBSITE_ROOT' => "%s" % [
                     domain
                 ]
             }
-            f      = File.open "/home/#{node['user']}/env", "a"
+
+            if node[:set_dev_domain]
+              extras['DEV_DOMAIN'] = domain
+            end
+
+            f = File.open "/home/#{node['user']}/env", "a"
             extras.each_pair do |key, value|
               f.write "%s: %s\n" % [
                   key,
