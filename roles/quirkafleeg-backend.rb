@@ -10,10 +10,10 @@ default_attributes(
             :migrate     => 'bundle exec rake db:migrate',
             :is_default  => true
         },
-        #        'static'        => {
-        #            :port        => 4010,
-        #            :assets_path => 'static'
-        #        },
+        'static'        => {
+            :port        => 4010,
+            :assets_path => 'static'
+        },
         'panopticon'    => {
             :port     => 4020,
             :mongo_db => 'govuk_content_publisher'
