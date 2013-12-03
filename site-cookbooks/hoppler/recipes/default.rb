@@ -95,7 +95,7 @@ template "/home/%s/hoppler/.mysql.env" % [
   group hoppler
 end
 
-link "/home/hoppler/hoppler/.env" do
+link "/home/env/.env" do
   to "/home/hoppler/.env"
 end
 
