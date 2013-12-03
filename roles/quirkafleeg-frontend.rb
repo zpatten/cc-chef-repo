@@ -74,7 +74,9 @@ default_attributes(
                 "^/news/feed$"                                                                                       => "/news.atom",
                 "^/jobs/feed$"                                                                                       => "/jobs.atom",
                 "^/events/feed$"                                                                                     => "/events.atom",
-                "^/blog/feed$"                                                                                       => "/blog.atom"
+                "^/blog/feed$"                                                                                       => "/blog.atom",
+                "^/sites/default/files/ODI%20Business%20Plan%20­%20May%20Release.pdf"                                => "http://e642e8368e3bf8d5526e-464b4b70b4554c1a79566214d402739e.r6.cf3.rackcdn.com/odi-description-and-offer-ask-final.pdf",
+                "^/sites/default/files/odi_description_and_offer­ask_final.pdf"                                      => "http://e642e8368e3bf8d5526e-464b4b70b4554c1a79566214d402739e.r6.cf3.rackcdn.com/odi-description-and-offer-ask-final.pdf"
             }
         },
         #        'people'           => {

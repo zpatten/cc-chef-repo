@@ -148,6 +148,8 @@ server {
   rewrite ^/jobs/feed$ http://theodi.org/jobs.atom permanent;
   rewrite ^/events/feed$ http://theodi.org/events.atom permanent;
   rewrite ^/blog/feed$ http://theodi.org/blog.atom permanent;
+  rewrite ^/sites/default/files/ODI%20Business%20Plan%20­%20May%20Release.pdf http://e642e8368e3bf8d5526e-464b4b70b4554c1a79566214d402739e.r6.cf3.rackcdn.com/odi-description-and-offer-ask-final.pdf permanent;
+  rewrite ^/sites/default/files/odi_description_and_offer­ask_final.pdf http://e642e8368e3bf8d5526e-464b4b70b4554c1a79566214d402739e.r6.cf3.rackcdn.com/odi-description-and-offer-ask-final.pdf permanent;
 }
   """
 
