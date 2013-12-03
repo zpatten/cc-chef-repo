@@ -1,0 +1,16 @@
+{
+  "name" : "metrics-production",
+  "description" : "metrics-production",
+  "cookbook_versions" : {
+  },
+  "json_class" : "Chef::Environment",
+  "chef_type" : "environment",
+  "default_attributes" : {
+    "ENV" : "production",
+    "deployment" : {
+      "revision" : "master",
+      "rack_env" : "production"
+    }
+  },
+  "override_attributes" : {}
+}
