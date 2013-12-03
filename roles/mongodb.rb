@@ -2,15 +2,15 @@ name "mongodb"
 description "mongodb server role"
 
 default_attributes(
-    'user'    => 'hoppler'
+#    'user'    => 'hoppler'
 )
 
 override_attributes(
     "envbuilder" => {
-        "base_dir" => "/home/hoppler/",
-        "filename" => ".env",
-        "owner"    => "hoppler",
-        "group"    => "hoppler"
+#        "base_dir" => "/home/hoppler/",
+#        "filename" => ".env",
+        "owner"    => "env",
+        "group"    => "env"
     }
 )
 
