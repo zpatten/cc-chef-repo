@@ -61,3 +61,7 @@ Feature: mongodb server role
     """
 0 2 * * * root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:backup_mongo'
     """
+
+  Scenario: env is correct
+    When I run "cat /home/hoppler/hoppler/.local.env"
+    Then I should see "MONGO_HOST: 192.168.96.10" in the output

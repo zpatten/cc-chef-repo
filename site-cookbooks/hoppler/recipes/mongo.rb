@@ -79,8 +79,27 @@ directory "/home/%s/hoppler" % [
   group hoppler
 end
 
-link "/home/hoppler/hoppler/.env" do
-  to "/home/hoppler/.env"
+link "/home/%s/hoppler/.env" % [
+    hoppler
+] do
+  to "/home/env/env"
+end
+
+search_string = "chef_environment:%s AND role:mongodb" % [
+    node.chef_environment
+]
+box           = search(:node, search_string)[0]
+mongo_ip        = box['ipaddress']
+if box['rackspace']
+  mongo_ip = box['rackspace']['private_ip']
+end
+
+file "/home/%s/hoppler/.local.env" % [
+    hoppler
+] do
+  content "MONGO_HOST: %s" % [
+      mongo_ip
+  ]
 end
 
 script "bundle" do
