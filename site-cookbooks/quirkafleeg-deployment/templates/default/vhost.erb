@@ -6,6 +6,10 @@
    if @naked_domain
      @canonical_name = @domain
    end
+
+   if @non_odi_hostname
+     @canonical_name = @non_odi_hostname
+   end
 %>
 upstream <%= @servername %> {
   server 127.0.0.1:<%= @port %>;
@@ -63,6 +67,14 @@ server {
 server {
   listen <%= @listen_port %>;
   server_name <%= @servername %>.<%= @domain %>;
+  rewrite ^/(.*) http://<%= @canonical_name %>/$1 permanent;
+}
+<% end %>
+<% if @catch_and_redirect %>
+
+server {
+  listen <%= @listen_port %>;
+  server_name <%= @catch_and_redirect %>;
   rewrite ^/(.*) http://<%= @canonical_name %>/$1 permanent;
 }
 <% end %>
