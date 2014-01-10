@@ -56,11 +56,11 @@ file "/etc/sudoers.d/%s" % [
   action :create
 end
 
-node.set['rvm'] = {} if not node['rvm']
-node.set['rvm']['user'] = hoppler
-node.set['rvm']['ruby'] = node['hoppler']['ruby']
+#node.set['rvm'] = {} if not node['rvm']
+#node.set['rvm']['user'] = hoppler
+#node.set['rvm']['ruby'] = node['hoppler']['ruby']
 
-include_recipe "odi-rvm"
+#include_recipe "odi-rvm"
 
 git "/home/%s/hoppler" % [
     hoppler
@@ -85,27 +85,27 @@ link "/home/%s/hoppler/.env" % [
   to "/home/env/env"
 end
 
-search_string = "chef_environment:%s AND role:mongodb" % [
-    node.chef_environment
-]
-box           = search(:node, search_string)[0]
-mongo_ip        = box['ipaddress']
-if box['rackspace']
-  mongo_ip = box['rackspace']['private_ip']
-end
+#search_string = "chef_environment:%s AND role:mongodb" % [
+#    node.chef_environment
+#]
+#box           = search(:node, search_string)[0]
+#mongo_ip        = box['ipaddress']
+#if box['rackspace']
+#  mongo_ip = box['rackspace']['private_ip']
+#end
 
 file "/home/%s/hoppler/.local.env" % [
     hoppler
 ] do
   content "MONGO_HOST: %s" % [
-      mongo_ip
+      "127.0.0.1"
   ]
 end
 
 script "bundle" do
   interpreter 'bash'
   code <<-EOF
-  su - hoppler -c "cd /home/hoppler/hoppler && bundle update --quiet"
+  su - hoppler -c "cd /home/hoppler/hoppler && rvmsudo bundle update --quiet"
   EOF
 end
 
