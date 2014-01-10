@@ -7,6 +7,7 @@ SITE
     build-essential (1.3.4)
     chef-client (2.2.2)
       cron (>= 0.0.0)
+    chef_gem (0.1.0)
     chef_handler (1.1.4)
     cron (1.2.2)
     dmg (1.1.0)
@@ -87,6 +88,14 @@ GIT
       ark (>= 0.0.0)
 
 GIT
+  remote: https://github.com/fnichol/chef-rvm
+  ref: master
+  sha: 26ad5c043c70ea98855a049fbbacb7ffc5ad73e3
+  specs:
+    rvm (0.9.1)
+      chef_gem (>= 0.0.0)
+
+GIT
   remote: https://github.com/librato/statsd-cookbook
   ref: master
   sha: be5de4f7a6c78479947bd6c82d4c01d3a1c41f27
@@ -151,13 +160,6 @@ GIT
   sha: 27252c8b85be41067ce364d62f9779855c5108b0
   specs:
     envbuilder (0.2.0)
-
-GIT
-  remote: https://github.com/theodi/chef-rvm
-  ref: master
-  sha: ee7847c86d14204be86cb4640008d2407b01c4b7
-  specs:
-    rvm (0.0.2)
 
 DEPENDENCIES
   ImageMagick (>= 0)
