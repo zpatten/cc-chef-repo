@@ -25,7 +25,7 @@ cookbook 'statsd', :github => 'librato/statsd-cookbook'
 cookbook 'java', :github => 'opscode-cookbooks/java'
 cookbook 'elasticsearch', :github => 'elasticsearch/cookbook-elasticsearch'
 
-cookbook 'rvm', :github => 'theodi/chef-rvm'
+cookbook 'rvm', :github => 'fnichol/chef-rvm'
 cookbook 'envbuilder', :github => 'theodi/chef-envbuilder'
 cookbook 'dictionary', :github => 'theodi/chef-dictionary'
 cookbook 'sqlite', :git => 'git@github.com:theodi/chef-sqlite.git'
