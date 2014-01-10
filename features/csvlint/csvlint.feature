@@ -119,4 +119,12 @@ server {
   }
 }
     """
+    And file "/var/www/csvlint.io/current/vhost" should contain
+    """
+server {
+  listen 80;
+  server_name www.csvlint.io;
+  rewrite ^/(.*) http://csvlint.io/$1 permanent;
+}
+    """
     And symlink "/etc/nginx/sites-enabled/csvlint.io" should exist

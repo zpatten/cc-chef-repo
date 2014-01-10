@@ -37,4 +37,11 @@ server {
     proxy_pass http://<%= @servername %>;
   }
 }
+<% if @catch_and_redirect %>
 
+server {
+  listen <%= @listen_port %>;
+  server_name <%= @catch_and_redirect %>;
+  rewrite ^/(.*) http://<%= @canonical_name %>/$1 permanent;
+}
+<% end %>

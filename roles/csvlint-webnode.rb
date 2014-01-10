@@ -22,6 +22,7 @@ default_attributes(
     :has_db            => true,
     :database          => 'csvlint',
     :non_odi_hostname  => 'csvlint.io',
+    :catch_and_redirect => 'www.csvlint.io',
     :envbuilder        => {
         :base_dir => '/home/csvlint',
         :owner    => 'csvlint',

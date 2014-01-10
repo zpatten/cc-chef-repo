@@ -45,10 +45,14 @@ end
 
 mysql_ip = nil
 dbi      = nil
+dbi      = data_bag_item node['databags']['primary'], 'databases'
 
 if node[:database]
-  mysql_ip = find_a 'mysql'
-  dbi      = data_bag_item node['databags']['primary'], 'databases'
+  if dbi['host']
+    mysql_ip = dbi['host']
+  else
+    mysql_ip = find_a 'mysql'
+  end
 end
 
 precompile_assets = node[:deployment][:precompile_assets].nil? ? true : node[:deployment][:precompile_assets]
@@ -180,12 +184,13 @@ deploy_revision root_dir do
     ] do
       source "vhost.erb"
       variables(
-          :servername       => node[:git_project],
-          :listen_port      => node[:deployment][:nginx_port],
-          :port             => node[:deployment][:port],
-          :non_odi_hostname => node[:non_odi_hostname],
-          :default          => node[:deployment][:default_vhost],
-          :static_assets    => node[:deployment][:static_assets]
+          :servername         => node[:git_project],
+          :listen_port        => node[:deployment][:nginx_port],
+          :port               => node[:deployment][:port],
+          :non_odi_hostname   => node[:non_odi_hostname],
+          :catch_and_redirect => node[:catch_and_redirect],
+          :default            => node[:deployment][:default_vhost],
+          :static_assets      => node[:deployment][:static_assets]
       )
       action :create
     end
