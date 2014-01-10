@@ -28,6 +28,15 @@ dbi = data_bag_item node['databags']['primary'], 'databases'
 
 node.set['mysql']['server_root_password'] = dbi['root'][node.chef_environment]
 
+#File.open "/tmp/wtf", "w" do |f|
+#  f.write dbi['root'][node.chef_environment]
+#  f.write "\n"
+#  f.write node.chef_environment
+#  f.write "\n"
+#  f.write data_bag_item node['databags']['primary']
+#  f.write "\n"
+#end
+
 listen_address = node["ipaddress"]
 if node["rackspace"]
   listen_address = node["rackspace"]["private_ip"]
