@@ -2,7 +2,7 @@
   "name": "csvlint-production",
   "description": "csvlint",
   "cookbook_versions": {
-    "odi-deployment": "= 0.3.3"
+    "odi-deployment": "= 0.3.5"
   },
   "json_class": "Chef::Environment",
   "chef_type": "environment",
