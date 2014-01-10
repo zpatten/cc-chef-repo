@@ -48,16 +48,16 @@ Feature: mongodb server role
     When I run "su - hoppler -c 'echo ${SHELL}'"
     Then I should see "/bin/bash" in the output
 
-  @user
-  Scenario: hoppler user has ruby 2
-    When I run "su - hoppler -c 'ruby -v'"
-    Then I should see "2.0.0" in the output
+#  @user
+#  Scenario: hoppler user has ruby 2
+#    When I run "su - hoppler -c 'ruby -v'"
+#    Then I should see "2.0.0" in the output
 
-  @code
-  Scenario: Hoppler is installed and cronned
-    * path "/home/hoppler/hoppler" should exist
-    And file "/home/hoppler/hoppler/lib/hoppler.rb" should exist
-    And file "/etc/cron.d/hoppler" should contain
-    """
-0 2 * * * root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:backup_mongo'
-    """
+#  @code
+#  Scenario: Hoppler is installed and cronned
+#    * path "/home/hoppler/hoppler" should exist
+#    And file "/home/hoppler/hoppler/lib/hoppler.rb" should exist
+#    And file "/etc/cron.d/hoppler" should contain
+#    """
+#0 2 * * * root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:backup_mongo'
+#    """
