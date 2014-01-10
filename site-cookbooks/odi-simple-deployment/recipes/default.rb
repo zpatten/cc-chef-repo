@@ -73,18 +73,19 @@ deploy_revision root_dir do
       cwd current_release_directory
       user running_deploy_user
       code <<-EOF
-          ln -sf ../../shared/config/env .env
+          ln -sf /home/env/env .env
       EOF
     end
 
     script 'Bundling the gems' do
       interpreter 'bash'
       cwd current_release_directory
-      user running_deploy_user
+#      user running_deploy_user
       code <<-EOF
-        bundle install \
+         su - #{running_deploy_user} -c 'cd #{current_release_directory} && rvmsudo bundle install \
+          --without=development test \
           --quiet \
-          --path #{bundler_depot}
+          --path #{bundler_depot}'
       EOF
     end
   end
@@ -96,16 +97,43 @@ deploy_revision root_dir do
     script 'Generate startup scripts with Foreman' do
       interpreter 'bash'
       cwd current_release_directory
-      user running_deploy_user
+#      user running_deploy_user
       code <<-EOF
-        export rvmsudo_secure_path=1
-        /home/#{user}/.rvm/bin/rvmsudo bundle exec foreman export \
+        su - #{running_deploy_user} -c 'cd #{current_release_directory} && rvmsudo bundle exec foreman export \
           -a #{node['git_project']} \
           -u #{node['user']} \
           -t config/foreman \
           -p 3000 \
-          upstart /etc/init
+          upstart /etc/init'
       EOF
+    end
+
+    template "%s/vhost" % [
+        current_release_directory
+    ] do
+      source "vhost.erb"
+      variables(
+          :fqdn        => node[:project_fqdn],
+          :git_project => node[:git_project]
+      #        :port          => port,
+      #        :domain        => domain,
+      #        :static_assets => precompile_assets,
+      #        :assets_path   => assets_path,
+      #        :listen_port   => node[:nginx][:listen_port],
+      #        :default       => attributes[:is_default],
+      #        :redirects     => attributes[:redirects],
+      #        :naked_domain  => attributes[:naked_domain],
+      #        :aliases       => attributes[:aliases]
+      )
+      action :create
+    end
+
+    link "/etc/nginx/sites-enabled/%s" % [
+        node[:project_fqdn]
+    ] do
+      to "%s/vhost" % [
+          current_release_directory
+      ]
     end
   end
   restart_command "sudo service #{node['git_project']} restart"
