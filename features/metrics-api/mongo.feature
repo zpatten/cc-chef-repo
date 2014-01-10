@@ -1,6 +1,6 @@
 @metrics-api @mongo
 Feature: mongodb server role
-  In order to run Quirkafleeg
+  In order to run some metrics thing
   I want a mongodb server
 
   Background:
@@ -31,7 +31,7 @@ Feature: mongodb server role
 
   Scenario: listening on specified ip address
     When I run "ps ax | grep mongo"
-    Then I should see "--bind_ip 192.168.96.10" in the output
+    Then I should see "--bind_ip 192.168.96.10,127.0.0.1" in the output
 
   Scenario: mongodb be runnin'
     * "mongod" should be running
@@ -62,6 +62,6 @@ Feature: mongodb server role
 0 2 * * * root su - hoppler -c 'cd /home/hoppler/hoppler && `which rake` hoppler:backup_mongo'
     """
 
-  Scenario: env is correct
-    When I run "cat /home/hoppler/hoppler/.local.env"
-    Then I should see "MONGO_HOST: 192.168.96.10" in the output
+#  Scenario: env is correct
+#    When I run "cat /home/hoppler/hoppler/.local.env"
+#    Then I should see "MONGO_HOST: 192.168.96.10" in the output
