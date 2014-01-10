@@ -11,7 +11,7 @@ override_attributes "envbuilder"  => {
     "group"    => "hoppler"
 },
                     'chef_client' => {
-                        'cron'  => {
+                        'cron' => {
                             'use_cron_d' => true,
                             'hour'       => "*",
                             'minute'     => "*/5",
