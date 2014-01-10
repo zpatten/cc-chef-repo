@@ -29,7 +29,7 @@ if node["rackspace"]
   bind_address = node["rackspace"]["private_ip"]
 end
 
-node.set['mongodb']['bind_ip'] = bind_address
+node.set['mongodb']['bind_ip'] = "%s,127.0.0.1" % bind_address
 node.save
 
 node.run_list << "mongodb"
@@ -46,3 +46,5 @@ end
 file lockfile do
   action :create
 end
+
+#node.save
