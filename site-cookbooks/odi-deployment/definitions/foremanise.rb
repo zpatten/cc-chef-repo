@@ -15,8 +15,11 @@ define :foremanise, :params => {} do
     cwd params[:cwd]
     user params[:user]
     code <<-EOF
+        RUBY="#{node[:rvm][:user_installs].select { |h| h[:user] == user }[0][:default_ruby]}"
+        BINPATH="/home/#{user}/.rvm/bin/:/home/#{user}/.rvm/rubies/ruby-${RUBY}/bin/"
+        PATH=${BINPATH}:${PATH}
         export rvmsudo_secure_path=1
-        /home/#{params[:user]}/.rvm/bin/rvmsudo bundle exec foreman export upstart /etc/init
+        rvmsudo bundle exec foreman export upstart /etc/init
     EOF
   end
 end

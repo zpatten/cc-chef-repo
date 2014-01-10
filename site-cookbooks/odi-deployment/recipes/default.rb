@@ -41,9 +41,15 @@ domain      = get_domain
   end
 end
 
-mysql_ip = find_a 'mysql'
+#has_db = node[:has_db].nil? ? true : node[:has_db]
 
-dbi = data_bag_item node['databags']['primary'], 'databases'
+mysql_ip = nil
+dbi      = nil
+
+if node[:database]
+  mysql_ip = find_a 'mysql'
+  dbi      = data_bag_item node['databags']['primary'], 'databases'
+end
 
 precompile_assets = node[:deployment][:precompile_assets].nil? ? true : node[:deployment][:precompile_assets]
 port              = node[:deployment][:port]
@@ -66,7 +72,7 @@ deploy_revision root_dir do
   )
 
   keep_releases 10
-  rollback_on_error true
+  rollback_on_error false
   migrate           = node.has_key? :migrate
   migration_command = node[:migrate]
 
@@ -132,9 +138,13 @@ deploy_revision root_dir do
       cwd current_release_directory
       user running_deploy_user
       code <<-EOF
+        RUBY="#{node[:rvm][:user_installs].select { |h| h[:user] == running_deploy_user }[0][:default_ruby]}"
+        BINPATH="/home/#{running_deploy_user}/.rvm/rubies/ruby-${RUBY}/bin/"
+        ${BINPATH}gem update bundler
+        PATH=${BINPATH}:${PATH}
+
         bundle install \
-          --without=development test\
-          --quiet \
+          --without=development test \
           --path #{bundler_depot}
       EOF
     end
@@ -144,13 +154,18 @@ deploy_revision root_dir do
       cwd current_release_directory
       user running_deploy_user
       code <<-EOF
-        RAILS_ENV=#{node[:deployment][:rack_env]} bundle exec rake assets:precompile
+        RUBY="#{node[:rvm][:user_installs].select { |h| h[:user] == running_deploy_user }[0][:default_ruby]}"
+        BINPATH="/home/#{running_deploy_user}/.rvm/rubies/ruby-${RUBY}/bin/"
+        PATH=${BINPATH}:${PATH}
+
+        RACK_ENV=#{node[:deployment][:rack_env]} RAILS_ENV=#{node[:deployment][:rack_env]} bundle exec rake assets:precompile
       EOF
       only_if { precompile_assets }
     end
   end
 
   before_restart do
+
     current_release_directory = release_path
     running_deploy_user       = new_resource.user
 
@@ -165,10 +180,12 @@ deploy_revision root_dir do
     ] do
       source "vhost.erb"
       variables(
-          :servername    => node[:git_project],
-          :port          => node[:deployment][:port],
-          :domain        => domain,
-          :static_assets => precompile_assets
+          :servername       => node[:git_project],
+          :listen_port      => node[:deployment][:nginx_port],
+          :port             => node[:deployment][:port],
+          :non_odi_hostname => node[:non_odi_hostname],
+          :default          => node[:deployment][:default_vhost],
+          :static_assets    => node[:deployment][:static_assets]
       )
       action :create
     end

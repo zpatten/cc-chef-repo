@@ -1,20 +1,30 @@
+<%
+   @canonical_name = "%s.%s" % [
+           @servername,
+           @domain
+   ]
+
+   if @non_odi_hostname
+     @canonical_name = @non_odi_hostname
+   end
+%>
 upstream <%= @servername %> {
   server 127.0.0.1:<%= @port %>;
 }
 
 server {
-  listen 80;
-  server_name <%= @servername %>.<%= @domain %>;
-  access_log /var/log/nginx/<%= @servername %>.<%= @domain %>.log;
-  error_log /var/log/nginx/<%= @servername %>.<%= @domain %>.err;
+  listen <%= @listen_port %><%= if @default then " default" end %>;
+  server_name <%= @canonical_name %>;
+  access_log /var/log/nginx/<%= @canonical_name %>.log;
+  error_log /var/log/nginx/<%= @canonical_name %>.err;
+  root /var/www/<%= @canonical_name %>/current/public/;
 
   location / {
     try_files $uri @backend;
   }
 
 <% if @static_assets %>
-  location ~ ^/(assets)/  {
-    root /var/www/<%= @servername %>.<%= @domain %>/current/public/;
+  location ~ ^/(assets)/ {
     gzip_static on; # to serve pre-gzipped version
     expires max;
     add_header Cache-Control public;
@@ -27,3 +37,4 @@ server {
     proxy_pass http://<%= @servername %>;
   }
 }
+
