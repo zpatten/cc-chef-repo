@@ -29,12 +29,20 @@
 
 
 node.set['rvm']['user_installs'] = [
-  { 'user'          => node['rvm']['user'],
-    'default_ruby'  => node['rvm']['ruby'],
-    'rubies'        => [
-      node['rvm']['ruby']
-    ]
-  }
+    { 'user'         => node['rvm']['user'],
+      'default_ruby' => node['rvm']['ruby'],
+      'rubies'       => [
+          node['rvm']['ruby']
+      ]
+#    },
+
+#    {
+#        'user'         => node['user'],
+#        'default_ruby' => node['ruby'],
+#        'rubies'       => [
+#            node['ruby']
+#        ]
+    }
 ]
 
 include_recipe "odi-xml"
