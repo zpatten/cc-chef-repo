@@ -184,16 +184,18 @@ node['apps'].each_pair do |github_name, attributes|
       ] do
         source "vhost.erb"
         variables(
-            :servername    => deploy_name,
-            :port          => port,
-            :domain        => domain,
-            :static_assets => precompile_assets,
-            :assets_path   => assets_path,
-            :listen_port   => node[:nginx][:listen_port],
-            :default       => attributes[:is_default],
-            :redirects     => attributes[:redirects],
-            :naked_domain  => attributes[:naked_domain],
-            :aliases       => attributes[:aliases]
+            :servername         => deploy_name,
+            :port               => port,
+            :domain             => domain,
+            :static_assets      => precompile_assets,
+            :assets_path        => assets_path,
+            :listen_port        => node[:nginx][:listen_port],
+            :default            => attributes[:is_default],
+            :redirects          => attributes[:redirects],
+            :naked_domain       => attributes[:naked_domain],
+            :aliases            => attributes[:aliases],
+            :non_odi_hostname   => attributes[:non_odi_hostname],
+            :catch_and_redirect => attributes[:catch_and_redirect]
         )
         action :create
       end
