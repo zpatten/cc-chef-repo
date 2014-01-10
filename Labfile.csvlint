@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+ecosystem 'csvlint' do
+  container 'mysql-csvlint-cucumber' do
+    distro 'ubuntu'
+    release 'precise'
+    persist true
+    ip '192.168.94.10'
+    mac '00:00:5e:d5:9a:00'
+    chef_client (
+                    {
+                        :environment => 'csvlint-production',
+                        :run_list    => [
+                            'role[csvlint]',
+                            'role[simple-mysql]'
+                        ]
+                    }
+                )
+  end
+
+  container 'csvlint-01' do
+    distro 'ubuntu'
+    release 'precise'
+    persist true
+    ip '192.168.94.11'
+    mac '00:00:5e:93:73:d9'
+    chef_client (
+                    {
+                        :environment => 'csvlint-production',
+                        :run_list    => [
+                            'role[csvlint]',
+                            'role[csvlint-webnode]'
+                        ]
+                    }
+                )
+  end
+end
