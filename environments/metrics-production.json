@@ -2,13 +2,19 @@
   "name" : "metrics-production",
   "description" : "metrics-production",
   "cookbook_versions" : {
+      "hoppler" : "= 0.3.0",
+      "odi-mongodb" : "= 0.1.2",
+      "odi-nginx" : "= 0.4.0",
+      "odi-simple-deployment" : "= 0.3.0",
+      "rvm" : "= 0.9.1"
+
   },
   "json_class" : "Chef::Environment",
   "chef_type" : "environment",
   "default_attributes" : {
     "ENV" : "production",
     "deployment" : {
-      "revision" : "master",
+      "revision" : "CURRENT",
       "rack_env" : "production"
     }
   },
