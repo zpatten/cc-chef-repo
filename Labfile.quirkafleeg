@@ -56,6 +56,24 @@ ecosystem "quirkafleeg" do
                 )
   end
 
+  container "dapaas-quirkafleeg-01" do
+    distro "ubuntu"
+    release "precise"
+    persist true
+    ip "192.168.99.31"
+    mac "00:00:5e:f2:cc:e6"
+    chef_client (
+                    {
+                        :environment => "quirkafleeg-preduction",
+                        :run_list    => [
+                            "role[dapaas-frontend]",
+                            "role[chef-client]",
+                            "role[quirkafleeg-webnode]"
+                        ]
+                    }
+                )
+  end
+
   container "backend-quirkafleeg-01" do
     distro "ubuntu"
     release "precise"
