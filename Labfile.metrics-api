@@ -12,8 +12,7 @@ ecosystem "metrics-api" do
                     {
                         :environment => 'metrics-production',
                         :run_list    => [
-                            'role[metrics-api]',
-                            'role[mongodb]'
+                            'role[metrics-api]'
                         ]
                     }
                 )
