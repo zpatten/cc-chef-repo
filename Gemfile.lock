@@ -115,7 +115,7 @@ GEM
       atomic
     tzinfo (0.3.38)
     ubuntu_ami (0.4.1)
-    yajl-ruby (1.1.0)
+    yajl-ruby (1.4.2)
     ztk (1.9.0)
       activesupport
       erubis
